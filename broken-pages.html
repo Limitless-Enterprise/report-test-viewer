@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Action list: 13 broken pages on purplebasilmedspa.com — fix before ads and SEO work."
+    />
+    <title>Broken Pages Action List — Purple Basil Medspa</title>
+    <style>
+      :root {
+        --ink: #1a2228;
+        --ink-66: rgba(26, 34, 40, 0.66);
+        --ink-55: rgba(26, 34, 40, 0.55);
+        --teal: #0a7289;
+        --teal-deep: #085a6d;
+        --teal-soft: rgba(10, 114, 137, 0.09);
+        --teal-border: rgba(10, 114, 137, 0.28);
+        --basil-soft: rgba(61, 107, 90, 0.1);
+        --line: rgba(26, 34, 40, 0.1);
+        --line-08: rgba(26, 34, 40, 0.07);
+        --bg-page: #f3f0eb;
+        --card: #fffcf9;
+        --accent-orange: #d85a38;
+        --accent-amber: #c9922a;
+        --basil: #3d6b5a;
+        --teal-mid: #0a7289;
+        --accent-purple: #6b5cae;
+        --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 24px 48px rgba(26, 34, 40, 0.07),
+          0 8px 16px rgba(26, 34, 40, 0.04);
+        --radius-shell: 26px;
+        --radius-card: 20px;
+        --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+        --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(10, 114, 137, 0.07), transparent 55%),
+          var(--bg-page);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+        font-size: 15px;
+      }
+      .page {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 52px 20px 72px;
+      }
+      .page-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 32px;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .page-brand__mark {
+        flex-shrink: 0;
+        color: var(--teal);
+      }
+      .page-brand__wordmark-top {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+      }
+      .page-brand__wordmark-bottom {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        color: var(--ink-66);
+      }
+      .report-shell {
+        border-radius: var(--radius-shell);
+        border: 1px solid rgba(26, 34, 40, 0.08);
+        background: var(--card);
+        padding: 20px;
+        box-shadow: var(--shadow-card);
+      }
+      @media (min-width: 640px) {
+        .report-shell {
+          padding: 36px 40px 40px;
+        }
+      }
+      .gradient-bar {
+        height: 5px;
+        margin: -20px -20px 28px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-orange),
+          var(--accent-amber),
+          var(--basil),
+          var(--teal-mid),
+          var(--accent-purple)
+        );
+        opacity: 0.92;
+      }
+      @media (min-width: 640px) {
+        .gradient-bar {
+          margin: -36px -40px 28px;
+        }
+      }
+      .report-kind {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 0;
+      }
+      .report-title {
+        margin: 10px 0 0;
+        font-family: var(--font-display);
+        font-size: clamp(26px, 4vw, 34px);
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        line-height: 1.12;
+      }
+      .report-submeta {
+        margin: 8px 0 0;
+        font-size: 14px;
+        color: var(--ink-66);
+      }
+      .intro-card {
+        margin-top: 28px;
+        border-radius: var(--radius-card);
+        border: 1px solid var(--teal-border);
+        background: linear-gradient(145deg, rgba(255, 252, 248, 0.95) 0%, var(--teal-soft) 55%, var(--basil-soft) 100%);
+        padding: 22px 24px;
+      }
+      .intro-card p {
+        margin: 0;
+        color: var(--ink-66);
+        max-width: 44rem;
+      }
+      .intro-card p + p {
+        margin-top: 12px;
+      }
+      .metric-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .metric-pill {
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        padding: 6px 14px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .metric-pill strong {
+        color: var(--accent-orange);
+      }
+      .section-head {
+        margin: 32px 0 12px;
+      }
+      .section-head h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .section-head p {
+        margin: 6px 0 0;
+        font-size: 14px;
+        color: var(--ink-55);
+      }
+      .table-wrap {
+        overflow-x: auto;
+        border-radius: 16px;
+        border: 1px solid var(--line-08);
+        background: var(--card);
+        box-shadow: 0 1px 2px rgba(26, 34, 40, 0.04);
+      }
+      table.broken-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .broken-table th {
+        text-align: left;
+        padding: 12px 14px;
+        background: rgba(243, 240, 235, 0.65);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-55);
+        border-bottom: 1px solid var(--line);
+      }
+      .broken-table td {
+        padding: 14px;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line-08);
+      }
+      .ref-list {
+        margin: 0;
+        padding-left: 1.15rem;
+        font-size: 12px;
+        color: var(--ink-66);
+        line-height: 1.45;
+      }
+      .ref-list li + li {
+        margin-top: 6px;
+      }
+      .ref-list a {
+        color: var(--teal-deep);
+        font-weight: 600;
+        word-break: break-all;
+      }
+      .ref-kind {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-55);
+        margin-bottom: 2px;
+      }
+      .broken-table tr:last-child td {
+        border-bottom: none;
+      }
+      .broken-table .num {
+        font-weight: 700;
+        color: var(--teal);
+        font-variant-numeric: tabular-nums;
+        width: 2.5rem;
+      }
+      .broken-table .url a {
+        color: var(--teal-deep);
+        font-weight: 600;
+        word-break: break-all;
+      }
+      .status-badge {
+        display: inline-flex;
+        border-radius: 999px;
+        padding: 2px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        background: rgba(216, 90, 56, 0.12);
+        color: #b84324;
+      }
+      .action-note {
+        margin-top: 24px;
+        padding: 16px 18px;
+        border-radius: 14px;
+        border: 1px dashed var(--line);
+        background: rgba(255, 252, 248, 0.8);
+        font-size: 14px;
+        color: var(--ink-66);
+      }
+      .action-note ul {
+        margin: 10px 0 0;
+        padding-left: 1.2rem;
+      }
+      .page-footer {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line-08);
+        font-size: 12px;
+        color: var(--ink-55);
+      }
+      .page-footer a {
+        color: var(--teal);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .report-shell {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <a class="page-brand" href="https://limitlessenterprise.ai/" aria-label="Limitless Enterprise home">
+        <svg class="page-brand__mark" viewBox="0 0 1080 1080" width="30" height="30" aria-hidden="true" fill="currentColor">
+          <path
+            d="M703.03,124.04l-124.69,75.08-12.77,8.82c-112.39,79.22-276.3,200.63-303.34,340.25-16.58,85.67,35.2,152.2,115.35,167.26,56.33,10.59,111.86,5.92,174.37-3.88l-1.51-14.34c-62.58,16.19-213.52,26.32-230.89-59.88-33.82-168.25,410.59-361.05,529.56-420.14l-146.08-93.17Z"
+          />
+          <path
+            d="M527.65,368.37l1.58,14.41c65.14-15.66,203.32-25.66,228.85,52.51,53.43,163.65-401.58,367.36-527.19,426.71l145.62,93.96,124.89-74.95,12.37-8.75c115.61-81.13,278.66-203.39,304.19-342.82,15.07-82.32-35.01-149.63-115.55-164.76-58.04-10.86-113.7-5.72-174.77,3.68Z"
+          />
+          <path
+            d="M295.52,789s176.5-198.86,188.36-223.43c8.44-17.48,7.56-44.24-4.22-60.46-33.07-45.54-199.66-229.17-199.66-229.17,29.04,22.04,110.21,99.87,115.72,104.72,35.08,30.88,68.87,60.99,105.7,89.53,25.34,19.63,57.25,19.8,83.42.72,58.22-42.44,179.43-153.29,179.43-153.29-11.84,21.1-104.95,119.41-150.88,178.36-23.24,29.82-19.79,63.87,3.82,91.58l71.15,83.49s91.89,96.18,111.66,125.45c-27.61-21.62-144.87-130.35-144.87-130.35-22.24-20.4-44.64-38.78-68.81-57.08-23.34-17.67-53.71-21.51-78.95-3.98-60.34,41.9-167.65,154.45-211.85,183.94Z"
+          />
+        </svg>
+        <span class="page-brand__wordmark">
+          <span class="page-brand__wordmark-top">LIMITLESS</span>
+          <span class="page-brand__wordmark-bottom">Enterprise</span>
+        </span>
+      </a>
+
+      <div class="report-shell">
+        <div class="gradient-bar" aria-hidden="true"></div>
+        <p class="report-kind">Website fix list</p>
+        <h1 class="report-title" id="report-title">Broken pages to fix</h1>
+        <p class="report-submeta" id="report-submeta"></p>
+
+        <div class="intro-card">
+          <p id="intro-lead"></p>
+          <p>
+            Each row below is a URL that returned a <strong>404 Not Found</strong> during our September 2026 site
+            health review. Visitors and Google can hit these links from menus, old promotions, or sitemaps—fix or
+            redirect them before running paid ads.
+          </p>
+        </div>
+
+        <div class="metric-strip" id="metric-strip" aria-label="Summary"></div>
+
+        <div class="section-head">
+          <h2>All broken pages (<span id="page-count">13</span>)</h2>
+          <p>
+            “Linked from” shows where each URL is still exposed—on-site links, your XML sitemap, or recent Google Analytics
+            visits (Aug 20–Sep 16, 2026). Share with your web team or WordPress admin.
+          </p>
+        </div>
+
+        <div class="table-wrap">
+          <table class="broken-table" aria-label="Broken pages">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">URL</th>
+                <th scope="col">Status</th>
+                <th scope="col">Linked from (why people hit this URL)</th>
+                <th scope="col">What to do</th>
+              </tr>
+            </thead>
+            <tbody id="broken-rows"></tbody>
+          </table>
+        </div>
+
+        <div class="action-note">
+          <strong>Recommended order</strong>
+          <ul>
+            <li>Fix the bad link on the wrinkle relaxers page (row 13)—it is a malformed path, not a real package.</li>
+            <li>Decide which package URLs should exist vs. redirect to <code>/packages/</code> or Vagaro booking.</li>
+            <li>Restore or redirect <code>/med-spa-deals/</code> if it is linked from email or social posts.</li>
+            <li>Remove fixed URLs from your XML sitemap and run a quick click-test from the main menu.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="page-footer" aria-label="Report footer">
+        <p id="footer-copyright"></p>
+        <p id="footer-confidential" style="margin: 8px 0 0"></p>
+        <p id="footer-generated" style="margin: 4px 0 0"></p>
+        <p style="margin: 8px 0 0"><a href="https://limitlessenterprise.ai/" rel="noopener noreferrer">limitlessenterprise.ai</a></p>
+      </footer>
+    </main>
+
+    <script type="application/json" id="report-data">
+      {
+        "BUSINESS_NAME": "Purple Basil Medspa",
+        "BUSINESS_URL": "https://purplebasilmedspa.com/",
+        "GENERATED_AT_ISO": "2026-09-18T09:55:00Z",
+        "AUDIT_AS_OF": "2026-09-17",
+        "BROKEN_PAGE_COUNT": 13,
+        "GA_WINDOW": "Aug 20–Sep 16, 2026",
+        "BROKEN_PAGES": [
+          {
+            "url": "https://purplebasilmedspa.com/med-spa-deals/",
+            "statusCode": 404,
+            "category": "Promotions",
+            "action": "Restore the deals page or 301 redirect to your current specials hub. Remove dead links from menus, emails, and the sitemap.",
+            "referencedFrom": [
+              {
+                "kind": "internal",
+                "url": "https://purplebasilmedspa.com/med-spa-black-friday-deals/",
+                "text": "Clickable link on the Black Friday deals page"
+              }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/2246/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
+              { "kind": "traffic", "text": "Google Analytics: 2 pageviews, 2 users" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/biore-peel-series/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
+              { "kind": "traffic", "text": "Google Analytics: 2 pageviews, 2 users" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/custom-facial-pack-of-3/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/hydra-facial/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/hydrafacial/ or /skin-concerns/hydrafacial/, or remove from the sitemap.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/is-clinical-fire-ice-facial/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
+              { "kind": "traffic", "text": "Google Analytics: 8 pageviews, 4 users" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/is-clinical-honey-enzyme-facial/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
+              { "kind": "traffic", "text": "Google Analytics: 6 pageviews, 2 users" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/is-clinical-prodigy-peel-series/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/lhr-large-area-series-2/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
+              { "kind": "traffic", "text": "Google Analytics: 6 pageviews, 4 users" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/lhr-large-area-series/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/lhr-small-area-series/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/packages/pure-radiance-facial-package/",
+            "statusCode": 404,
+            "category": "Package",
+            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "referencedFrom": [
+              { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
+              { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
+            ]
+          },
+          {
+            "url": "https://purplebasilmedspa.com/wrinkle-relaxers-for-smooth-skin/purplebasilmedspa.com",
+            "statusCode": 404,
+            "category": "Bad link",
+            "action": "Fix the internal link on the wrinkle relaxers page—this path accidentally includes the domain name as a folder segment.",
+            "referencedFrom": [
+              {
+                "kind": "internal",
+                "url": "https://purplebasilmedspa.com/wrinkle-relaxers-for-smooth-skin/",
+                "text": "Broken link on the wrinkle relaxers article (site health review, Sep 2026)"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <script>
+      (function () {
+        function escapeHtml(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+        }
+
+        var data = JSON.parse(document.getElementById("report-data").textContent);
+        var pages = data.BROKEN_PAGES || [];
+
+        document.title = "Broken Pages Action List — " + (data.BUSINESS_NAME || "");
+        document.getElementById("report-title").textContent =
+          "Broken pages to fix — " + (data.BUSINESS_NAME || "your site");
+        document.getElementById("report-submeta").textContent =
+          (data.BUSINESS_URL || "") +
+          " · Site health review as of " +
+          (data.AUDIT_AS_OF || "") +
+          " · Generated " +
+          new Date(data.GENERATED_AT_ISO).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+
+        document.getElementById("intro-lead").textContent =
+          "We found " +
+          pages.length +
+          " URLs on " +
+          (data.BUSINESS_NAME || "your website") +
+          " that return a page-not-found error. Fixing these protects trust with visitors and helps Google index the pages you want to rank.";
+
+        document.getElementById("page-count").textContent = String(pages.length);
+
+        var packageCount = pages.filter(function (p) {
+          return p.category === "Package";
+        }).length;
+        document.getElementById("metric-strip").innerHTML =
+          '<span class="metric-pill"><strong>' +
+          pages.length +
+          "</strong> broken URLs</span>" +
+          '<span class="metric-pill"><strong>' +
+          packageCount +
+          "</strong> package paths</span>" +
+          '<span class="metric-pill">All <strong>404</strong> at review</span>';
+
+        var kindLabel = {
+          internal: "On your website",
+          sitemap: "Sitemap",
+          scan: "Site scan",
+          traffic: "Recent visits"
+        };
+
+        function renderReferencedFrom(row) {
+          var refs = row.referencedFrom || [];
+          if (!refs.length) {
+            return "<span style=\"color:var(--ink-55)\">Not traced in this review</span>";
+          }
+          return (
+            "<ul class=\"ref-list\">" +
+            refs
+              .map(function (ref) {
+                var label = kindLabel[ref.kind] || ref.kind || "Source";
+                var body = ref.url
+                  ? '<a href="' +
+                    escapeHtml(ref.url) +
+                    '" rel="noopener noreferrer" target="_blank">' +
+                    escapeHtml(ref.text || ref.url) +
+                    "</a>"
+                  : escapeHtml(ref.text || "");
+                if (ref.kind === "traffic" && data.GA_WINDOW) {
+                  body += ' <span style="color:var(--ink-55)">(' + escapeHtml(data.GA_WINDOW) + ")</span>";
+                }
+                return (
+                  "<li><span class=\"ref-kind\">" +
+                  escapeHtml(label) +
+                  "</span>" +
+                  body +
+                  "</li>"
+                );
+              })
+              .join("") +
+            "</ul>"
+          );
+        }
+
+        document.getElementById("broken-rows").innerHTML = pages
+          .map(function (row, i) {
+            return (
+              "<tr>" +
+              '<td class="num">' +
+              (i + 1) +
+              "</td>" +
+              '<td class="url"><a href="' +
+              escapeHtml(row.url) +
+              '" rel="noopener noreferrer" target="_blank">' +
+              escapeHtml(row.url) +
+              "</a><br /><span style=\"color:var(--ink-55);font-size:12px\">" +
+              escapeHtml(row.category || "") +
+              "</span></td>" +
+              '<td><span class="status-badge">' +
+              escapeHtml(String(row.statusCode || "404")) +
+              "</span></td>" +
+              "<td>" +
+              renderReferencedFrom(row) +
+              "</td>" +
+              "<td>" +
+              escapeHtml(row.action || "") +
+              "</td>" +
+              "</tr>"
+            );
+          })
+          .join("");
+
+        var year = new Date().getFullYear();
+        document.getElementById("footer-copyright").textContent =
+          "\u00A9 " + year + " Limitless Enterprise OS LLC. All rights reserved.";
+        document.getElementById("footer-confidential").textContent =
+          "Confidential — prepared exclusively for " +
+          (data.BUSINESS_NAME || "the client") +
+          ". Do not distribute without permission.";
+        document.getElementById("footer-generated").textContent =
+          "Broken-page list from Detailed Revenue Leak Audit · " +
+          (data.AUDIT_AS_OF ? "Data as of " + data.AUDIT_AS_OF + "." : "") +
+          " Linked-from: site health review, sitemap recon, live link scan (161 pages), and Google Analytics.";
+      })();
+    </script>
+  </body>
+</html>

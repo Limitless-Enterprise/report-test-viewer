@@ -1,6 +1,11 @@
 # Purple Basil Medspa — Detailed Revenue Leak Audit
 
-Static publish folder for the client report (`index.html` only). Deploy on **Vercel** as a static site—no build step.
+Static publish folder for the client report. Deploy on **Vercel** as a static site—no build step.
+
+| File | URL path |
+|------|----------|
+| `index.html` | `/` — full Detailed Revenue Leak Audit |
+| `broken-pages.html` | `/broken-pages.html` — 13 broken URLs action list |
 
 ## Vercel (Git)
 
