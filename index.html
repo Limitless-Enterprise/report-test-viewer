@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Detailed Revenue Leak Audit for Purple Basil Medspa — Frisco Maps and Google search, website fixes, booking measurement, and whether AI assistants cite your spa." />
+    <title>Detailed Revenue Leak Audit — Purple Basil Medspa</title>
+    <style>
+      :root {
+        --ink: #1a2228;
+        --ink-66: rgba(26, 34, 40, 0.66);
+        --ink-72: rgba(26, 34, 40, 0.72);
+        --ink-55: rgba(26, 34, 40, 0.55);
+        --ink-50: rgba(26, 34, 40, 0.5);
+        --ink-42: rgba(26, 34, 40, 0.42);
+        --teal: #0a7289;
+        --teal-deep: #085a6d;
+        --teal-soft: rgba(10, 114, 137, 0.09);
+        --teal-border: rgba(10, 114, 137, 0.28);
+        --basil: #3d6b5a;
+        --basil-soft: rgba(61, 107, 90, 0.1);
+        --aubergine: #5c4a62;
+        --aubergine-soft: rgba(92, 74, 98, 0.1);
+        --line: rgba(26, 34, 40, 0.1);
+        --line-08: rgba(26, 34, 40, 0.07);
+        --bg-page: #f3f0eb;
+        --bg-tab: rgba(255, 252, 248, 0.72);
+        --card: #fffcf9;
+        --accent-green: #2d9d5a;
+        --accent-orange: #d85a38;
+        --accent-amber: #c9922a;
+        --accent-purple: #6b5cae;
+        --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 24px 48px rgba(26, 34, 40, 0.07), 0 8px 16px rgba(26, 34, 40, 0.04);
+        --shadow-tile: 0 1px 2px rgba(26, 34, 40, 0.04), 0 10px 28px rgba(26, 34, 40, 0.05);
+        --shadow-accent-hover: 0 28px 56px rgba(10, 114, 137, 0.14);
+        --radius-shell: 26px;
+        --radius-card: 20px;
+        --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+        --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      :where(.grid, .flex, .scores-grid, .metric-grid, .four-bar-grid, .viz-row-2, .overview-compare, .integration-grid, .tab-list, .stack) > *,
+      :where([style*="display: grid"], [style*="display:grid"], [style*="display: flex"], [style*="display:flex"]) > * {
+        min-width: 0;
+      }
+      :where(p, h1, h2, h3, h4, h5, h6, li, dd, blockquote, figcaption, td, th, .badge, .band-pill) {
+        overflow-wrap: anywhere;
+      }
+      :where(img, svg, video, canvas, iframe) {
+        max-width: 100%;
+        height: auto;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background:
+          radial-gradient(ellipse 120% 80% at 50% -20%, rgba(10, 114, 137, 0.07), transparent 55%),
+          radial-gradient(ellipse 80% 50% at 100% 0%, rgba(92, 74, 98, 0.05), transparent 45%),
+          var(--bg-page);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+        font-size: 15px;
+      }
+      .page { max-width: 1040px; margin: 0 auto; padding: 52px 20px 72px; }
+      .page-brand {
+        display: inline-flex; align-items: center; gap: 10px; margin-bottom: 32px;
+        text-decoration: none; color: var(--ink);
+      }
+      .page-brand__mark { flex-shrink: 0; color: var(--teal); }
+      .page-brand__wordmark-top { display: block; font-size: 14px; font-weight: 700; letter-spacing: 0.14em; }
+      .page-brand__wordmark-bottom { display: block; font-size: 10px; letter-spacing: 0.08em; color: var(--ink-66); }
+      .report-shell {
+        overflow: hidden; border-radius: var(--radius-shell);
+        border: 1px solid rgba(26, 34, 40, 0.08);
+        background: var(--card); padding: 20px; box-shadow: var(--shadow-card);
+      }
+      @media (min-width: 640px) { .report-shell { padding: 36px 40px 40px; } }
+      .gradient-bar {
+        height: 5px; margin: -20px -20px 28px;
+        background: linear-gradient(90deg, var(--accent-orange), var(--accent-amber), var(--basil), var(--teal), var(--accent-purple));
+        opacity: 0.92;
+      }
+      @media (min-width: 640px) { .gradient-bar { margin: -36px -40px 28px; } }
+      .report-inner { display: flex; flex-direction: column; gap: 28px; }
+      .report-meta-block {
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--line-08);
+      }
+      .report-kind {
+        font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+        color: var(--teal); margin: 0;
+      }
+      .report-tier {
+        display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 600;
+        letter-spacing: 0.06em; text-transform: none; color: var(--ink-55);
+        border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; vertical-align: middle;
+      }
+      .report-title {
+        margin: 10px 0 0; font-family: var(--font-display);
+        font-size: clamp(26px, 4vw, 34px); font-weight: 500;
+        letter-spacing: -0.025em; line-height: 1.12;
+      }
+      .report-submeta { margin: 8px 0 0; font-size: 14px; color: var(--ink-66); }
+
+      /* Integration status bar */
+      .integration-bar {
+        border-radius: var(--radius-card); border: 1px solid var(--teal-border);
+        background: linear-gradient(135deg, var(--teal-soft), var(--basil-soft));
+        padding: 16px 18px;
+      }
+      .integration-bar__label {
+        font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+        color: var(--teal); margin: 0 0 10px;
+      }
+      .integration-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .integration-chip {
+        display: inline-flex; align-items: center; gap: 6px; border-radius: 999px;
+        border: 1px solid var(--line); background: var(--card); padding: 4px 12px;
+        font-size: 12px; font-weight: 600;
+      }
+      .integration-chip .dot {
+        width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      }
+      .integration-chip--on .dot { background: var(--accent-green); }
+      .integration-chip--off .dot { background: var(--accent-amber); }
+      .integration-chip--optional .dot { background: var(--ink-42); }
+
+      /* Badges */
+      .badge {
+        display: inline-flex; align-items: center; border-radius: 999px; padding: 3px 10px;
+        font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+      }
+      .badge--included { background: rgba(52, 199, 92, 0.12); color: #1a7a34; }
+      .badge--connected { background: rgba(0, 123, 167, 0.12); color: var(--teal); }
+      .badge--unlock { background: rgba(255, 182, 47, 0.18); color: #9a6b00; }
+      .badge--preview { background: rgba(107, 76, 230, 0.12); color: var(--accent-purple); }
+      .badge--optional { background: var(--bg-tab); color: var(--ink-55); }
+
+      .tabs { width: 100%; min-width: 0; }
+      .tab-list {
+        display: flex; flex-wrap: nowrap; gap: 5px; overflow-x: auto; padding: 7px;
+        border-radius: 16px; border: 1px solid var(--line-08);
+        background: var(--bg-tab);
+        box-shadow: inset 0 1px 2px rgba(26, 34, 40, 0.04);
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .tab-list::-webkit-scrollbar { display: none; }
+      .tab-trigger {
+        flex-shrink: 0; border: 1px solid transparent; background: transparent; border-radius: 11px;
+        padding: 9px 13px; font-family: inherit; font-size: 12px; font-weight: 600;
+        color: var(--ink-55); cursor: pointer;
+        transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      }
+      @media (min-width: 640px) { .tab-trigger { padding: 9px 16px; font-size: 13px; } }
+      .tab-trigger:hover { color: var(--teal-deep); background: rgba(255, 255, 255, 0.55); }
+      .tab-trigger[aria-selected="true"] {
+        background: var(--card); color: var(--teal-deep);
+        border-color: rgba(10, 114, 137, 0.15);
+        box-shadow: 0 2px 8px rgba(26, 34, 40, 0.07), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+      }
+      .tab-trigger[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+      .tab-panel { margin-top: 24px; }
+      .tab-panel[hidden] { display: none !important; }
+      .stack { display: flex; flex-direction: column; gap: 20px; }
+
+      .hero-fix {
+        border-radius: var(--radius-card);
+        border: 1px solid var(--teal-border);
+        background:
+          linear-gradient(145deg, rgba(255, 252, 248, 0.95) 0%, var(--teal-soft) 48%, var(--basil-soft) 100%);
+        padding: 26px 22px;
+        box-shadow: var(--shadow-tile), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      }
+      @media (min-width: 640px) { .hero-fix { padding: 32px 36px; } }
+      .hero-fix .label {
+        font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+        color: var(--teal); margin: 0;
+      }
+      .hero-fix h3 {
+        margin: 12px 0 0; font-family: var(--font-display);
+        font-size: clamp(22px, 3.8vw, 32px); font-weight: 500;
+        letter-spacing: -0.02em; line-height: 1.18;
+      }
+      .hero-fix .why { margin: 12px 0 0; max-width: 42rem; font-size: 15px; color: var(--ink-72); }
+      .hero-fix .why strong { color: var(--teal); font-weight: 600; }
+
+      .accent-card {
+        position: relative; border-radius: var(--radius-card); border: 1px solid var(--line-08);
+        background: var(--card); overflow: hidden;
+        box-shadow: var(--shadow-tile);
+        transition: box-shadow 0.2s ease;
+      }
+      @media (hover: hover) {
+        .accent-card:hover { box-shadow: var(--shadow-accent-hover); }
+      }
+      .accent-card::before {
+        content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+        background: var(--accent-bar, var(--teal));
+      }
+      .accent-card .pad { padding: 22px 22px 22px 26px; }
+      .accent-card .pad-lg { padding: 28px 28px 28px 32px; }
+
+      .leak-label {
+        font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--teal); margin: 0;
+      }
+      .leak-values { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; }
+      .leak-month { font-size: clamp(26px, 3.5vw, 36px); font-weight: 700; margin: 0; }
+      .leak-month span { margin-left: 6px; font-size: 16px; font-weight: 600; color: var(--ink-55); }
+      .leak-disclaimer { margin: 8px 0 0; font-size: 12px; color: var(--ink-50); }
+
+      .scores-grid { display: grid; gap: 12px; }
+      @media (min-width: 640px) { .scores-grid { grid-template-columns: repeat(3, 1fr); } }
+      .score-tile {
+        border-radius: 16px; border: 1px solid var(--line-08);
+        background: linear-gradient(180deg, #fff 0%, rgba(255, 252, 248, 0.6) 100%);
+        padding: 16px; box-shadow: var(--shadow-tile);
+      }
+      .score-tile.primary {
+        border-color: var(--teal-border);
+        background: linear-gradient(145deg, rgba(10, 114, 137, 0.06), rgba(255, 252, 248, 0.95));
+      }
+      .score-tile .tile-label {
+        font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+        color: var(--ink-42); margin: 0;
+      }
+      .score-tile .tile-score { margin: 2px 0 0; font-size: 24px; font-weight: 700; color: var(--teal); }
+      .score-tile .tile-sub { margin: 2px 0 0; font-size: 12px; color: var(--ink-55); }
+      .band-pill {
+        display: inline-flex; margin-top: 8px; border-radius: 9999px;
+        background: rgba(0, 123, 167, 0.1); padding: 2px 10px; font-size: 12px; font-weight: 600; color: var(--teal);
+      }
+
+      .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+      .section-head h3 {
+        margin: 0; font-family: var(--font-display);
+        font-size: 21px; font-weight: 500; letter-spacing: -0.015em;
+      }
+      .section-head .intro { margin: 6px 0 0; font-size: 14px; color: var(--ink-66); max-width: 36rem; }
+      .section-head .head-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+      .section-score { text-align: right; }
+      .section-score .big { font-size: 30px; font-weight: 700; color: var(--teal); margin: 0; line-height: 1; }
+      .section-body { margin-top: 20px; font-size: 14px; }
+      .section-body > * + * { margin-top: 16px; }
+      .block-title { font-weight: 700; margin: 0 0 4px; }
+      .block-sub { font-size: 12px; color: var(--ink-55); margin: 0 0 8px; }
+
+      .four-bar-grid { display: grid; gap: 8px; }
+      @media (min-width: 640px) { .four-bar-grid { grid-template-columns: 1fr 1fr; } }
+      .four-bar-item {
+        border-radius: 14px; border: 1px solid var(--line); background: var(--bg-tab); padding: 12px;
+      }
+      .four-bar-row { display: flex; justify-content: space-between; font-weight: 600; }
+      .four-bar-row span:last-child { color: var(--teal); }
+      .four-bar-item p { margin: 2px 0 0; font-size: 12px; color: var(--ink-55); }
+
+      ul.bullets { margin: 0; padding-left: 1.25rem; color: var(--ink-66); }
+      ul.bullets li + li { margin-top: 4px; }
+
+      .data-table-wrap {
+        overflow-x: auto; border-radius: 14px; border: 1px solid var(--line-08);
+        background: rgba(255, 252, 248, 0.65);
+      }
+      .data-table {
+        width: 100%; border-collapse: collapse; font-size: 13px;
+      }
+      .data-table th, .data-table td {
+        text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-08);
+      }
+      .data-table tbody tr:nth-child(even) { background: rgba(26, 34, 40, 0.02); }
+      .data-table tbody tr:last-child td { border-bottom: none; }
+      .data-table th {
+        font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--ink-42); background: rgba(26, 34, 40, 0.03);
+      }
+      .data-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+      .metric-grid { display: grid; gap: 10px; }
+      @media (min-width: 640px) { .metric-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (min-width: 768px) { .metric-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+      .metric-tile {
+        border-radius: 14px; border: 1px solid var(--line); background: var(--bg-tab); padding: 12px 14px;
+      }
+      .metric-tile .m-label { font-size: 11px; font-weight: 600; color: var(--ink-55); margin: 0; }
+      .metric-tile .m-value { font-size: 20px; font-weight: 700; color: var(--teal); margin: 4px 0 0; }
+      .metric-tile .m-hint { font-size: 11px; color: var(--ink-42); margin: 2px 0 0; }
+
+      details.collapsible {
+        border-radius: 14px; border: 1px solid var(--line); background: var(--card); margin-top: 8px;
+      }
+      details.collapsible summary {
+        display: flex; align-items: center; justify-content: space-between; gap: 8px;
+        padding: 12px 16px; font-size: 14px; font-weight: 700; cursor: pointer; list-style: none;
+      }
+      details.collapsible summary::-webkit-details-marker { display: none; }
+      details.collapsible .collapsible-body { padding: 0 16px 12px; }
+
+      details.for-team {
+        border-radius: 14px; border: 1px dashed var(--line); background: var(--bg-tab); margin-top: 12px;
+      }
+      details.for-team summary {
+        padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--ink-55); cursor: pointer; list-style: none;
+      }
+      details.for-team summary::-webkit-details-marker { display: none; }
+      details.for-team .for-team-body { padding: 0 14px 14px; font-size: 13px; color: var(--ink-66); }
+      details.for-team .for-team-body > * + * { margin-top: 12px; }
+
+      /* Section gates */
+      .section-gate { position: relative; }
+      .section-gate.is-locked .section-gate__content {
+        filter: blur(4px); user-select: none; pointer-events: none; max-height: 220px; overflow: hidden;
+      }
+      .section-gate__overlay {
+        display: none; position: absolute; inset: 0; z-index: 2;
+        border-radius: 18px; background: rgba(255, 255, 255, 0.88);
+        align-items: center; justify-content: center; flex-direction: column;
+        text-align: center; padding: 24px;
+      }
+      .section-gate.is-locked .section-gate__overlay { display: flex; }
+      .section-gate__overlay h4 { margin: 12px 0 0; font-size: 16px; }
+      .section-gate__overlay p { margin: 8px 0 0; font-size: 13px; color: var(--ink-66); max-width: 28rem; }
+
+      .roadmap-list { margin: 0; padding: 0; list-style: none; }
+      .roadmap-item {
+        display: grid; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line-08);
+      }
+      @media (min-width: 640px) {
+        .roadmap-item { grid-template-columns: 72px 1fr auto; align-items: start; gap: 12px; }
+      }
+      .roadmap-item .phase {
+        font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal);
+      }
+      .roadmap-item .impact {
+        font-size: 12px; font-weight: 600; color: var(--accent-orange); white-space: nowrap;
+      }
+      .badge--p0 { background: rgba(254, 100, 56, 0.14); color: #c43d1a; }
+      .badge--p1 { background: rgba(255, 182, 47, 0.2); color: #9a6b00; }
+      .badge--p2 { background: rgba(0, 123, 167, 0.12); color: var(--teal); }
+      @media (min-width: 640px) {
+        .roadmap-item--action {
+          grid-template-columns: 44px 76px 1fr minmax(120px, auto);
+          align-items: start;
+        }
+      }
+      .roadmap-item .roadmap-meta {
+        margin: 6px 0 0; font-size: 12px; color: var(--ink-55); line-height: 1.45;
+      }
+      .roadmap-item .ie-label {
+        font-size: 11px; font-weight: 600; color: var(--ink-55); text-align: right; line-height: 1.35;
+      }
+      .overview-compare {
+        display: grid; gap: 12px; margin-top: 12px;
+      }
+      @media (min-width: 640px) { .overview-compare { grid-template-columns: 1fr 1fr; } }
+      .overview-compare__col {
+        border-radius: 14px; border: 1px solid var(--line); background: var(--bg-tab); padding: 14px 16px;
+      }
+      .overview-compare__col h4 { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+      .overview-compare__col ul { margin: 8px 0 0; padding-left: 1.1rem; font-size: 13px; color: var(--ink-66); }
+      .overview-included { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+      .debrief-card {
+        border-radius: var(--radius-card); border: 1px solid var(--teal-border);
+        background: linear-gradient(135deg, var(--teal-soft), var(--aubergine-soft));
+        padding: 24px 26px; box-shadow: var(--shadow-tile);
+      }
+      .debrief-card h3 { margin: 0; font-family: var(--font-display); font-size: 19px; font-weight: 500; }
+      .debrief-card p { margin: 10px 0 0; font-size: 14px; color: var(--ink-72); max-width: 40rem; }
+      .debrief-cta {
+        display: inline-flex; margin-top: 16px; border-radius: 999px; border: none;
+        background: linear-gradient(180deg, var(--teal) 0%, var(--teal-deep) 100%);
+        color: #fff; font-family: inherit; font-size: 13px; font-weight: 600;
+        padding: 11px 20px; text-decoration: none; cursor: pointer;
+        box-shadow: 0 4px 14px rgba(10, 114, 137, 0.28);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .debrief-cta:hover { filter: brightness(1.04); transform: translateY(-1px); }
+      .appendix-export {
+        margin-top: 16px; padding: 14px 16px; border-radius: 14px; border: 1px dashed var(--line);
+        background: var(--bg-tab); font-size: 13px; color: var(--ink-66);
+      }
+
+      .integration-grid { display: grid; gap: 12px; }
+      @media (min-width: 640px) { .integration-grid { grid-template-columns: 1fr 1fr; } }
+      .integration-card {
+        border-radius: 14px; border: 1px solid var(--line); padding: 14px 16px; background: var(--bg-tab);
+      }
+      .integration-card h4 { margin: 8px 0 0; font-size: 15px; }
+      .integration-card p { margin: 6px 0 0; font-size: 13px; color: var(--ink-66); }
+
+      .page-footer {
+        margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line-08);
+        font-size: 12px; color: var(--ink-42);
+      }
+      .page-footer a { color: var(--teal); text-decoration: none; font-weight: 500; }
+      .page-footer a:hover { text-decoration: underline; }
+
+      @media print {
+        body { background: #fff; }
+        .section-gate.is-locked .section-gate__content { filter: none; max-height: none; }
+        .section-gate__overlay { display: none !important; }
+      }
+
+      /* Data visuals (rendered from #report-data) */
+      .viz-card {
+        border-radius: 16px; border: 1px solid var(--line-08);
+        background: linear-gradient(180deg, #fff 0%, rgba(243, 240, 235, 0.35) 100%);
+        padding: 18px 20px; margin-top: 4px;
+        box-shadow: var(--shadow-tile);
+      }
+      .viz-card__title {
+        margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--ink-42);
+      }
+      .viz-card__sub { margin: 0 0 14px; font-size: 12px; color: var(--ink-55); line-height: 1.45; }
+      .viz-row-2 { display: grid; gap: 14px; }
+      @media (min-width: 640px) { .viz-row-2 { grid-template-columns: 1fr 1fr; align-items: start; } }
+      .viz-score-strip { display: flex; flex-direction: column; gap: 12px; }
+      .viz-score-row {
+        display: grid; grid-template-columns: 88px 1fr 40px; gap: 10px; align-items: center;
+        font-size: 13px;
+      }
+      @media (max-width: 420px) {
+        .viz-score-row { grid-template-columns: 72px 1fr 36px; font-size: 12px; }
+      }
+      .viz-score-row__label { font-weight: 600; color: var(--ink); }
+      .viz-score-row__val { font-weight: 700; color: var(--teal); text-align: right; font-variant-numeric: tabular-nums; }
+      .viz-bar-track {
+        height: 11px; border-radius: 999px;
+        background: rgba(26, 34, 40, 0.07);
+        box-shadow: inset 0 1px 2px rgba(26, 34, 40, 0.06);
+        overflow: hidden;
+      }
+      .viz-bar-fill {
+        display: block; height: 100%; border-radius: 999px; min-width: 2px;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+      }
+      .viz-hbars { display: flex; flex-direction: column; gap: 10px; }
+      .viz-hbar {
+        display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) 52px;
+        gap: 8px; align-items: center; font-size: 12px;
+      }
+      @media (max-width: 520px) {
+        .viz-hbar { grid-template-columns: 1fr; gap: 4px; }
+        .viz-hbar .viz-bar-track { grid-column: 1; }
+      }
+      .viz-hbar__label {
+        font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      }
+      .viz-hbar__meta { font-size: 11px; color: var(--ink-55); text-align: right; font-variant-numeric: tabular-nums; }
+      .viz-hbar--dual .viz-bar-track { position: relative; height: 12px; }
+      .viz-hbar--dual .viz-bar-fill--imps { position: absolute; inset: 0; opacity: 0.35; background: var(--teal); }
+      .viz-hbar--dual .viz-bar-fill--clicks {
+        position: relative; z-index: 1; height: 100%; background: var(--accent-orange);
+      }
+      .viz-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 11px; color: var(--ink-55); }
+      .viz-legend__item { display: inline-flex; align-items: center; gap: 6px; }
+      .viz-legend__swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+      .viz-grid-wrap { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+      .viz-grid-5 {
+        display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; width: min(100%, 200px);
+      }
+      .viz-grid-cell {
+        aspect-ratio: 1; border-radius: 7px; border: 1px solid var(--line);
+        background: var(--card);
+      }
+      .viz-grid-cell--ranked {
+        background: var(--teal-soft); border-color: var(--teal-border);
+        box-shadow: inset 0 0 0 2px rgba(0, 123, 167, 0.45);
+      }
+      .viz-grid-cell--you {
+        background: var(--aubergine-soft); border-color: rgba(92, 74, 98, 0.35);
+        box-shadow: inset 0 0 0 2px var(--aubergine);
+      }
+      .viz-donut-wrap { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+      .viz-donut { width: 120px; height: 120px; flex-shrink: 0; }
+      .viz-donut__center {
+        font-size: 18px; font-weight: 700; fill: var(--teal); font-family: var(--font);
+      }
+      .viz-donut__sub { font-size: 10px; font-weight: 600; fill: var(--ink-55); font-family: var(--font); }
+      .viz-roadmap-lanes { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+      .viz-roadmap-lane {
+        border-radius: 14px; border: 1px solid var(--line); background: var(--card); padding: 12px 14px;
+      }
+      .viz-roadmap-lane__head {
+        display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+        font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      }
+      .viz-roadmap-lane--p0 { border-left: 4px solid var(--accent-orange); }
+      .viz-roadmap-lane--p1 { border-left: 4px solid var(--accent-amber); }
+      .viz-roadmap-lane--p2 { border-left: 4px solid var(--teal); }
+      .viz-roadmap-lane ul { margin: 0; padding-left: 1.1rem; font-size: 13px; color: var(--ink-66); }
+      .viz-roadmap-lane li + li { margin-top: 4px; }
+      .viz-depth-compare { display: flex; flex-direction: column; gap: 10px; }
+      .viz-depth-row { display: grid; grid-template-columns: 100px 1fr 36px; gap: 8px; align-items: center; font-size: 12px; }
+      .viz-sr-only {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+        clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <a class="page-brand" href="https://limitlessenterprise.ai/" aria-label="Limitless Enterprise home">
+        <svg class="page-brand__mark" viewBox="0 0 1080 1080" width="30" height="30" aria-hidden="true" fill="currentColor">
+          <path d="M703.03,124.04l-124.69,75.08-12.77,8.82c-112.39,79.22-276.3,200.63-303.34,340.25-16.58,85.67,35.2,152.2,115.35,167.26,56.33,10.59,111.86,5.92,174.37-3.88l-1.51-14.34c-62.58,16.19-213.52,26.32-230.89-59.88-33.82-168.25,410.59-361.05,529.56-420.14l-146.08-93.17Z" />
+          <path d="M527.65,368.37l1.58,14.41c65.14-15.66,203.32-25.66,228.85,52.51,53.43,163.65-401.58,367.36-527.19,426.71l145.62,93.96,124.89-74.95,12.37-8.75c115.61-81.13,278.66-203.39,304.19-342.82,15.07-82.32-35.01-149.63-115.55-164.76-58.04-10.86-113.7-5.72-174.77,3.68Z" />
+          <path d="M295.52,789s176.5-198.86,188.36-223.43c8.44-17.48,7.56-44.24-4.22-60.46-33.07-45.54-199.66-229.17-199.66-229.17,29.04,22.04,110.21,99.87,115.72,104.72,35.08,30.88,68.87,60.99,105.7,89.53,25.34,19.63,57.25,19.8,83.42.72,58.22-42.44,179.43-153.29,179.43-153.29-11.84,21.1-104.95,119.41-150.88,178.36-23.24,29.82-19.79,63.87,3.82,91.58l71.15,83.49s91.89,96.18,111.66,125.45c-27.61-21.62-144.87-130.35-144.87-130.35-22.24-20.4-44.64-38.78-68.81-57.08-23.34-17.67-53.71-21.51-78.95-3.98-60.34,41.9-167.65,154.45-211.85,183.94Z" />
+        </svg>
+        <span class="page-brand__wordmark">
+          <span class="page-brand__wordmark-top">LIMITLESS</span>
+          <span class="page-brand__wordmark-bottom">Enterprise</span>
+        </span>
+      </a>
+
+      <div class="report-shell">
+        <div class="gradient-bar" aria-hidden="true"></div>
+        <div class="report-inner">
+          <div class="report-meta-block">
+            <p class="report-kind">Detailed Revenue Leak Audit</p>
+            <h2 class="report-title">{{REPORT_TITLE}}</h2>
+            <p class="report-submeta">
+              <span>{{BUSINESS_URL}}</span>
+              · Frisco, TX med spa · Generated <span id="generated-at"></span>
+              · <span id="report-source-label"></span>
+            </p>
+          </div>
+
+          <div class="integration-bar" id="integration-bar-mini" aria-label="Connected data sources">
+            <p class="integration-bar__label">Data sources in this report</p>
+            <div class="integration-chips" id="integration-chips"></div>
+          </div>
+
+          <div class="tabs" data-tabs-root>
+            <div class="tab-list" role="tablist" aria-label="Report sections">
+              <button type="button" class="tab-trigger" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="visibility">Visibility</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="response">Response</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="local">Local</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="technical">Technical</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="content-ai">Content &amp; AI</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="gsc">Search Console</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="analytics">Analytics</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="calls">Calls</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="competitive">Competitive</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="roadmap">Roadmap</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="gaps">Gaps</button>
+              <button type="button" class="tab-trigger" role="tab" data-tab="integrations">Integrations</button>
+            </div>
+
+            <!-- Overview -->
+            <div class="tab-panel stack" data-tab-panel="overview">
+              <article class="accent-card overview-value" style="--accent-bar: var(--teal)">
+                <div class="pad">
+                  <h3 style="margin:0;font-size:18px;font-weight:700">What this detailed audit adds vs. the free scan</h3>
+                  <p class="block-sub" style="margin-top:6px">Same pillar scores as the free scan. Connecting Google Search Console, Google Analytics, and AI citation checks adds the charts below and a 90-day plan—it does not change headline numbers by itself.</p>
+                  <div class="overview-compare" id="overview-vs-free"></div>
+                  <div class="viz-row-2" style="margin-top:14px">
+                    <div class="viz-card" id="viz-overview-scores" aria-label="Pillar score chart"></div>
+                    <div class="viz-card" id="viz-overview-depth" aria-label="Free scan vs detailed audit depth"></div>
+                  </div>
+                  <p style="margin:16px 0 0;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-42)">Prioritized outcomes in this report</p>
+                  <ul class="bullets" data-report-list="OVERVIEW_OUTCOMES"></ul>
+                  <p style="margin:16px 0 0;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-42)">Included in this audit · connection status</p>
+                  <div class="overview-included" id="overview-included-checklist" aria-label="Data sources included"></div>
+                </div>
+              </article>
+              <div class="hero-fix">
+                <p class="label">Highest-impact fix · next 7 days</p>
+                <h3 id="hero-fix-title"></h3>
+                <p class="why"><strong>What you lose if this waits: </strong><span id="hero-fix-why"></span></p>
+              </div>
+              <p class="summary-text" style="max-width:48rem;font-size:15px;color:var(--ink-72);margin:0">
+                {{EXECUTIVE_SUMMARY}}
+              </p>
+              <article class="accent-card" style="--accent-bar: #34c75c">
+                <div class="pad">
+                  <p class="leak-label" id="revenue-label">Revenue at risk</p>
+                  <div class="leak-values" id="revenue-leak-values">
+                    <p class="leak-month" id="revenue-monthly">~{{REVENUE_AT_RISK_MONTHLY}}<span>/mo</span></p>
+                    <p class="leak-year" id="revenue-yearly-wrap" style="font-size:18px;font-weight:600;color:var(--ink-55);margin:0">~<span id="revenue-yearly"></span>/yr</p>
+                  </div>
+                  <p class="leak-disclaimer" id="revenue-disclaimer"></p>
+                </div>
+              </article>
+              <div>
+                <p style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-42);margin:0 0 8px">Pillar scores</p>
+                <div class="scores-grid">
+                  <div class="score-tile primary">
+                    <p class="tile-label">Overall</p>
+                    <p class="tile-score">{{SCORE_OVERALL}}</p>
+                    <p class="tile-sub">Visibility + Response mean</p>
+                    <span class="band-pill">{{SCORE_OVERALL_BAND}}</span>
+                  </div>
+                  <div class="score-tile">
+                    <p class="tile-label">Visibility</p>
+                    <p class="tile-score">{{VISIBILITY_SCORE}}</p>
+                    <span class="band-pill">{{VISIBILITY_BAND}}</span>
+                  </div>
+                  <div class="score-tile">
+                    <p class="tile-label">Response</p>
+                    <p class="tile-score">{{RESPONSE_SCORE}}</p>
+                    <span class="band-pill">{{RESPONSE_BAND}}</span>
+                  </div>
+                </div>
+              </div>
+              <article class="debrief-card" id="debrief-block" aria-label="Analyst walkthrough">
+                <h3 id="debrief-title"></h3>
+                <p id="debrief-body"></p>
+                <a class="debrief-cta" id="debrief-cta" href="#" rel="noopener noreferrer"></a>
+              </article>
+            </div>
+
+            <!-- Visibility -->
+            <div class="tab-panel" data-tab-panel="visibility" hidden>
+              <article class="accent-card section-gate" data-gate="openseo" style="--accent-bar: var(--teal)">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Visibility — how patients find you online</h3>
+                      <p class="intro">Four pillars below—where you win and where Frisco searches leak to competitors.</p>
+                      <div class="head-badges"><span class="badge badge--included" data-section-badge="openseo">Included</span></div>
+                      <p style="margin:6px 0 0;font-size:14px;color:var(--ink-50)">{{VISIBILITY_BAND}}</p>
+                    </div>
+                    <div class="section-score"><p class="big">{{VISIBILITY_SCORE}}</p></div>
+                  </div>
+                  <div class="viz-card" id="viz-four-bar" aria-label="Visibility pillar scores chart"></div>
+                  <div class="four-bar-grid">
+                    <div class="four-bar-item"><div class="four-bar-row"><span>Coverage</span><span>{{FOUR_BAR_COVERAGE}}</span></div><p>Google Maps and regular Google search</p></div>
+                    <div class="four-bar-item"><div class="four-bar-row"><span>Clarity</span><span>{{FOUR_BAR_CLARITY}}</span></div><p>Service &amp; treatment pages</p></div>
+                    <div class="four-bar-item"><div class="four-bar-row"><span>Credibility</span><span>{{FOUR_BAR_CREDIBILITY}}</span></div><p>Reviews and trust signals online</p></div>
+                    <div class="four-bar-item"><div class="four-bar-row"><span>Consistency</span><span>{{FOUR_BAR_CONSISTENCY}}</span></div><p>Google listing ↔ website</p></div>
+                  </div>
+                  <div><p class="block-title">What's working</p><ul class="bullets" data-report-list="VISIBILITY_WHATS_WORKING"></ul></div>
+                  <div><p class="block-title">What's holding you back</p><ul class="bullets" data-report-list="VISIBILITY_HOLDING_BACK"></ul></div>
+                  <div><p class="block-title">Top improvements</p><ul class="bullets" data-report-list="VISIBILITY_TOP_IMPROVEMENTS"></ul></div>
+                  <details class="collapsible"><summary>Evidence (search data &amp; site scan)</summary><div class="collapsible-body"><ul class="bullets" data-report-list="VISIBILITY_EVIDENCE"></ul></div></details>
+                </div>
+              </article>
+            </div>
+
+            <!-- Response -->
+            <div class="tab-panel" data-tab-panel="response" hidden>
+              <article class="accent-card section-gate" data-gate="intake" style="--accent-bar: #34c75c">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Response — reach, book, convert</h3>
+                      <p class="intro">What we saw on your website and what you told us on the onboarding form; real call volume and missed-call rates appear once phone tracking is connected.</p>
+                      <div class="head-badges"><span class="badge badge--included">Included</span></div>
+                      <p style="margin:6px 0 0;font-size:14px;color:var(--ink-50)">{{RESPONSE_BAND}}</p>
+                    </div>
+                    <div class="section-score"><p class="big">{{RESPONSE_SCORE}}</p></div>
+                  </div>
+                  <div><p class="block-title">What's working</p><ul class="bullets" data-report-list="RESPONSE_WHATS_WORKING"></ul></div>
+                  <div><p class="block-title">What's holding you back</p><ul class="bullets" data-report-list="RESPONSE_HOLDING_BACK"></ul></div>
+                  <div><p class="block-title">Top improvements</p><ul class="bullets" data-report-list="RESPONSE_TOP_IMPROVEMENTS"></ul></div>
+                  <details class="collapsible"><summary>Evidence (site scan &amp; onboarding form)</summary><div class="collapsible-body"><ul class="bullets" data-report-list="RESPONSE_EVIDENCE"></ul></div></details>
+                </div>
+              </article>
+            </div>
+
+            <!-- Local -->
+            <div class="tab-panel" data-tab-panel="local" hidden>
+              <article class="accent-card section-gate" data-gate="openseo" style="--accent-bar: #ffb62f">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Local &amp; maps</h3>
+                      <p class="intro">Where you rank on the Maps grid, how your Google listing looks, and recent reviews (2026-09-18 capture)—including med-spa Maps searches from your address and the laser hair removal 5×5 grid in this tab.</p>
+                      <details class="for-team"><summary>For your marketing team</summary><div class="for-team-body"><p>Includes Maps SERP pulls, Google Business Profile field exports, and 5×5 grid data for laser hair removal and med spa keywords.</p></div></details>
+                      <div class="head-badges"><span class="badge badge--included">Included</span></div>
+                    </div>
+                  </div>
+                  <div class="metric-grid metric-grid--3" id="local-metrics"></div>
+                  <div class="viz-card" id="viz-lhr-grid" aria-label="Laser hair removal Maps grid coverage"></div>
+                  <div><p class="block-title">Local insights</p><ul class="bullets" data-report-list="LOCAL_INSIGHTS"></ul></div>
+                  <table class="data-table" id="local-grid-table"><thead><tr><th>Keyword</th><th>Grid avg rank</th><th>Points in top 3</th></tr></thead><tbody></tbody></table>
+                </div>
+              </article>
+            </div>
+
+            <!-- Technical -->
+            <div class="tab-panel" data-tab-panel="technical" hidden>
+              <article class="accent-card section-gate" data-gate="librecrawl" style="--accent-bar: var(--accent-orange)">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Website health</h3>
+                      <p class="intro">Broken pages, thin treatment pages, and site-scan gaps that can waste ad spend or erode trust before someone books.</p>
+                      <div class="head-badges"><span class="badge badge--included">Included</span></div>
+                    </div>
+                  </div>
+                  <div class="metric-grid metric-grid--3" id="technical-metrics"></div>
+                  <div><p class="block-title">Priority fixes</p><ul class="bullets" data-report-list="TECHNICAL_PRIORITIES"></ul></div>
+                  <details class="collapsible"><summary>Site scan evidence</summary><div class="collapsible-body"><ul class="bullets" data-report-list="TECHNICAL_EVIDENCE"></ul></div></details>
+                  <details class="for-team"><summary>For your marketing team</summary><div class="for-team-body"><p>Export detail: 368 URLs fetched 2026-09-17; 11 URLs with HTTP 4xx in the per-page spreadsheet (audit model counts 13 broken pages). Search visibility audit 4ed66c4f: 257 pages scanned; 674 total issues logged.</p></div></details>
+                </div>
+              </article>
+            </div>
+
+            <!-- Content & AI -->
+            <div class="tab-panel" data-tab-panel="content-ai" hidden>
+              <article class="accent-card section-gate" data-gate="citedby" style="--accent-bar: #6b4ce6">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Content &amp; AI visibility</h3>
+                      <p class="intro">When someone asks ChatGPT, Gemini, Perplexity, or Google AI about peels, HydraFacial, or laser hair removal in Frisco, do those answers mention Purple Basil—or only competitors? Last probe: 2026-09-15.</p>
+                      <div class="head-badges"><span class="badge badge--connected" data-section-badge="citedby">Included</span></div>
+                    </div>
+                  </div>
+                  <div class="metric-grid" id="citedby-metrics"></div>
+                  <div class="viz-card" id="viz-ai-citation" aria-label="AI citation visibility chart"></div>
+                  <div>
+                    <p class="block-title">Visibility by topic</p>
+                    <p class="block-sub">25 tracked buyer prompts across 5 topics · capture 2026-09-17</p>
+                    <table class="data-table" id="citedby-topic-table"><thead><tr><th>Topic</th><th class="num">Visibility</th><th class="num">Your citations</th><th class="num">Prompts</th></tr></thead><tbody></tbody></table>
+                  </div>
+                  <div>
+                    <p class="block-title">Prompts where your brand was cited</p>
+                    <p class="block-sub">4 of 25 tracked prompts returned at least one citation to your domain in the probe</p>
+                    <table class="data-table" id="citedby-prompt-table"><thead><tr><th>Topic</th><th>Buyer question</th><th class="num">Your cites</th><th class="num">Total cites</th></tr></thead><tbody></tbody></table>
+                  </div>
+                  <div>
+                    <p class="block-title">Top domains in AI answer sources</p>
+                    <p class="block-sub">Aggregated URL retrievals from the citation probe (489 URLs merged)</p>
+                    <table class="data-table" id="citedby-sources-table"><thead><tr><th>Domain</th><th class="num">Retrievals</th><th>Notes</th></tr></thead><tbody></tbody></table>
+                  </div>
+                  <div>
+                    <p class="block-title">AI visibility — saved competitors</p>
+                    <p class="block-sub">Weekly visibility series in this capture includes your brand only; competitor domains are saved for future probes</p>
+                    <table class="data-table" id="citedby-ai-competitors-table"><thead><tr><th>Domain</th><th class="num">Visibility</th><th>Notes</th></tr></thead><tbody></tbody></table>
+                  </div>
+                  <details class="for-team"><summary>For your marketing team</summary><div class="for-team-body">
+                  <div><p class="block-title">AI crawler &amp; on-page technical checks</p><ul class="bullets" data-report-list="CITEDBY_TECH_HIGHLIGHTS"></ul></div>
+                  </div></details>
+                  <div><p class="block-title">Earned vs. owned gaps</p><ul class="bullets" data-report-list="CITEDBY_GAPS"></ul></div>
+                  <div><p class="block-title">Recommended content plays</p><ul class="bullets" data-report-list="CITEDBY_RECOMMENDATIONS"></ul></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- GSC -->
+            <div class="tab-panel" data-tab-panel="gsc" hidden>
+              <article class="accent-card section-gate" data-gate="gsc" style="--accent-bar: var(--teal)">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Google Search Console</h3>
+                      <p class="intro">Real clicks and searches from Google—not estimates. Chart: top queries by impressions; table has full detail (first 1,000 rows in export).</p>
+                      <div class="head-badges"><span class="badge badge--connected" data-section-badge="gsc">Connected</span></div>
+                    </div>
+                  </div>
+                  <div class="metric-grid metric-grid--3" id="gsc-metrics"></div>
+                  <div class="viz-card" id="viz-gsc-queries" aria-label="Top Search Console queries chart"></div>
+                  <div><p class="block-title">Top queries (90 days)</p><table class="data-table" id="gsc-queries"><thead><tr><th>Query</th><th class="num">Clicks</th><th class="num">Impressions</th><th class="num">Click rate</th><th class="num">Avg. rank</th></tr></thead><tbody></tbody></table></div>
+                  <div><p class="block-title">Opportunities</p><ul class="bullets" data-report-list="GSC_OPPORTUNITIES"></ul></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Analytics -->
+            <div class="tab-panel" data-tab-panel="analytics" hidden>
+              <article class="accent-card section-gate" data-gate="ga4" style="--accent-bar: #34c75c">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Website analytics (Google Analytics)</h3>
+                      <p class="intro">Who came from Google, which pages they landed on, and whether book or call actions are recorded. Organic window: 2026-08-20→2026-09-16; device and country widgets: 2026-08-21→2026-09-17.</p>
+                      <div class="head-badges"><span class="badge badge--connected" data-section-badge="ga4">Connected</span></div>
+                    </div>
+                  </div>
+                  <div class="metric-grid metric-grid--3" id="ga4-metrics"></div>
+                  <div><p class="block-title">Top organic landing pages</p><table class="data-table" id="ga4-landing"><thead><tr><th>Page</th><th class="num">Sessions</th><th class="num">Book / form events</th></tr></thead><tbody></tbody></table></div>
+                  <div><p class="block-title">Insights</p><ul class="bullets" data-report-list="GA4_INSIGHTS"></ul></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Calls -->
+            <div class="tab-panel" data-tab-panel="calls" hidden>
+              <article class="accent-card section-gate" data-gate="call_tracking" style="--accent-bar: var(--accent-orange)">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Call &amp; conversion intelligence</h3>
+                      <p class="intro">Missed calls, answer rate, and after-hours share from connected phone/call history.</p>
+                      <div class="head-badges"><span class="badge badge--unlock" data-section-badge="call_tracking">Integration pending</span></div>
+                    </div>
+                  </div>
+                  <div class="metric-grid metric-grid--3" id="call-metrics">
+                    <div class="metric-tile"><p class="m-label">Inbound calls (30d)</p><p class="m-value">—</p><p class="m-hint">Populates when connected</p></div>
+                    <div class="metric-tile"><p class="m-label">Missed / unanswered</p><p class="m-value">—</p><p class="m-hint">Populates when connected</p></div>
+                    <div class="metric-tile"><p class="m-label">After-hours share</p><p class="m-value">—</p><p class="m-hint">Populates when connected</p></div>
+                  </div>
+                  <p class="block-sub">Call logs integration is pending—metrics will appear here once phone/call history is connected (included in this audit; no additional report purchase).</p>
+                  <ul class="bullets" data-report-list="CALL_INSIGHTS"></ul>
+                </div>
+              </article>
+            </div>
+
+            <!-- Competitive -->
+            <div class="tab-panel" data-tab-panel="competitive" hidden>
+              <article class="accent-card section-gate" data-gate="openseo" style="--accent-bar: var(--teal)">
+                <div class="section-gate__overlay" data-gate-overlay></div>
+                <div class="pad-lg section-body section-gate__content">
+                  <div class="section-head">
+                    <div>
+                      <h3>Competitors nearby</h3>
+                      <p class="intro">Who else shows up for eight high-intent Frisco searches (2026-09-18)—overlap score in the chart, detail in the table.</p>
+                      <div class="head-badges"><span class="badge badge--included">Included</span></div>
+                    </div>
+                  </div>
+                  <div class="viz-card" id="viz-competitors" aria-label="Competitor overlap chart"></div>
+                  <table class="data-table" id="competitor-table"><thead><tr><th>Domain</th><th>Shared Frisco searches (score)</th><th class="num">Est. keywords</th><th>Notes</th></tr></thead><tbody></tbody></table>
+                  <ul class="bullets" data-report-list="COMPETITIVE_INSIGHTS"></ul>
+                </div>
+              </article>
+            </div>
+
+            <!-- Roadmap -->
+            <div class="tab-panel" data-tab-panel="roadmap" hidden>
+              <article class="accent-card" style="--accent-bar: #34c75c">
+                <div class="pad-lg section-body">
+                  <div class="section-head"><div><h3>Prioritized 90-day roadmap</h3><p class="intro">Lanes show priority (P0 → P2); the list below has owners, hours, and done-when lines.</p></div></div>
+                  <div class="viz-roadmap-lanes" id="viz-roadmap-lanes" aria-label="Roadmap priority lanes"></div>
+                  <ol class="roadmap-list" id="roadmap-list"></ol>
+                </div>
+              </article>
+            </div>
+
+            <!-- Gaps -->
+            <div class="tab-panel stack" data-tab-panel="gaps" hidden>
+              <article class="accent-card" style="--accent-bar: #ffb62f">
+                <div class="pad-lg">
+                  <h3 style="margin:0;font-size:18px">What we still can't see</h3>
+                  <p style="margin:12px 0 0;font-size:14px;color:var(--ink-66)">Even with Google Search Console, Google Analytics, and AI citation analysis connected, some revenue leaks live inside your patient database, front desk workflow, and follow-up after consultations. This section stays honest about blind spots—nothing here is an upsell to a different report tier.</p>
+                  <p style="margin:12px 0 0;font-size:14px;color:var(--ink-66)" id="gaps-completion-note"></p>
+                </div>
+              </article>
+              <ul class="bullets" data-report-list="GAPS_REMAINING"></ul>
+            </div>
+
+            <!-- Integrations -->
+            <div class="tab-panel stack" data-tab-panel="integrations" hidden>
+              <article class="accent-card" style="--accent-bar: var(--teal)">
+                <div class="pad-lg section-body">
+                  <div class="section-head">
+                    <div>
+                      <h3>Integration dashboard</h3>
+                      <p class="intro">Which accounts fed this report and what’s still waiting on your phone or call system. Missing sources gray out their tab until connected.</p>
+                    </div>
+                  </div>
+                  <div class="integration-grid" id="integration-dashboard"></div>
+                </div>
+              </article>
+              <article class="accent-card" style="--accent-bar: var(--ink-42)">
+                <div class="pad-lg section-body">
+                  <h3 style="margin:0">Appendix — data sources &amp; capture dates</h3>
+                  <p class="block-sub" style="margin-top:8px">For owners: every number in the report traces to a dated pull from your site, Google accounts, or our research tools—not guesswork.</p>
+                  <p class="block-sub" id="appendix-scoring-note">Headline scores use the Detailed audit rubric (full site scan, Google Business Profile, onboarding form answers, plus Google Search Console, Google Analytics, and AI citation when connected). Score trace file on request. The free snapshot uses a narrower rubric without those connections.</p>
+                  <table class="data-table" id="appendix-sources"><thead><tr><th>Analysis area</th><th>What was analyzed</th><th>Captured (UTC)</th><th>Status</th></tr></thead><tbody></tbody></table>
+                  <div class="appendix-export" id="appendix-export-pack"></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer" aria-label="Report footer">
+        <p id="footer-copyright" style="margin:0"></p>
+        <p id="footer-confidential" style="margin:8px 0 0"></p>
+        <p id="footer-generated" style="margin:4px 0 0"></p>
+        <p style="margin:8px 0 0"><a href="https://limitlessenterprise.ai/" rel="noopener noreferrer">limitlessenterprise.ai</a></p>
+      </footer>
+    </main>
+
+    <script type="application/json" id="report-data">
+{
+  "REPORT_TITLE": "Detailed Revenue Leak Audit: Purple Basil Medspa",
+  "BUSINESS_NAME": "Purple Basil Medspa",
+  "BUSINESS_URL": "https://purplebasilmedspa.com/",
+  "IS_LIVE": true,
+  "GENERATED_AT_ISO": "2026-09-18T09:55:00Z",
+  "EXECUTIVE_SUMMARY": "Vagaro booking links show up on 73 pages we scanned—good foundation. Google Analytics logged 397 visits from Google search in the last window (+104% vs 195 prior), but Search Console shows only 79 clicks on 10,554 impressions; most searches still include your name, while “med spa frisco” alone had 373 impressions and zero clicks. When people ask AI about treatments in Frisco, you appear in 6.34% of tracked answers (5 citations; VI Peel leads at 25%)—HydraFacial, injectables, and microneedling are at 0%. Thirteen broken URLs, 24 thin service pages, no /llms-full.txt file (the extended page list some AI tools read alongside /llms.txt), and zero recorded book or call actions in Google Analytics mean you cannot yet prove which fixes drive appointments. Dollar “revenue at risk” stays off the Overview until call logs connect; we will use missed-call actuals from your phone system, not planning numbers from the onboarding form.",
+  "OVERVIEW_VS_FREE": {
+    "free": [
+      "4 tabs: Overview, Visibility, Response, Gaps",
+      "Visibility and Response scores plus Coverage / Clarity / Credibility / Consistency from the site scan and onboarding form",
+      "Summary bullets without Search Console, website analytics, or AI visibility tables"
+    ],
+    "detailed": [
+      "13 tabs: Search Console, analytics, Maps grid, website health, AI visibility, competitors",
+      "Your actual Google clicks and landing pages (79 clicks, 397 organic sessions)",
+      "90-day roadmap with owners, hours, and clear done-when lines",
+      "Live analyst walkthrough (schedule below)"
+    ]
+  },
+  "OVERVIEW_OUTCOMES": [
+    "Stop trust leaks: fix 13 broken pages, point your Google listing website field at https://purplebasilmedspa.com/, and add /llms-full.txt so AI tools can read a full list of your site pages.",
+    "Win searches without your name: “med spa frisco” (373 impressions, 0 clicks) and “microneedling frisco” (400 impressions, 0 clicks) need stronger Frisco landing pages and internal links.",
+    "Show up in AI answers: grow from 6.34% citation share with a VI Peel hub (/skin-concerns/vi-peel/), a HydraFacial vs peel page, and earned placements (North Biomedical, Perfect B, Mimi Silk).",
+    "Count bookings from Google traffic: tag book and call buttons in Google Analytics so those 397 organic sessions tie to real actions—right now the organic window shows 0 measurable events.",
+    "Finish the picture: call logs still pending (same audit, no extra purchase); mystery-shop call scoring is booked separately when you schedule it."
+  ],
+  "DEBRIEF_TITLE": "Included: 45–60 minute analyst walkthrough",
+  "DEBRIEF_BODY": "We walk through this report live: what to fix first, which Frisco searches deserve pages, Maps grid weak spots, and where AI answers skip you. Goal is a two-week action list. Bring your web person, front desk lead, or agency.",
+  "DEBRIEF_CTA_TEXT": "Schedule walkthrough with Limitless",
+  "DEBRIEF_CTA_HREF": "mailto:hello@limitlessenterprise.ai?subject=Purple%20Basil%20Detailed%20Audit%20Walkthrough",
+  "GAPS_COMPLETION_NOTE": "Your phone call history is not connected yet. Once it is, this same Detailed Revenue Leak Audit will show answer rate, missed calls, and after-hours share on the Calls tab—no extra report to buy. Mystery-shop call scoring is booked on its own when you schedule it; we leave those scores blank until real calls are recorded.",
+  "APPENDIX_EXPORT_PACK": "Export pack on request: per-page site scan spreadsheet, content and outbound-link checks, Search Console query export, AI citation URL list, site audit summary, and Maps grid coordinates. We can bundle Google Business Profile and Search Console screenshots for your records.",
+  "APPENDIX_SCORING_NOTE": "Headline scores use the Detailed audit rubric (full site scan, Google Business Profile, onboarding form answers, plus Google Search Console, Google Analytics, and AI citation when connected). Score trace file on request. The free snapshot uses a narrower rubric without those connections.",
+  "VISIBILITY_SCORE": "26",
+  "RESPONSE_SCORE": "52",
+  "REVENUE_AT_RISK_MONTHLY": "2,520",
+  "REVENUE_SOURCE": "intake_estimate",
+  "REVENUE_SHOW_ON_OVERVIEW": false,
+  "SCORE_OVERALL": "39",
+  "SCORE_OVERALL_BAND": "Significant opportunity",
+  "VISIBILITY_BAND": "Significant opportunity",
+  "RESPONSE_BAND": "Moderate opportunity",
+  "FOUR_BAR_COVERAGE": "48",
+  "FOUR_BAR_CLARITY": "39",
+  "FOUR_BAR_CREDIBILITY": "63",
+  "FOUR_BAR_CONSISTENCY": "42",
+  "HERO_FIX_TITLE": "Fix 13 broken pages and point your Google listing at the HTTPS version of purplebasilmedspa.com",
+  "HERO_FIX_WHY": "The site audit flags 13 error pages and the site scan finds broken paths. Search Console already shows hundreds of impressions on competitive Frisco terms with almost no clicks. Clean up errors and make sure your Google listing name, address, phone, and website match what is on purplebasilmedspa.com before you pour budget into ads or new pages.",
+  "INTEGRATIONS": {
+    "intake": {
+      "connected": true,
+      "label": "Onboarding form",
+      "description": "Revenue inputs, booking and after-hours flags, service area."
+    },
+    "librecrawl": {
+      "connected": true,
+      "label": "Website technical scan",
+      "description": "Full-site scan for broken links, thin pages, and on-page search issues."
+    },
+    "openseo": {
+      "connected": true,
+      "label": "Search & local visibility",
+      "description": "Keyword rankings, Maps grid, Google listing, backlinks, and site audit signals."
+    },
+    "gsc": {
+      "connected": true,
+      "label": "Google Search Console",
+      "description": "Queries, pages, clicks, opportunities."
+    },
+    "ga4": {
+      "connected": true,
+      "label": "Google Analytics",
+      "description": "Traffic, landing pages, book and form actions, audience."
+    },
+    "call_tracking": {
+      "connected": false,
+      "label": "Call history / phone",
+      "description": "Missed calls, answer rate, after-hours actuals."
+    },
+    "citedby": {
+      "connected": true,
+      "label": "AI citation & content visibility",
+      "description": "Brand mentions in AI answers, earned vs. owned content gaps."
+    }
+  },
+  "VISIBILITY_WHATS_WORKING": [
+    "Homepage title and positioning are clear: “Medspa in Frisco, TX | Purple Basil Medspa & Wellness”.",
+    "Third-party footprint: ~302 estimated organic traffic and 281 ranked keywords (domain overview, 2026-09-17).",
+    "Branded search demand is real in Search Console—top queries are Purple Basil variants and people click when they see you."
+  ],
+  "VISIBILITY_HOLDING_BACK": [
+    "13 pages on your site return broken-page errors—bad for trust and Google indexing.",
+    "24 service pages look too thin for people comparing treatments in Frisco.",
+    "Live Google results (2026-09-18): no purplebasilmedspa.com URL in the top 20 on six Frisco searches; instagram.com/purplebasilmedspa ranks 17 for “hydrafacial frisco” only (social profile, not your site).",
+    "Laser hair removal Maps grid: you show at only 3 of 25 points (avg rank 10.7 where found)—visibility drops beyond ~2 km.",
+    "Google listing website field still http://www.purplebasilmedspa.com/ (two hops to HTTPS)."
+  ],
+  "VISIBILITY_TOP_IMPROVEMENTS": [
+    "Set each Google listing so name, address, phone, and website match https://purplebasilmedspa.com/.",
+    "Fix broken internal links from the site audit before turning on paid traffic.",
+    "Build or strengthen Frisco service landing pages (including your second Google listing location)."
+  ],
+  "VISIBILITY_EVIDENCE": [
+    "Third-party estimate: ~302 organic visits/month and 281 keywords where you rank (domain overview, 2026-09-17).",
+    "Other sites linking to you: 162 backlinks from 68 domains; domain strength score 18 (2026-09-18).",
+    "AI brand lookup (2026-09-18): 23 total mentions, 5,065 AI search volume.",
+    "Google results check: 6 Frisco searches, top 20 each—no purplebasilmedspa.com URLs (batch dated 2026-09-18).",
+    "Site health audit: 674 issues summarized; 13 broken error pages.",
+    "Full site scan: 172 HTML pages scored; 368 URLs checked (2026-09-17 session)."
+  ],
+  "RESPONSE_WHATS_WORKING": [
+    "Online scheduling (Vagaro) linked from 73 pages on your site.",
+    "Your onboarding form confirms online booking is offered—matches what the site scan found.",
+    "Dedicated contact page is reachable on the site."
+  ],
+  "RESPONSE_HOLDING_BACK": [
+    "After-hours call coverage not confirmed—evening and weekend leads may hit voicemail.",
+    "Google Analytics shows 0 book, call, or form actions in the organic window even though one event is defined in measurement health—you cannot see conversions from Google traffic yet."
+  ],
+  "RESPONSE_TOP_IMPROVEMENTS": [
+    "Pick one primary action (call or book) above the fold on mobile for top service pages.",
+    "Cover after-hours calls so intent is not lost to voicemail.",
+    "Tag book, call, and form actions in Google Analytics and confirm they appear in reports before scaling spend."
+  ],
+  "RESPONSE_EVIDENCE": [
+    "Click-to-call link on site: yes (site scan); Google listing phone not re-verified in the 2026-09-18 listing pull",
+    "Contact form or email link: yes",
+    "Vagaro booking links: on 73 pages",
+    "Live chat widget: not found",
+    "After-hours coverage (onboarding form): no",
+    "Online booking offered (onboarding form): yes",
+    "Book, call, or form actions in Google Analytics organic window (2026-08-20→2026-09-16): 0"
+  ],
+  "LOCAL_INSIGHTS": [
+    "Google listing (2026-09-18): Medical spa, claimed, 4.90★ from 184 reviews, 55 photos; website field still http://www.purplebasilmedspa.com/.",
+    "Newest 30 reviews: 17 of 30 have no owner reply in this pull (habit lapsed on recent reviews).",
+    "Mobile Google Maps search for “med spa frisco” from your storefront address: Purple Basil rank #1 in the local pack shown (9 businesses).",
+    "Laser hair removal Maps grid (5×5, 2 km, mobile): ranked at 3/25 points; ranks 2, 13, 17 at storefront-adjacent pins.",
+    "Beyond the storefront pin, laser hair removal visibility falls off quickly—most grid points show no rank in this capture, which matches the 3/25 scorecard above."
+  ],
+  "LOCAL_GRID_ROWS": [
+    {
+      "keyword": "laser hair removal (5×5, 2 km mobile)",
+      "avg_rank": "10.7 (3/25 pts)",
+      "top3": "1"
+    }
+  ],
+  "LOCAL_METRICS": [
+    {
+      "label": "Google listing · reviews",
+      "value": "4.90★ / 184",
+      "hint": "Listing snapshot 2026-09-18"
+    },
+    {
+      "label": "Maps pack (med spa frisco)",
+      "value": "#1",
+      "hint": "Mobile Maps search from your address"
+    },
+    {
+      "label": "LHR grid visibility",
+      "value": "3 / 25 pins",
+      "hint": "Avg rank 10.7 where found"
+    }
+  ],
+  "TECHNICAL_METRICS": [
+    {
+      "label": "Broken pages",
+      "value": "13",
+      "hint": "Search audit + site scan"
+    },
+    {
+      "label": "Thin content (HTML)",
+      "value": "24",
+      "hint": "Site scan flags"
+    },
+    {
+      "label": "Missing meta (HTML)",
+      "value": "78",
+      "hint": "Filtered page set"
+    }
+  ],
+  "TECHNICAL_PRIORITIES": [
+    "Clear 13 broken URLs from the search visibility audit before paid campaigns.",
+    "Expand or merge 24 thin HTML pages—especially service and package paths tied to Vagaro.",
+    "Fix 2 broken internal links and 2 redirect chains from the audit summary.",
+    "Check Vagaro booking links and fix the broken WebMD outbound (server error in site scan exports)."
+  ],
+  "TECHNICAL_EVIDENCE": [
+    "Site scan 2026-09-17: 368 URLs checked; 13 broken pages flagged in the audit summary.",
+    "Search visibility audit 4ed66c4f: 257 pages reviewed; 674 total issues.",
+    "172 HTML pages used for free-report scoring; 73 pages with booking links."
+  ],
+  "CITEDBY_METRICS": [
+    {
+      "label": "Overall AI visibility",
+      "value": "6.34%",
+      "hint": "Probe 2026-09-15"
+    },
+    {
+      "label": "Citations of your brand",
+      "value": "5",
+      "hint": "78 probe questions"
+    },
+    {
+      "label": "Topic leader: VI Peel",
+      "value": "25%",
+      "hint": "4 cites on topic"
+    },
+    {
+      "label": "Owned content recs",
+      "value": "17",
+      "hint": "9 HIGH / 8 MED · capture 2026-09-17"
+    },
+    {
+      "label": "Earned content recs",
+      "value": "16",
+      "hint": "All HIGH · capture 2026-09-17"
+    }
+  ],
+  "CITEDBY_GAPS": [
+    "HydraFacial, injectables, and microneedling: 0% of probed AI answers cite you despite live service pages.",
+    "AI engines pulled 489 URLs in the probe; only 5 were pages you own—most mentions go to other sites.",
+    "Missing /llms-full.txt (the extended page list some AI tools read) and a warning on your HTML sitemap page make it harder for AI answers to pull accurate facts from your site.",
+    "Laser hair removal: 6.7% visibility, 1 citation—competitors own the “worth it vs waxing” questions."
+  ],
+  "CITEDBY_RECOMMENDATIONS": [
+    "Publish owned hub: “How Does a VI Peel Actually Work on the Skin?” (high-priority recommendation).",
+    "Publish owned comparison: “Hydrafacial vs. Chemical Peels for Acne-Prone Skin”.",
+    "Publish owned local guide: “Microneedling Downtime in Frisco: What to Expect Before Your Next Event”.",
+    "Earned outreach targets include North Biomedical (VI Peel), Perfect B (HydraFacial vs peel), and Mimi Silk (home IPL vs professional laser)—drafts in client content deliverable folder."
+  ],
+  "CITEDBY_TOPIC_ROWS": [
+    {
+      "topic": "Hydrafacial Services",
+      "visibility": "0%",
+      "citations": "0",
+      "prompts": "5"
+    },
+    {
+      "topic": "Laser Hair Removal",
+      "visibility": "6.7%",
+      "citations": "1",
+      "prompts": "5"
+    },
+    {
+      "topic": "Medical-Grade Injectables",
+      "visibility": "0%",
+      "citations": "0",
+      "prompts": "5"
+    },
+    {
+      "topic": "Microneedling Treatments",
+      "visibility": "0%",
+      "citations": "0",
+      "prompts": "5"
+    },
+    {
+      "topic": "Vi Peel Treatments",
+      "visibility": "25%",
+      "citations": "4",
+      "prompts": "5"
+    }
+  ],
+  "CITEDBY_PROMPT_ROWS": [
+    {
+      "topic": "Laser Hair Removal",
+      "prompt": "Is laser hair removal in Frisco worth it compared to just waxing every few weeks?",
+      "our_cites": "1",
+      "total_cites": "8"
+    },
+    {
+      "topic": "Vi Peel Treatments",
+      "prompt": "Can I book a VI peel consultation in Frisco this week?",
+      "our_cites": "2",
+      "total_cites": "12"
+    },
+    {
+      "topic": "Vi Peel Treatments",
+      "prompt": "What should I expect to pay for a full VI peel series in Frisco?",
+      "our_cites": "1",
+      "total_cites": "8"
+    },
+    {
+      "topic": "Vi Peel Treatments",
+      "prompt": "How much does a VI peel cost in Frisco?",
+      "our_cites": "1",
+      "total_cites": "22"
+    }
+  ],
+  "CITEDBY_CITED_SOURCES": [
+    {
+      "domain": "google.com",
+      "retrievals": "39",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "youtube.com",
+      "retrievals": "12",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "pmc.ncbi.nlm.nih.gov",
+      "retrievals": "11",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "instagram.com",
+      "retrievals": "10",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "frznaesthetics.com",
+      "retrievals": "9",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "novuskin.com",
+      "retrievals": "9",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "txfaces.com",
+      "retrievals": "9",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "facebeautyscience.com",
+      "retrievals": "8",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "vipeel.com",
+      "retrievals": "8",
+      "notes": "489 URLs in probe merge"
+    },
+    {
+      "domain": "reddit.com",
+      "retrievals": "8",
+      "notes": "489 URLs in probe merge"
+    }
+  ],
+  "CITEDBY_AI_COMPETITORS": [
+    {
+      "domain": "purplebasilmedspa.com",
+      "visibility": "6.4%",
+      "notes": "Your brand · probe 2026-09-15"
+    },
+    {
+      "domain": "skintightnaturals.com",
+      "visibility": "—",
+      "notes": "Saved competitor; visibility trend not shown for this report period"
+    },
+    {
+      "domain": "radiantcomplexionsmedspa.com",
+      "visibility": "—",
+      "notes": "Saved competitor; visibility trend not shown for this report period"
+    },
+    {
+      "domain": "bellavisomedical.com",
+      "visibility": "—",
+      "notes": "Saved competitor; visibility trend not shown for this report period"
+    },
+    {
+      "domain": "glowmedispa.com",
+      "visibility": "—",
+      "notes": "Saved competitor; visibility trend not shown for this report period"
+    },
+    {
+      "domain": "serenitymedspa.com",
+      "visibility": "—",
+      "notes": "Saved competitor; visibility trend not shown for this report period"
+    }
+  ],
+  "CITEDBY_TECH_HIGHLIGHTS": [
+    "Crawl readiness (2026-09-15): 14 PASS, 1 FAIL (/llms-full.txt extended page list for AI tools), 1 WARN (HTML sitemap page).",
+    "/llms.txt: PASS; robots.txt allows major AI crawlers.",
+    "On-page AI-readiness checks: 96 items (56 FAIL, 24 critical) on homepage, packages, and laser service URLs.",
+    "489 URLs retrieved in the citation probe—5 classified as owned on purplebasilmedspa.com."
+  ],
+  "GSC_METRICS": [
+    {
+      "label": "Organic clicks",
+      "value": "79",
+      "hint": "2026-08-17→2026-09-14 (top 1000 queries)"
+    },
+    {
+      "label": "Impressions (same rows)",
+      "value": "10,554",
+      "hint": "More query rows available"
+    },
+    {
+      "label": "Avg. click rate / rank",
+      "value": "0.75% / 26.9",
+      "hint": "Impression-weighted"
+    }
+  ],
+  "GSC_QUERY_ROWS": [
+    {
+      "query": "purple basil medspa",
+      "clicks": 36,
+      "impressions": 198,
+      "ctr": "18.2%",
+      "position": "2.6"
+    },
+    {
+      "query": "purple basil medspa frisco",
+      "clicks": 21,
+      "impressions": 91,
+      "ctr": "23.1%",
+      "position": "1.1"
+    },
+    {
+      "query": "purple basil med spa",
+      "clicks": 5,
+      "impressions": 18,
+      "ctr": "27.8%",
+      "position": "1.3"
+    },
+    {
+      "query": "purple basil medspa and wellness",
+      "clicks": 5,
+      "impressions": 7,
+      "ctr": "71.4%",
+      "position": "1.3"
+    },
+    {
+      "query": "laser hair removal frisco",
+      "clicks": 1,
+      "impressions": 388,
+      "ctr": "0.3%",
+      "position": "25.8"
+    },
+    {
+      "query": "frisco med spa",
+      "clicks": 1,
+      "impressions": 154,
+      "ctr": "0.6%",
+      "position": "3.5"
+    },
+    {
+      "query": "hydradermabrasion",
+      "clicks": 1,
+      "impressions": 365,
+      "ctr": "0.3%",
+      "position": "13.0"
+    },
+    {
+      "query": "med spa frisco",
+      "clicks": 0,
+      "impressions": 373,
+      "ctr": "0.0%",
+      "position": "22.6"
+    },
+    {
+      "query": "microneedling frisco",
+      "clicks": 0,
+      "impressions": 400,
+      "ctr": "0.0%",
+      "position": "12.6"
+    },
+    {
+      "query": "hydrodermabrasion",
+      "clicks": 0,
+      "impressions": 162,
+      "ctr": "0.0%",
+      "position": "43.9"
+    }
+  ],
+  "GSC_OPPORTUNITIES": [
+    "Post-microneedling skincare guide: 6 clicks, 2,954 impressions, average position ~16.9 (strongest query-to-page match we could confirm from your connected Search Console and Analytics data).",
+    "“med spa frisco”—373 impressions, 0 clicks: tighten title/snippet and align a Frisco landing page.",
+    "“microneedling frisco”—400 impressions, 0 clicks: strengthen the Frisco service page and link from blog hubs.",
+    "18 opportunity rows match a Google Analytics landing page; none show book or form actions—fix tracking before you judge return on ad spend."
+  ],
+  "GA4_METRICS": [
+    {
+      "label": "Organic sessions",
+      "value": "397",
+      "hint": "2026-08-20→2026-09-16"
+    },
+    {
+      "label": "Key events (organic)",
+      "value": "0",
+      "hint": "Same period"
+    },
+    {
+      "label": "Organic session change",
+      "value": "+104%",
+      "hint": "vs prior period (195)"
+    }
+  ],
+  "GA4_LANDING_ROWS": [
+    {
+      "page": "/",
+      "sessions": 229,
+      "events": 0
+    },
+    {
+      "page": "/packages/laser-hair-removal",
+      "sessions": 9,
+      "events": 0
+    },
+    {
+      "page": "/best-skin-treatments-for-large-pores-and-rough-texture",
+      "sessions": 9,
+      "events": 0
+    },
+    {
+      "page": "/skin-concerns",
+      "sessions": 11,
+      "events": 0
+    },
+    {
+      "page": "/post-microneedling-skincare-guide-what-to-use-and-avoid",
+      "sessions": 6,
+      "events": 0
+    },
+    {
+      "page": "/vi-peel-near-me-friso-tx",
+      "sessions": 4,
+      "events": 0
+    },
+    {
+      "page": "/contact",
+      "sessions": 4,
+      "events": 0
+    }
+  ],
+  "GA4_INSIGHTS": [
+    "Homepage takes 229 of 397 organic sessions (~58%)—service pages are underused as entry points.",
+    "Measurement health: 1 web stream, 1 event defined, 0 diagnostics—but organic overview still shows 0 book/call/form events (tags not firing or not attributed to organic).",
+    "Channel mix: Direct 440, Organic 397, Organic Social 54—organic is second-largest and growing.",
+    "Device and country breakdown captured for organic search (2026-08-21→2026-09-17)."
+  ],
+  "CALL_INSIGHTS": [
+    "Call logs integration is pending—this tab will show inbound volume, missed calls, and after-hours share once phone/call history is connected.",
+    "Overview revenue-at-risk will use actual missed-call data after connection (onboarding-form planning math is not shown in the client UI until then).",
+    "Connecting your phone system or call-tracking account is part of delivering this audit—no additional report purchase required."
+  ],
+  "COMPETITOR_ROWS": [
+    {
+      "domain": "starwoodmedspa.com",
+      "overlap": "10.45 · 7 shared searches",
+      "keywords": 7,
+      "notes": "median pos 1; est traffic 528"
+    },
+    {
+      "domain": "yelp.com",
+      "overlap": "5.30 · 7 shared searches",
+      "keywords": 7,
+      "notes": "median pos 4; est traffic 35"
+    },
+    {
+      "domain": "lebeauvisagemedicalspa.com",
+      "overlap": "4.35 · 6 shared searches",
+      "keywords": 6,
+      "notes": "median pos 6; est traffic 106"
+    },
+    {
+      "domain": "legacydermatology.com",
+      "overlap": "3.35 · 6 shared searches",
+      "keywords": 6,
+      "notes": "median pos 3; est traffic 20"
+    },
+    {
+      "domain": "finelineaestheticstx.com",
+      "overlap": "2.65 · 6 shared searches",
+      "keywords": 6,
+      "notes": "median pos 5; est traffic 20"
+    },
+    {
+      "domain": "themodernskin.com",
+      "overlap": "2.25 · 3 shared searches",
+      "keywords": 3,
+      "notes": "median pos 3; est traffic 14"
+    },
+    {
+      "domain": "hushmedspa.com",
+      "overlap": "2.00 · 5 shared searches",
+      "keywords": 5,
+      "notes": "median pos 12; est traffic 62"
+    },
+    {
+      "domain": "txfaces.com",
+      "overlap": "1.95 · 6 shared searches",
+      "keywords": 6,
+      "notes": "median pos 10; est traffic 11"
+    },
+    {
+      "domain": "atomicbeauty.com",
+      "overlap": "1.90 · 5 shared searches",
+      "keywords": 5,
+      "notes": "median pos 6; est traffic 7"
+    },
+    {
+      "domain": "finetunemedspa.com",
+      "overlap": "1.85 · 7 shared searches",
+      "keywords": 7,
+      "notes": "median pos 11; est traffic 30"
+    }
+  ],
+  "COMPETITIVE_INSIGHTS": [
+    "Eight Frisco searches (2026-09-18): starwoodmedspa.com tops the shared-search score at 10.45 on 7 of those keywords—your clearest organic benchmark in this pull.",
+    "Other med spas in the batch: Le Beau Visage (4.35), Fine Line (2.65), Hush (2.0), FINETUNE (1.85), The Modern Skin (2.25). Re-check after P0 fixes to see if the scores shift.",
+    "AI competitor table rows show “—” where the probe did not return a trend—do not treat as zero market share; use this tab plus Content & AI topic tables instead.",
+    "Backlinks (yours): 162 total / 68 referring domains as of 2026-09-18. Side-by-side competitor backlink counts are not included in this report.",
+    "Your website in Google results: no purplebasilmedspa.com in the top 20 for laser, botox, med spa, microneedling, or frisco facial; the hydrafacial check includes instagram.com/purplebasilmedspa at rank 17 (social, not your site)."
+  ],
+  "ROADMAP": [
+    {
+      "phase": "Days 1–14",
+      "priority": "P0",
+      "title": "Fix 13 broken pages, 2 broken internal links, and Google listing website → HTTPS",
+      "impact": "High",
+      "effort": "Medium",
+      "owner": "Dev / web",
+      "hours": "8–16h",
+      "success_metric": "Broken pages from the site audit drop to 0; Google listing website shows https://purplebasilmedspa.com/; “med spa frisco” keeps impressions with rising clicks in Search Console"
+    },
+    {
+      "phase": "Days 1–14",
+      "priority": "P0",
+      "title": "Add /llms-full.txt, redirect the “friso” typo URL, and repair broken HydraFacial page links",
+      "impact": "High",
+      "effort": "Low",
+      "owner": "Dev",
+      "hours": "2–4h",
+      "success_metric": "/llms-full.txt is live and readable by AI tools; HydraFacial and other priority service URLs open without “page not found” errors"
+    },
+    {
+      "phase": "Days 15–30",
+      "priority": "P0",
+      "title": "Tag and validate Google Analytics book and call events on buttons; plan after-hours capture",
+      "impact": "High",
+      "effort": "Medium",
+      "owner": "Marketing + web",
+      "hours": "4–8h",
+      "success_metric": "Organic traffic shows at least one book or call in Google Analytics; test clicks on homepage and /contact show up in Google Analytics real-time reports"
+    },
+    {
+      "phase": "Days 31–60",
+      "priority": "P1",
+      "title": "Ship owned hubs: VI Peel (/skin-concerns/vi-peel/), HydraFacial vs peel, microneedling downtime Frisco",
+      "impact": "High",
+      "effort": "High",
+      "owner": "Content / clinical review",
+      "hours": "12–24h",
+      "success_metric": "AI answers cite you on HydraFacial and microneedling (0% → ≥3%); VI Peel stays ≥25%; +2 weekly clicks on searches without your brand name"
+    },
+    {
+      "phase": "Days 61–90",
+      "priority": "P2",
+      "title": "Refresh laser hair removal Maps grid coverage (3/25 pins today); pursue earned placements (North Biomedical, Perfect B, Mimi Silk)",
+      "impact": "Medium",
+      "effort": "Medium",
+      "owner": "PR / owner-approved outreach",
+      "hours": "6–12h",
+      "success_metric": "Grid ≥5/25 pins with avg rank ≤10; ≥1 new earned URL citing purplebasilmedspa.com in citation probe"
+    },
+    {
+      "phase": "Days 61–90",
+      "priority": "P2",
+      "title": "Connect call logs + optional mystery-shop scoring (same audit deliverable)",
+      "impact": "High",
+      "effort": "Low",
+      "owner": "Ops / Limitless integration",
+      "hours": "1–2h setup",
+      "success_metric": "Calls tab populated; Overview revenue-at-risk uses actual missed-call rate (not onboarding-form estimate)"
+    }
+  ],
+  "GAPS_REMAINING": [
+    "We cannot yet see how often the phone is answered, how long callers wait on hold, or how many calls arrive after hours—those numbers fill in once your call history is connected (already included in this audit).",
+    "Recorded mystery-shopping calls with scored follow-up are a separate booking when you want them; this report does not show sample scores until those calls are recorded.",
+    "Local visibility in this report is based on Frisco med-spa Maps results and your laser hair removal grid (3/25 pins)—not a city-wide list of every business type sorted by review count.",
+    "We could not match every Search Console search to a single landing page from your connected Google accounts as of 2026-09-17. Query-and-page pairings called out in this report were checked individually; other high-impression searches may land on pages we did not pair here."
+  ],
+  "APPENDIX_SOURCES": [
+    {
+      "source": "Onboarding form",
+      "scope": "Revenue inputs, booking and after-hours flags, two Google listing URLs",
+      "captured": "2026-09-17",
+      "status": "Included"
+    },
+    {
+      "source": "Website technical scan",
+      "scope": "368-page site scan, CSV/PDF exports, per-page health flags",
+      "captured": "2026-09-17",
+      "status": "Included"
+    },
+    {
+      "source": "Search visibility audit",
+      "scope": "257-page audit, 674 issues summarized",
+      "captured": "2026-09-17",
+      "status": "Included"
+    },
+    {
+      "source": "Google Search Console",
+      "scope": "Query performance (1000 rows; more available)",
+      "captured": "2026-09-17",
+      "status": "Connected"
+    },
+    {
+      "source": "Google Analytics 4",
+      "scope": "Organic overview, landing pages, acquisition, measurement health",
+      "captured": "2026-09-17",
+      "status": "Connected"
+    },
+    {
+      "source": "AI citation & content visibility",
+      "scope": "Domain report, probes, owned/earned recommendations",
+      "captured": "2026-09-17",
+      "status": "Included"
+    },
+    {
+      "source": "Local / Google listing pulls",
+      "scope": "Listing 4.90★/184 reviews, med spa frisco Maps #1, laser hair removal 5×5 grid 3/25 pins",
+      "captured": "2026-09-18",
+      "status": "Included"
+    },
+    {
+      "source": "Competitive Google results",
+      "scope": "Eight Frisco searches overlap table + six-search check for your domain in the top 20",
+      "captured": "2026-09-18",
+      "status": "Included"
+    },
+    {
+      "source": "Call tracking",
+      "scope": "Not connected",
+      "captured": "—",
+      "status": "Not connected"
+    }
+  ]
+}
+    </script>
+
+    <script>
+      (function () {
+        /** Internal INTEGRATIONS keys → client-facing labels (never show operator tool brands in UI). */
+        var INTEGRATION_CLIENT_DISPLAY = {
+          openseo: {
+            label: "Search & local visibility",
+            description: "Keyword rankings, Maps grid, Google listing, backlinks, and site audit signals."
+          },
+          librecrawl: {
+            label: "Website technical scan",
+            description: "Full-site scan for broken links, thin pages, and on-page search issues."
+          },
+          citedby: {
+            label: "AI citation & content visibility",
+            description: "Brand mentions in AI answers, earned vs. owned content gaps."
+          }
+        };
+
+        function integrationClientView(key, cfg) {
+          cfg = cfg || {};
+          var overlay = INTEGRATION_CLIENT_DISPLAY[key];
+          return {
+            label: (overlay && overlay.label) || cfg.label || key,
+            description: (overlay && overlay.description) || cfg.description || ""
+          };
+        }
+
+        function escapeHtml(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+        }
+
+        function renderBulletList(items) {
+          if (!Array.isArray(items)) return "";
+          return items.map(function (item) {
+            return "<li>" + escapeHtml(item == null ? "" : item) + "</li>";
+          }).join("");
+        }
+
+        function populateReportLists(root, data) {
+          root.querySelectorAll("[data-report-list]").forEach(function (ul) {
+            var key = ul.getAttribute("data-report-list");
+            ul.innerHTML = renderBulletList(data[key]);
+          });
+        }
+
+        function renderMetrics(containerId, items) {
+          var el = document.getElementById(containerId);
+          if (!el || !Array.isArray(items)) return;
+          el.innerHTML = items.map(function (m) {
+            return (
+              '<div class="metric-tile"><p class="m-label">' + escapeHtml(m.label) +
+              '</p><p class="m-value">' + escapeHtml(m.value) +
+              '</p><p class="m-hint">' + escapeHtml(m.hint || "") + "</p></div>"
+            );
+          }).join("");
+        }
+
+        function renderTableBody(tableId, rows, fn) {
+          var table = document.getElementById(tableId);
+          if (!table || !Array.isArray(rows)) return;
+          var tbody = table.querySelector("tbody");
+          tbody.innerHTML = rows.map(fn).join("");
+        }
+
+        function parseRevenueAmount(str) {
+          return Number(String(str == null ? "" : str).replace(/,/g, ""));
+        }
+
+        function formatRevenueAmount(n) {
+          return isFinite(n) ? Math.round(n).toLocaleString("en-US") : "";
+        }
+
+        function badgeForIntegration(key, integ) {
+          if (!integ || !integ.connected) {
+            if (integ && integ.optional) return { cls: "badge--optional", text: "Optional — not connected" };
+            if (key === "call_tracking") return { cls: "badge--unlock", text: "Integration pending" };
+            if (key === "gsc") return { cls: "badge--unlock", text: "Search Console not connected" };
+            if (key === "ga4") return { cls: "badge--unlock", text: "Google Analytics not connected" };
+            if (key === "citedby") return { cls: "badge--unlock", text: "Not included in this report" };
+            return { cls: "badge--unlock", text: "Not connected" };
+          }
+          if (key === "gsc" || key === "ga4") return { cls: "badge--connected", text: "Connected" };
+          return { cls: "badge--included", text: "Included" };
+        }
+
+        function applyGates(data) {
+          var integ = data.INTEGRATIONS || {};
+          document.querySelectorAll("[data-gate]").forEach(function (section) {
+            var key = section.getAttribute("data-gate");
+            var cfg = integ[key];
+            var connected = cfg && cfg.connected === true;
+            section.classList.toggle("is-locked", !connected);
+            var overlay = section.querySelector("[data-gate-overlay]");
+            if (overlay && !connected) {
+              var badge = badgeForIntegration(key, cfg);
+              var view = integrationClientView(key, cfg);
+              if (key === "call_tracking") {
+                overlay.innerHTML =
+                  '<span class="badge ' + badge.cls + '">' + escapeHtml(badge.text) + "</span>" +
+                  "<h4>Call logs integration pending</h4>" +
+                  "<p>This section will populate when phone/call history is connected. No additional report purchase is required—it is part of delivering this audit.</p>";
+              } else {
+                overlay.innerHTML =
+                  '<span class="badge ' + badge.cls + '">' + escapeHtml(badge.text) + "</span>" +
+                  "<h4>" + escapeHtml(view.label) + " not available</h4>" +
+                  "<p>" + escapeHtml(view.description || "This section was empty because the account was not connected when we prepared this report.") + "</p>";
+              }
+            }
+            var badgeEl = section.querySelector("[data-section-badge]");
+            if (badgeEl && cfg) {
+              var b = badgeForIntegration(key, cfg);
+              badgeEl.className = "badge " + b.cls;
+              badgeEl.textContent = b.text;
+            }
+          });
+        }
+
+        function renderOverviewExtras(data) {
+          var vs = data.OVERVIEW_VS_FREE;
+          var vsEl = document.getElementById("overview-vs-free");
+          if (vsEl && vs && vs.free && vs.detailed) {
+            vsEl.innerHTML =
+              '<div class="overview-compare__col"><h4>Free revenue scan</h4><ul>' +
+              vs.free.map(function (line) { return "<li>" + escapeHtml(line) + "</li>"; }).join("") +
+              "</ul></div>" +
+              '<div class="overview-compare__col"><h4>This detailed audit</h4><ul>' +
+              vs.detailed.map(function (line) { return "<li>" + escapeHtml(line) + "</li>"; }).join("") +
+              "</ul></div>";
+          }
+
+          var checklist = document.getElementById("overview-included-checklist");
+          var integ = data.INTEGRATIONS || {};
+          if (checklist) {
+            checklist.innerHTML = Object.keys(integ).map(function (key) {
+              var c = integ[key];
+              var view = integrationClientView(key, c);
+              var b = badgeForIntegration(key, c);
+              return (
+                '<span class="badge ' + b.cls + '" title="' + escapeHtml(view.description || "") + '">' +
+                escapeHtml(view.label) + " · " + escapeHtml(b.text) + "</span>"
+              );
+            }).join("");
+          }
+
+          var debriefTitle = document.getElementById("debrief-title");
+          var debriefBody = document.getElementById("debrief-body");
+          var debriefCta = document.getElementById("debrief-cta");
+          if (debriefTitle && data.DEBRIEF_TITLE) debriefTitle.textContent = data.DEBRIEF_TITLE;
+          if (debriefBody && data.DEBRIEF_BODY) debriefBody.textContent = data.DEBRIEF_BODY;
+          if (debriefCta) {
+            debriefCta.textContent = data.DEBRIEF_CTA_TEXT || "Schedule walkthrough";
+            if (data.DEBRIEF_CTA_HREF) debriefCta.setAttribute("href", data.DEBRIEF_CTA_HREF);
+          }
+
+          var gapsNote = document.getElementById("gaps-completion-note");
+          if (gapsNote && data.GAPS_COMPLETION_NOTE) gapsNote.textContent = data.GAPS_COMPLETION_NOTE;
+
+          var exportPack = document.getElementById("appendix-export-pack");
+          if (exportPack && data.APPENDIX_EXPORT_PACK) exportPack.textContent = data.APPENDIX_EXPORT_PACK;
+
+          var scoringNote = document.getElementById("appendix-scoring-note");
+          if (scoringNote && data.APPENDIX_SCORING_NOTE) scoringNote.textContent = data.APPENDIX_SCORING_NOTE;
+        }
+
+        function vizParseNum(val) {
+          if (val == null || val === "") return 0;
+          var n = parseFloat(String(val).replace(/[^0-9.-]/g, ""));
+          return isNaN(n) ? 0 : n;
+        }
+
+        function vizScoreColor(score) {
+          if (score >= 70) return "var(--accent-green)";
+          if (score >= 45) return "var(--accent-amber)";
+          return "var(--accent-orange)";
+        }
+
+        function vizBarFill(score, max) {
+          max = max || 100;
+          var pct = Math.min(100, Math.max(0, (score / max) * 100));
+          return (
+            '<span class="viz-bar-track" role="presentation"><span class="viz-bar-fill" style="width:' +
+            pct +
+            "%;background:" +
+            vizScoreColor(score) +
+            '"></span></span>'
+          );
+        }
+
+        function renderVisuals(data) {
+          var el;
+
+          el = document.getElementById("viz-overview-scores");
+          if (el) {
+            var pillars = [
+              { label: "Overall", value: vizParseNum(data.SCORE_OVERALL) },
+              { label: "Visibility", value: vizParseNum(data.VISIBILITY_SCORE) },
+              { label: "Response", value: vizParseNum(data.RESPONSE_SCORE) }
+            ];
+            var sr = pillars
+              .map(function (p) {
+                return p.label + " " + p.value + " out of 100";
+              })
+              .join("; ");
+            el.innerHTML =
+              '<p class="viz-card__title">Headline scores</p>' +
+              '<p class="viz-card__sub">0–100 scale · higher is stronger</p>' +
+              '<div class="viz-score-strip" role="img" aria-label="' +
+              escapeHtml(sr) +
+              '">' +
+              pillars
+                .map(function (p) {
+                  return (
+                    '<div class="viz-score-row"><span class="viz-score-row__label">' +
+                    escapeHtml(p.label) +
+                    "</span>" +
+                    vizBarFill(p.value) +
+                    '<span class="viz-score-row__val">' +
+                    escapeHtml(String(p.value)) +
+                    "</span></div>"
+                  );
+                })
+                .join("") +
+              "</div>";
+          }
+
+          el = document.getElementById("viz-overview-depth");
+          if (el) {
+            var vs = data.OVERVIEW_VS_FREE || {};
+            var freeN = Array.isArray(vs.free) ? vs.free.length : 4;
+            var detN = Array.isArray(vs.detailed) ? vs.detailed.length : 4;
+            var integ = data.INTEGRATIONS || {};
+            var connected = Object.keys(integ).filter(function (k) {
+              return integ[k] && integ[k].connected === true;
+            }).length;
+            var totalInt = Object.keys(integ).length || 1;
+            el.innerHTML =
+              '<p class="viz-card__title">What the paid audit adds</p>' +
+              '<p class="viz-card__sub">Same headline scores; more connected data and action items</p>' +
+              '<div class="viz-depth-compare" role="img" aria-label="Free scan ' +
+              freeN +
+              " highlight areas; detailed audit " +
+              detN +
+              " highlight areas; " +
+              connected +
+              " of " +
+              totalInt +
+              ' data sources connected">' +
+              '<div class="viz-depth-row"><span>Free scan</span>' +
+              vizBarFill(freeN, Math.max(freeN, detN, 6)) +
+              "<span>" +
+              freeN +
+              "</span></div>" +
+              '<div class="viz-depth-row"><span>This audit</span>' +
+              vizBarFill(detN, Math.max(freeN, detN, 6)) +
+              "<span>" +
+              detN +
+              "</span></div>" +
+              '<div class="viz-depth-row"><span>Connected</span>' +
+              vizBarFill(connected, totalInt) +
+              "<span>" +
+              connected +
+              "/" +
+              totalInt +
+              "</span></div>" +
+              "</div>" +
+              '<p class="viz-card__sub" style="margin:10px 0 0">Bars compare breadth (bullets in each tier), not score values.</p>';
+          }
+
+          el = document.getElementById("viz-four-bar");
+          if (el) {
+            var bars = [
+              { label: "Coverage", sub: "Maps & Google search", value: vizParseNum(data.FOUR_BAR_COVERAGE) },
+              { label: "Clarity", sub: "Service pages", value: vizParseNum(data.FOUR_BAR_CLARITY) },
+              { label: "Credibility", sub: "Reviews & trust", value: vizParseNum(data.FOUR_BAR_CREDIBILITY) },
+              { label: "Consistency", sub: "Listing ↔ site", value: vizParseNum(data.FOUR_BAR_CONSISTENCY) }
+            ];
+            el.innerHTML =
+              '<p class="viz-card__title">Four visibility pillars</p>' +
+              '<p class="viz-card__sub">Sub-scores that roll up to your Visibility score (' +
+              escapeHtml(String(data.VISIBILITY_SCORE || "")) +
+              ")</p>" +
+              '<div class="viz-hbars" role="img" aria-label="' +
+              escapeHtml(
+                bars
+                  .map(function (b) {
+                    return b.label + " " + b.value;
+                  })
+                  .join(", ")
+              ) +
+              '">' +
+              bars
+                .map(function (b) {
+                  return (
+                    '<div class="viz-hbar"><span class="viz-hbar__label" title="' +
+                    escapeHtml(b.sub) +
+                    '">' +
+                    escapeHtml(b.label) +
+                    "</span>" +
+                    vizBarFill(b.value) +
+                    '<span class="viz-hbar__meta">' +
+                    escapeHtml(String(b.value)) +
+                    "</span></div>"
+                  );
+                })
+                .join("") +
+              "</div>";
+          }
+
+          el = document.getElementById("viz-lhr-grid");
+          if (el) {
+            var ranked = 3;
+            var total = 25;
+            var gridLabel = "Laser hair removal";
+            (data.LOCAL_METRICS || []).forEach(function (m) {
+              if (!m || !m.value) return;
+              var match = String(m.value).match(/(\d+)\s*\/\s*(\d+)/);
+              if (match) {
+                ranked = parseInt(match[1], 10);
+                total = parseInt(match[2], 10);
+              }
+            });
+            (data.LOCAL_GRID_ROWS || []).forEach(function (r) {
+              if (r && r.keyword) gridLabel = r.keyword.split("(")[0].trim();
+              if (r && r.avg_rank) {
+                var m2 = String(r.avg_rank).match(/(\d+)\s*\/\s*(\d+)/);
+                if (m2) {
+                  ranked = parseInt(m2[1], 10);
+                  total = parseInt(m2[2], 10);
+                }
+              }
+            });
+            var cells = [];
+            var center = Math.floor(total / 2);
+            var rankedElsewhere = Math.max(0, ranked - 1);
+            for (var ci = 0; ci < total; ci++) {
+              var cls = "viz-grid-cell";
+              if (ci === center) cls += " viz-grid-cell--you";
+              else if (rankedElsewhere > 0) {
+                cls += " viz-grid-cell--ranked";
+                rankedElsewhere--;
+              }
+              cells.push('<div class="' + cls + '" aria-hidden="true"></div>');
+            }
+            el.innerHTML =
+              '<p class="viz-card__title">Maps grid · ' +
+              escapeHtml(gridLabel) +
+              "</p>" +
+              '<p class="viz-card__sub">' +
+              escapeHtml(String(ranked)) +
+              " of " +
+              escapeHtml(String(total)) +
+              " pins show your business (5×5, 2 km). Purple = your storefront pin; teal = you appear in results.</p>" +
+              '<div class="viz-grid-wrap">' +
+              '<div class="viz-grid-5" role="img" aria-label="' +
+              escapeHtml(ranked + " of " + total + " map points show your listing") +
+              '">' +
+              cells.join("") +
+              "</div></div>";
+          }
+
+          el = document.getElementById("viz-gsc-queries");
+          if (el && Array.isArray(data.GSC_QUERY_ROWS) && data.GSC_QUERY_ROWS.length) {
+            var qrows = data.GSC_QUERY_ROWS.slice().sort(function (a, b) {
+              return (b.impressions || 0) - (a.impressions || 0);
+            });
+            var top = qrows.slice(0, 7);
+            var maxImp = top[0].impressions || 1;
+            el.innerHTML =
+              '<p class="viz-card__title">Top searches by impressions</p>' +
+              '<p class="viz-card__sub">Orange = clicks · pale teal = impressions (same scale)</p>' +
+              '<div class="viz-hbars">' +
+              top
+                .map(function (r) {
+                  var impPct = Math.min(100, ((r.impressions || 0) / maxImp) * 100);
+                  var clkPct = Math.min(100, ((r.clicks || 0) / maxImp) * 100);
+                  return (
+                    '<div class="viz-hbar viz-hbar--dual" role="img" aria-label="' +
+                    escapeHtml(r.query) +
+                    ": " +
+                    r.clicks +
+                    " clicks, " +
+                    r.impressions +
+                    ' impressions">' +
+                    '<span class="viz-hbar__label">' +
+                    escapeHtml(r.query) +
+                    '</span><span class="viz-bar-track"><span class="viz-bar-fill viz-bar-fill--imps" style="width:' +
+                    impPct +
+                    '%"></span><span class="viz-bar-fill viz-bar-fill--clicks" style="width:' +
+                    clkPct +
+                    '%"></span></span><span class="viz-hbar__meta">' +
+                    r.clicks +
+                    " / " +
+                    r.impressions +
+                    "</span></div>"
+                  );
+                })
+                .join("") +
+              "</div>" +
+              '<div class="viz-legend"><span class="viz-legend__item"><span class="viz-legend__swatch" style="background:var(--teal);opacity:.45"></span>Impressions</span>' +
+              '<span class="viz-legend__item"><span class="viz-legend__swatch" style="background:var(--accent-orange)"></span>Clicks</span></div>';
+          }
+
+          el = document.getElementById("viz-competitors");
+          if (el && Array.isArray(data.COMPETITOR_ROWS) && data.COMPETITOR_ROWS.length) {
+            var crows = data.COMPETITOR_ROWS.slice().sort(function (a, b) {
+              return vizParseNum((b.overlap || "").split("·")[0]) - vizParseNum((a.overlap || "").split("·")[0]);
+            });
+            var topC = crows.slice(0, 8);
+            var maxOv = vizParseNum((topC[0].overlap || "").split("·")[0]) || 1;
+            el.innerHTML =
+              '<p class="viz-card__title">Shared Frisco search overlap</p>' +
+              '<p class="viz-card__sub">Higher bar = more keywords where you and they both appear</p>' +
+              '<div class="viz-hbars" role="img" aria-label="Competitor overlap scores">' +
+              topC
+                .map(function (r) {
+                  var score = vizParseNum((r.overlap || "").split("·")[0]);
+                  return (
+                    '<div class="viz-hbar"><span class="viz-hbar__label">' +
+                    escapeHtml(r.domain) +
+                    "</span>" +
+                    vizBarFill(score, maxOv) +
+                    '<span class="viz-hbar__meta">' +
+                    escapeHtml(String(score)) +
+                    "</span></div>"
+                  );
+                })
+                .join("") +
+              "</div>";
+          }
+
+          el = document.getElementById("viz-roadmap-lanes");
+          if (el && Array.isArray(data.ROADMAP)) {
+            var lanes = { P0: [], P1: [], P2: [] };
+            data.ROADMAP.forEach(function (item) {
+              var p = item.priority || "P2";
+              if (!lanes[p]) lanes[p] = [];
+              lanes[p].push(item);
+            });
+            var laneOrder = [
+              { key: "P0", cls: "viz-roadmap-lane--p0", title: "P0 · Do first" },
+              { key: "P1", cls: "viz-roadmap-lane--p1", title: "P1 · Next" },
+              { key: "P2", cls: "viz-roadmap-lane--p2", title: "P2 · Then" }
+            ];
+            el.innerHTML = laneOrder
+              .filter(function (lane) {
+                return lanes[lane.key] && lanes[lane.key].length;
+              })
+              .map(function (lane) {
+                return (
+                  '<div class="viz-roadmap-lane ' +
+                  lane.cls +
+                  '"><div class="viz-roadmap-lane__head"><span class="badge badge--' +
+                  lane.key.toLowerCase() +
+                  '">' +
+                  escapeHtml(lane.key) +
+                  "</span> " +
+                  escapeHtml(lane.title.replace(/^P\d · /, "")) +
+                  "</div><ul>" +
+                  lanes[lane.key]
+                    .map(function (item) {
+                      return (
+                        "<li><strong>" +
+                        escapeHtml(item.phase || "") +
+                        ":</strong> " +
+                        escapeHtml(item.title || "") +
+                        "</li>"
+                      );
+                    })
+                    .join("") +
+                  "</ul></div>"
+                );
+              })
+              .join("");
+          }
+
+          el = document.getElementById("viz-ai-citation");
+          if (el) {
+            var overallVis = 0;
+            (data.CITEDBY_METRICS || []).forEach(function (m) {
+              if (m && m.label && m.label.toLowerCase().indexOf("overall") !== -1) {
+                overallVis = vizParseNum(m.value);
+              }
+            });
+            var rest = Math.max(0, 100 - overallVis);
+            var circ = 2 * Math.PI * 42;
+            var dash = (overallVis / 100) * circ;
+            var topics = data.CITEDBY_TOPIC_ROWS || [];
+            el.innerHTML =
+              '<p class="viz-card__title">AI answers mentioning you</p>' +
+              '<p class="viz-card__sub">Share of tracked buyer prompts where your brand was cited</p>' +
+              '<div class="viz-donut-wrap">' +
+              '<svg class="viz-donut" viewBox="0 0 100 100" role="img" aria-label="' +
+              escapeHtml(overallVis + " percent AI visibility") +
+              '">' +
+              '<circle cx="50" cy="50" r="42" fill="none" stroke="rgba(23,42,52,0.08)" stroke-width="12"></circle>' +
+              '<circle cx="50" cy="50" r="42" fill="none" stroke="var(--teal)" stroke-width="12" stroke-linecap="round" transform="rotate(-90 50 50)" stroke-dasharray="' +
+              dash +
+              " " +
+              (circ - dash) +
+              '"></circle>' +
+              '<text x="50" y="48" text-anchor="middle" class="viz-donut__center">' +
+              escapeHtml(String(overallVis)) +
+              '%</text>' +
+              '<text x="50" y="62" text-anchor="middle" class="viz-donut__sub">cited</text>' +
+              "</svg>" +
+              '<div class="viz-hbars" style="flex:1;min-width:180px">' +
+              topics
+                .map(function (t) {
+                  var v = vizParseNum(t.visibility);
+                  return (
+                    '<div class="viz-hbar"><span class="viz-hbar__label">' +
+                    escapeHtml(t.topic) +
+                    "</span>" +
+                    vizBarFill(v) +
+                    '<span class="viz-hbar__meta">' +
+                    escapeHtml(String(t.visibility || "0%")) +
+                    "</span></div>"
+                  );
+                })
+                .join("") +
+              "</div></div>";
+          }
+        }
+
+        function renderIntegrationUI(data) {
+          var integ = data.INTEGRATIONS || {};
+          var chips = document.getElementById("integration-chips");
+          var dash = document.getElementById("integration-dashboard");
+          if (!chips || !dash) return;
+
+          chips.innerHTML = Object.keys(integ).map(function (key) {
+            var c = integ[key];
+            var view = integrationClientView(key, c);
+            var on = c.connected === true;
+            var cls = c.optional && !on ? "integration-chip--optional" : on ? "integration-chip--on" : "integration-chip--off";
+            return '<span class="integration-chip ' + cls + '"><span class="dot"></span>' + escapeHtml(view.label) + "</span>";
+          }).join("");
+
+          dash.innerHTML = Object.keys(integ).map(function (key) {
+            var c = integ[key];
+            var view = integrationClientView(key, c);
+            var b = badgeForIntegration(key, c);
+            return (
+              '<div class="integration-card"><span class="badge ' + b.cls + '">' + escapeHtml(b.text) +
+              "</span><h4>" + escapeHtml(view.label) + "</h4><p>" + escapeHtml(view.description) + "</p></div>"
+            );
+          }).join("");
+        }
+
+        function renderReport(data) {
+          document.title = "Detailed Revenue Leak Audit — " + (data.BUSINESS_NAME || "");
+
+          var main = document.querySelector("main");
+          var html = main.innerHTML;
+          Object.keys(data).forEach(function (key) {
+            if (Array.isArray(data[key])) return;
+            if (data[key] !== null && typeof data[key] === "object") return;
+            if (key === "IS_LIVE" || key === "REVENUE_SOURCE") return;
+            var token = "{{" + key + "}}";
+            if (html.indexOf(token) === -1) return;
+            html = html.split(token).join(escapeHtml(String(data[key] == null ? "" : data[key])));
+          });
+          main.innerHTML = html;
+
+          populateReportLists(main, data);
+          renderIntegrationUI(data);
+          renderOverviewExtras(data);
+          renderVisuals(data);
+          applyGates(data);
+
+          document.getElementById("hero-fix-title").textContent = data.HERO_FIX_TITLE || "";
+          document.getElementById("hero-fix-why").textContent = data.HERO_FIX_WHY || "";
+
+          var monthly = parseRevenueAmount(data.REVENUE_AT_RISK_MONTHLY);
+          var yearlyEl = document.getElementById("revenue-yearly");
+          var yearlyWrap = document.getElementById("revenue-yearly-wrap");
+          var monthlyEl = document.getElementById("revenue-monthly");
+          var disc = document.getElementById("revenue-disclaimer");
+          var revLabel = document.getElementById("revenue-label");
+          var callOn = data.INTEGRATIONS && data.INTEGRATIONS.call_tracking && data.INTEGRATIONS.call_tracking.connected;
+          var showOverviewRevenue = callOn || data.CALL_HAS_ACTUALS === true;
+          if (
+            !showOverviewRevenue &&
+            data.REVENUE_SOURCE === "intake_estimate" &&
+            data.REVENUE_SHOW_ON_OVERVIEW === true
+          ) {
+            showOverviewRevenue = true;
+          }
+          if (!showOverviewRevenue && data.REVENUE_SOURCE === "intake_estimate") {
+            if (monthlyEl) {
+              monthlyEl.innerHTML = "—<span></span>";
+              monthlyEl.style.color = "var(--ink-55)";
+            }
+            if (yearlyWrap) yearlyWrap.style.display = "none";
+            if (disc) {
+              disc.textContent =
+                "Call logs integration is pending—we will populate revenue impact from actual missed-call data when connected. Not a separate paid upgrade; part of delivering this audit.";
+            }
+            if (revLabel) revLabel.textContent = "Revenue at risk";
+          } else {
+            if (yearlyEl) yearlyEl.textContent = formatRevenueAmount(monthly * 12);
+            if (yearlyWrap) yearlyWrap.style.display = "";
+            if (disc) {
+              disc.textContent = callOn
+                ? "From connected call history × your ticket & close rate — planning estimate replaced with actuals."
+                : "From your onboarding form · planning estimate until call logs are connected.";
+            }
+            if (revLabel) revLabel.textContent = callOn ? "Revenue at risk (call-verified)" : "Estimated revenue at risk";
+          }
+
+          renderMetrics("local-metrics", data.LOCAL_METRICS);
+          renderMetrics("technical-metrics", data.TECHNICAL_METRICS);
+          renderMetrics("citedby-metrics", data.CITEDBY_METRICS);
+          renderMetrics("gsc-metrics", data.GSC_METRICS);
+          renderMetrics("ga4-metrics", data.GA4_METRICS);
+
+          renderTableBody("local-grid-table", data.LOCAL_GRID_ROWS, function (r) {
+            return "<tr><td>" + escapeHtml(r.keyword) + '</td><td class="num">' + escapeHtml(r.avg_rank) +
+              '</td><td class="num">' + escapeHtml(r.top3) + "</td></tr>";
+          });
+          renderTableBody("gsc-queries", data.GSC_QUERY_ROWS, function (r) {
+            return "<tr><td>" + escapeHtml(r.query) + '</td><td class="num">' + r.clicks +
+              '</td><td class="num">' + r.impressions + '</td><td class="num">' + escapeHtml(r.ctr) +
+              '</td><td class="num">' + escapeHtml(r.position) + "</td></tr>";
+          });
+          renderTableBody("ga4-landing", data.GA4_LANDING_ROWS, function (r) {
+            return "<tr><td>" + escapeHtml(r.page) + '</td><td class="num">' + r.sessions +
+              '</td><td class="num">' + r.events + "</td></tr>";
+          });
+          renderTableBody("competitor-table", data.COMPETITOR_ROWS, function (r) {
+            return "<tr><td>" + escapeHtml(r.domain) + "</td><td>" + escapeHtml(r.overlap) +
+              '</td><td class="num">' + r.keywords + "</td><td>" + escapeHtml(r.notes) + "</td></tr>";
+          });
+          renderTableBody("citedby-topic-table", data.CITEDBY_TOPIC_ROWS, function (r) {
+            return "<tr><td>" + escapeHtml(r.topic) + '</td><td class="num">' + escapeHtml(r.visibility) +
+              '</td><td class="num">' + escapeHtml(r.citations) + '</td><td class="num">' + escapeHtml(r.prompts) + "</td></tr>";
+          });
+          renderTableBody("citedby-prompt-table", data.CITEDBY_PROMPT_ROWS, function (r) {
+            return "<tr><td>" + escapeHtml(r.topic) + "</td><td>" + escapeHtml(r.prompt) +
+              '</td><td class="num">' + escapeHtml(r.our_cites) + '</td><td class="num">' + escapeHtml(r.total_cites) + "</td></tr>";
+          });
+          renderTableBody("citedby-sources-table", data.CITEDBY_CITED_SOURCES, function (r) {
+            return "<tr><td>" + escapeHtml(r.domain) + '</td><td class="num">' + escapeHtml(r.retrievals) +
+              "</td><td>" + escapeHtml(r.notes) + "</td></tr>";
+          });
+          renderTableBody("citedby-ai-competitors-table", data.CITEDBY_AI_COMPETITORS, function (r) {
+            return "<tr><td>" + escapeHtml(r.domain) + '</td><td class="num">' + escapeHtml(r.visibility) +
+              "</td><td>" + escapeHtml(r.notes) + "</td></tr>";
+          });
+          renderTableBody("appendix-sources", data.APPENDIX_SOURCES, function (r) {
+            return "<tr><td>" + escapeHtml(r.source) + "</td><td>" + escapeHtml(r.scope || r.tool || "") +
+              "</td><td>" + escapeHtml(r.captured) + "</td><td>" + escapeHtml(r.status) + "</td></tr>";
+          });
+
+          var roadmap = document.getElementById("roadmap-list");
+          if (roadmap && Array.isArray(data.ROADMAP)) {
+            var priCls = { P0: "badge--p0", P1: "badge--p1", P2: "badge--p2" };
+            roadmap.innerHTML = data.ROADMAP.map(function (item) {
+              var pri = item.priority || "";
+              var priBadge = pri
+                ? '<span class="badge ' + (priCls[pri] || "badge--optional") + '">' + escapeHtml(pri) + "</span>"
+                : '<span class="badge badge--optional">—</span>';
+              var meta = [];
+              if (item.owner) meta.push("Owner: " + item.owner);
+              if (item.hours) meta.push("Effort: " + item.hours);
+              if (item.success_metric) meta.push("Success: " + item.success_metric);
+              var ie =
+                escapeHtml(item.impact || "—") +
+                " impact × " +
+                escapeHtml(item.effort || "—") +
+                " effort";
+              return (
+                '<li class="roadmap-item roadmap-item--action">' +
+                priBadge +
+                '<span class="phase">' +
+                escapeHtml(item.phase) +
+                "</span>" +
+                "<div><strong>" +
+                escapeHtml(item.title) +
+                "</strong>" +
+                (meta.length ? '<p class="roadmap-meta">' + escapeHtml(meta.join(" · ")) + "</p>" : "") +
+                "</div>" +
+                '<span class="ie-label">' +
+                ie +
+                "</span></li>"
+              );
+            }).join("");
+          }
+
+          var sourceEl = document.getElementById("report-source-label");
+          if (sourceEl) {
+            sourceEl.textContent = data.IS_LIVE === true ? "Live multi-source audit" : "Multi-source audit";
+          }
+
+          var genEl = document.getElementById("generated-at");
+          if (genEl && data.GENERATED_AT_ISO) {
+            var d = new Date(data.GENERATED_AT_ISO);
+            genEl.textContent = isNaN(d.getTime()) ? data.GENERATED_AT_ISO : d.toLocaleString();
+          }
+        }
+
+        var dataEl = document.getElementById("report-data");
+        var data;
+        try {
+          data = JSON.parse(dataEl.textContent);
+        } catch (e) {
+          console.error(e);
+          return;
+        }
+        renderReport(data);
+
+        var year = new Date().getFullYear();
+        document.getElementById("footer-copyright").textContent =
+          "\u00A9 " + year + " Limitless Enterprise OS LLC. All rights reserved.";
+        var confEl = document.getElementById("footer-confidential");
+        if (confEl) {
+          confEl.textContent =
+            "Confidential — prepared exclusively for " + (data.BUSINESS_NAME || "the client") +
+            ". Do not distribute without permission.";
+        }
+        var footGen = document.getElementById("footer-generated");
+        if (footGen && data.GENERATED_AT_ISO) {
+          var gd = new Date(data.GENERATED_AT_ISO);
+          footGen.textContent = "Report generated " + (isNaN(gd.getTime()) ? data.GENERATED_AT_ISO : gd.toLocaleString()) + ".";
+        }
+
+        var root = document.querySelector("[data-tabs-root]");
+        var triggers = root.querySelectorAll("[data-tab]");
+        var panels = root.querySelectorAll("[data-tab-panel]");
+        function selectTab(name) {
+          triggers.forEach(function (btn) {
+            btn.setAttribute("aria-selected", btn.getAttribute("data-tab") === name ? "true" : "false");
+          });
+          panels.forEach(function (panel) {
+            if (panel.getAttribute("data-tab-panel") === name) panel.removeAttribute("hidden");
+            else panel.setAttribute("hidden", "");
+          });
+        }
+        triggers.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            selectTab(btn.getAttribute("data-tab"));
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
