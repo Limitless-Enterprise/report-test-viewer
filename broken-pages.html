@@ -218,6 +218,26 @@
         font-weight: 600;
         word-break: break-all;
       }
+      .action-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 12px;
+        color: var(--ink-66);
+        line-height: 1.45;
+      }
+      .action-list li + li {
+        margin-top: 8px;
+      }
+      .action-list .option-label {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 2px;
+      }
       .ref-kind {
         display: block;
         font-size: 10px;
@@ -377,7 +397,11 @@
             "url": "https://purplebasilmedspa.com/med-spa-deals/",
             "statusCode": 404,
             "category": "Promotions",
-            "action": "Restore the deals page or 301 redirect to your current specials hub. Remove dead links from menus, emails, and the sitemap.",
+            "actionOptions": [
+              "Restore the deals page on this URL so it returns a normal page.",
+              "301 redirect this URL to your current specials or promotions hub.",
+              "Remove links to this URL from menus, emails, and the XML sitemap."
+            ],
             "referencedFrom": [
               {
                 "kind": "internal",
@@ -390,7 +414,11 @@
             "url": "https://purplebasilmedspa.com/packages/2246/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
@@ -401,7 +429,11 @@
             "url": "https://purplebasilmedspa.com/packages/biore-peel-series/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
@@ -412,7 +444,11 @@
             "url": "https://purplebasilmedspa.com/packages/custom-facial-pack-of-3/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
@@ -422,7 +458,11 @@
             "url": "https://purplebasilmedspa.com/packages/hydra-facial/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/hydrafacial/ or /skin-concerns/hydrafacial/, or remove from the sitemap.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/hydrafacial/ or /skin-concerns/hydrafacial/.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
@@ -432,7 +472,11 @@
             "url": "https://purplebasilmedspa.com/packages/is-clinical-fire-ice-facial/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
@@ -443,7 +487,11 @@
             "url": "https://purplebasilmedspa.com/packages/is-clinical-honey-enzyme-facial/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
@@ -454,7 +502,11 @@
             "url": "https://purplebasilmedspa.com/packages/is-clinical-prodigy-peel-series/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
@@ -464,7 +516,11 @@
             "url": "https://purplebasilmedspa.com/packages/lhr-large-area-series-2/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" },
@@ -475,7 +531,11 @@
             "url": "https://purplebasilmedspa.com/packages/lhr-large-area-series/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
@@ -485,7 +545,11 @@
             "url": "https://purplebasilmedspa.com/packages/lhr-small-area-series/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
@@ -495,7 +559,11 @@
             "url": "https://purplebasilmedspa.com/packages/pure-radiance-facial-package/",
             "statusCode": 404,
             "category": "Package",
-            "action": "Republish the package, redirect to /packages/, or remove from the sitemap if the offer is retired.",
+            "actionOptions": [
+              "Republish the package page so this URL returns 200.",
+              "301 redirect to /packages/ or another live package page.",
+              "Remove this URL from the sitemap if the offer is retired."
+            ],
             "referencedFrom": [
               { "kind": "sitemap", "text": "WordPress XML sitemap (still submitted to Google)" },
               { "kind": "scan", "text": "No on-site page links found (161 live pages checked)" }
@@ -505,7 +573,10 @@
             "url": "https://purplebasilmedspa.com/wrinkle-relaxers-for-smooth-skin/purplebasilmedspa.com",
             "statusCode": 404,
             "category": "Bad link",
-            "action": "Fix the internal link on the wrinkle relaxers page—this path accidentally includes the domain name as a folder segment.",
+            "actionOptions": [
+              "Fix the link on the wrinkle relaxers article so it points to the correct live URL.",
+              "Remove the broken link if it is no longer needed."
+            ],
             "referencedFrom": [
               {
                 "kind": "internal",
@@ -572,6 +643,35 @@
           traffic: "Recent visits"
         };
 
+        function optionLetter(index) {
+          return String.fromCharCode(65 + index);
+        }
+
+        function renderActionOptions(row) {
+          var opts = row.actionOptions || [];
+          if (!opts.length && row.action) {
+            opts = [row.action];
+          }
+          if (!opts.length) {
+            return "";
+          }
+          return (
+            "<ul class=\"action-list\">" +
+            opts
+              .map(function (text, idx) {
+                return (
+                  "<li><span class=\"option-label\">Option " +
+                  optionLetter(idx) +
+                  "</span>" +
+                  escapeHtml(text) +
+                  "</li>"
+                );
+              })
+              .join("") +
+            "</ul>"
+          );
+        }
+
         function renderReferencedFrom(row) {
           var refs = row.referencedFrom || [];
           if (!refs.length) {
@@ -626,7 +726,7 @@
               renderReferencedFrom(row) +
               "</td>" +
               "<td>" +
-              escapeHtml(row.action || "") +
+              renderActionOptions(row) +
               "</td>" +
               "</tr>"
             );
