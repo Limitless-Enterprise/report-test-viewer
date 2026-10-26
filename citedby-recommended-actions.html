@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="AI visibility recommended actions from ThriveStack — technical entity signals and content SEO fixes for Purple Basil Medspa."
+    />
+    <title>Recommended Actions — AI Visibility — Purple Basil Medspa</title>
+    <style>
+      :root {
+        --ink: #1a2228;
+        --ink-66: rgba(26, 34, 40, 0.66);
+        --ink-55: rgba(26, 34, 40, 0.55);
+        --ink-42: rgba(26, 34, 40, 0.42);
+        --teal: #0a7289;
+        --teal-deep: #085a6d;
+        --teal-soft: rgba(10, 114, 137, 0.09);
+        --teal-border: rgba(10, 114, 137, 0.28);
+        --basil: #3d6b5a;
+        --basil-soft: rgba(61, 107, 90, 0.1);
+        --aubergine-soft: rgba(92, 74, 98, 0.1);
+        --line: rgba(26, 34, 40, 0.1);
+        --line-08: rgba(26, 34, 40, 0.07);
+        --bg-page: #f3f0eb;
+        --bg-tab: rgba(255, 252, 248, 0.72);
+        --card: #fffcf9;
+        --accent-orange: #d85a38;
+        --accent-amber: #c9922a;
+        --accent-purple: #6b5cae;
+        --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 24px 48px rgba(26, 34, 40, 0.07),
+          0 8px 16px rgba(26, 34, 40, 0.04);
+        --radius-shell: 26px;
+        --radius-card: 20px;
+        --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+        --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(10, 114, 137, 0.07), transparent 55%),
+          var(--bg-page);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+        font-size: 15px;
+      }
+      .page {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 52px 20px 72px;
+      }
+      .page-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 32px;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .page-brand__mark {
+        flex-shrink: 0;
+        color: var(--teal);
+      }
+      .page-brand__wordmark-top {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+      }
+      .page-brand__wordmark-bottom {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        color: var(--ink-66);
+      }
+      .report-shell {
+        border-radius: var(--radius-shell);
+        border: 1px solid rgba(26, 34, 40, 0.08);
+        background: var(--card);
+        padding: 20px;
+        box-shadow: var(--shadow-card);
+      }
+      @media (min-width: 640px) {
+        .report-shell {
+          padding: 36px 40px 40px;
+        }
+      }
+      .gradient-bar {
+        height: 5px;
+        margin: -20px -20px 28px;
+        background: linear-gradient(
+          90deg,
+          var(--accent-orange),
+          var(--accent-amber),
+          var(--basil),
+          var(--teal),
+          var(--accent-purple)
+        );
+        opacity: 0.92;
+      }
+      @media (min-width: 640px) {
+        .gradient-bar {
+          margin: -36px -40px 28px;
+        }
+      }
+      .report-kind {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 0;
+      }
+      .report-title {
+        margin: 10px 0 0;
+        font-family: var(--font-display);
+        font-size: clamp(26px, 4vw, 34px);
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        line-height: 1.12;
+      }
+      .report-submeta {
+        margin: 8px 0 0;
+        font-size: 14px;
+        color: var(--ink-66);
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--teal);
+        text-decoration: none;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+      .intro-card {
+        margin-top: 24px;
+        border-radius: var(--radius-card);
+        border: 1px solid var(--teal-border);
+        background: linear-gradient(145deg, rgba(255, 252, 248, 0.95) 0%, var(--teal-soft) 55%, var(--basil-soft) 100%);
+        padding: 20px 22px;
+      }
+      .intro-card p {
+        margin: 0;
+        color: var(--ink-66);
+        max-width: 44rem;
+      }
+      .metric-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .metric-pill {
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--bg-tab);
+        padding: 6px 14px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .metric-pill span {
+        color: var(--ink-55);
+        font-weight: 500;
+      }
+      .section-block {
+        margin-top: 32px;
+      }
+      .section-block h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 500;
+      }
+      .block-sub {
+        font-size: 13px;
+        color: var(--ink-55);
+        margin: 8px 0 0;
+        max-width: 44rem;
+      }
+      .citedby-action-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .citedby-action {
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: var(--bg-tab);
+        padding: 14px 16px;
+        margin-top: 10px;
+      }
+      .citedby-action__badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .citedby-action__title {
+        font-weight: 700;
+        font-size: 15px;
+        margin: 0;
+        line-height: 1.35;
+      }
+      .citedby-action__desc {
+        margin: 8px 0 0;
+        font-size: 13px;
+        color: var(--ink-66);
+        line-height: 1.45;
+      }
+      .citedby-action__url {
+        margin: 8px 0 0;
+        font-size: 12px;
+        color: var(--ink-55);
+        word-break: break-word;
+      }
+      .badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 2px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .badge--critical {
+        background: rgba(254, 100, 56, 0.14);
+        color: #c43d1a;
+      }
+      .badge--high {
+        background: rgba(255, 182, 47, 0.2);
+        color: #9a6b00;
+      }
+      .badge--optional {
+        background: rgba(26, 34, 40, 0.06);
+        color: var(--ink-55);
+      }
+      .badge--status-fail {
+        background: rgba(254, 100, 56, 0.1);
+        color: #b83200;
+      }
+      .badge--status-warn {
+        background: rgba(255, 182, 47, 0.15);
+        color: #9a6b00;
+      }
+      .page-footer {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line-08);
+        font-size: 12px;
+        color: var(--ink-42);
+      }
+      .page-footer a {
+        color: var(--teal);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .page-footer a:hover {
+        text-decoration: underline;
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .report-shell {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <a class="page-brand" href="https://limitlessenterprise.ai/" aria-label="Limitless Enterprise home">
+        <svg class="page-brand__mark" viewBox="0 0 1080 1080" width="30" height="30" aria-hidden="true" fill="currentColor">
+          <path
+            d="M703.03,124.04l-124.69,75.08-12.77,8.82c-112.39,79.22-276.3,200.63-303.34,340.25-16.58,85.67,35.2,152.2,115.35,167.26,56.33,10.59,111.86,5.92,174.37-3.88l-1.51-14.34c-62.58,16.19-213.52,26.32-230.89-59.88-33.82-168.25,410.59-361.05,529.56-420.14l-146.08-93.17Z"
+          />
+          <path
+            d="M527.65,368.37l1.58,14.41c65.14-15.66,203.32-25.66,228.85,52.51,53.43,163.65-401.58,367.36-527.19,426.71l145.62,93.96,124.89-74.95,12.37-8.75c115.61-81.13,278.66-203.39,304.19-342.82,15.07-82.32-35.01-149.63-115.55-164.76-58.04-10.86-113.7-5.72-174.77,3.68Z"
+          />
+          <path
+            d="M295.52,789s176.5-198.86,188.36-223.43c8.44-17.48,7.56-44.24-4.22-60.46-33.07-45.54-199.66-229.17-199.66-229.17,29.04,22.04,110.21,99.87,115.72,104.72,35.08,30.88,68.87,60.99,105.7,89.53,25.34,19.63,57.25,19.8,83.42.72,58.22-42.44,179.43-153.29,179.43-153.29-11.84,21.1-104.95,119.41-150.88,178.36-23.24,29.82-19.79,63.87,3.82,91.58l71.15,83.49s91.89,96.18,111.66,125.45c-27.61-21.62-144.87-130.35-144.87-130.35-22.24-20.4-44.64-38.78-68.81-57.08-23.34-17.67-53.71-21.51-78.95-3.98-60.34,41.9-167.65,154.45-211.85,183.94Z"
+          />
+        </svg>
+        <span class="page-brand__wordmark">
+          <span class="page-brand__wordmark-top">LIMITLESS</span>
+          <span class="page-brand__wordmark-bottom">Enterprise</span>
+        </span>
+      </a>
+
+      <div class="report-shell">
+        <div class="gradient-bar" aria-hidden="true"></div>
+        <p class="report-kind">AI visibility · ThriveStack Citedby</p>
+        <h1 class="report-title" id="report-title">Recommended actions</h1>
+        <p class="report-submeta" id="report-submeta"></p>
+
+        <a class="back-link" id="back-to-audit" href="detailed-revenue-leak-audit.html">← Back to Detailed Revenue Leak Audit</a>
+
+        <div class="intro-card">
+          <p id="intro-lead">
+            Pending items from your AI citation technical audit: site-wide crawl signals, structured data, and on-page
+            content checks ThriveStack flagged for your domain.
+          </p>
+        </div>
+
+        <div class="metric-strip" id="metric-strip" aria-label="Summary counts"></div>
+
+        <section class="section-block" aria-labelledby="section-tech">
+          <h2 id="section-tech">Technical &amp; Entity Signals</h2>
+          <p class="block-sub">Site-wide AI crawl readiness plus structured-data (entity) fixes still marked pending.</p>
+          <ul class="citedby-action-list" id="citedby-actions-tech"></ul>
+        </section>
+
+        <section class="section-block" aria-labelledby="section-content">
+          <h2 id="section-content">Content &amp; SEO</h2>
+          <p class="block-sub">On-page content checks with Critical or High priority from the latest capture.</p>
+          <ul class="citedby-action-list" id="citedby-actions-content"></ul>
+        </section>
+
+        <p class="block-sub" id="citedby-actions-truncated" style="margin-top: 20px"></p>
+        <p class="block-sub" id="citedby-actions-capture"></p>
+      </div>
+
+      <footer class="page-footer" aria-label="Report footer">
+        <p id="footer-copyright" style="margin: 0"></p>
+        <p id="footer-confidential" style="margin: 8px 0 0"></p>
+        <p id="footer-generated" style="margin: 4px 0 0"></p>
+        <p style="margin: 8px 0 0">
+          <a id="footer-audit-link" href="detailed-revenue-leak-audit.html">Detailed Revenue Leak Audit</a>
+          ·
+          <a href="https://limitlessenterprise.ai/" rel="noopener noreferrer">limitlessenterprise.ai</a>
+        </p>
+      </footer>
+    </main>
+
+    <script type="application/json" id="report-data">
+{
+  "BUSINESS_NAME": "Purple Basil Medspa",
+  "BUSINESS_URL": "https://purplebasilmedspa.com/",
+  "GENERATED_AT_ISO": "2026-10-26T15:35:32.098670Z",
+  "CITEDBY_ACTIONS_PAGE": {
+    "capture_date": "2026-10-26",
+    "source_tool": "get_technical_recommendations",
+    "technical_entity_signals": [
+      {
+        "title": "FAQPage schema",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for FAQ structured data that marks up questions and answers so AI systems can lift them directly. The page has no FAQPage schema, and it also shows no visible FAQ questions. Customers ask AI tools questions like 'how long does microneedling take' or 'is laser hair removal painful.' Without marked-up answers on your homepage, competitors with FAQ content are more likely to be cited for those questions.",
+        "why_fix_it": "Customers ask AI tools questions like 'how long does microneedling take' or 'is laser hair removal painful.' Without marked-up answers on your homepage, competitors with FAQ content are more likely to be cited for those questions.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ (add the FAQ content block), then add the JSON-LD in the page <head> or an existing schema source",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "FAQPage schema",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Confirms that frequently asked questions are marked up in a machine-readable format so AI engines can extract and cite your Q&A pairs directly in conversational answers, increasing visibility in voice assistants and chatbots. Without FAQPage schema, AI engines cannot easily pull your treatment package questions into answers. Competitors with FAQ markup will dominate 'What are the best medspa packages in Frisco?' queries, capturing prospects researching treatment options.",
+        "why_fix_it": "Without FAQPage schema, AI engines cannot easily pull your treatment package questions into answers. Competitors with FAQ markup will dominate 'What are the best medspa packages in Frisco?' queries, capturing prospects researching treatment options.",
+        "fix_url": "WordPress Admin > Pages > Edit 'Treatment Packages' (https://purplebasilmedspa.com/packages/) > Add FAQ section with 5+ questions in page content, then add FAQPage JSON-LD in Yoast SEO schema blocks or theme header",
+        "page_url": "https://purplebasilmedspa.com/packages",
+        "page_label": "Treatment Packages",
+        "owner": "Engineering"
+      },
+      {
+        "title": "FAQPage schema",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for FAQPage structured data that marks up question-and-answer content so AI systems can lift answers directly. The page data showed no FAQPage markup, and no visible FAQ questions were detected. Customers ask AI tools questions like 'is laser hair removal on the face safe?' or 'how many sessions will I need?'. Pages with clearly marked answers are easier for AI to quote, and without them competitors with FAQ markup get those citations.",
+        "why_fix_it": "Customers ask AI tools questions like 'is laser hair removal on the face safe?' or 'how many sessions will I need?'. Pages with clearly marked answers are easier for AI to quote, and without them competitors with FAQ markup get those citations.",
+        "fix_url": "WordPress Admin > Appearance > Customize/Edit category description for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (add visible FAQ), plus JSON-LD in the page <head>",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "Organization schema (JSON-LD)",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether the page has structured data (JSON-LD) that tells machines who the business is: its name, website, logo and official profiles. AI answer engines use it to confirm which business is behind the content before they cite or recommend it. The page data showed no Organization markup and no structured data of any kind. Without a machine-readable identity, AI assistants have a harder time linking this laser hair removal page to your med spa. Competitors that declare their identity are easier to cite and recommend for local treatment searches.",
+        "why_fix_it": "Without a machine-readable identity, AI assistants have a harder time linking this laser hair removal page to your med spa. Competitors that declare their identity are easier to cite and recommend for local treatment searches.",
+        "fix_url": "WordPress Admin > Appearance > Theme File Editor > header.php, or a header-scripts setting, for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (<head> section)",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "Schema validates at validator.schema.org",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that every structured-data block is complete, with no missing properties that validators flag. Clean schema is more likely to be read and trusted by search engines and AI systems. The Organization block is missing its description. The other blocks (WebPage, WebSite, DaySpa, address, geo and opening hours) are complete. Incomplete schema can be ignored or only partly used. Fixing this one gap makes the whole set clean, so competitors with valid markup don't have an edge in rich results and AI summaries.",
+        "why_fix_it": "Incomplete schema can be ignored or only partly used. Fixing this one gap makes the whole set clean, so competitors with valid markup don't have an edge in rich results and AI summaries.",
+        "fix_url": "WordPress Admin > Yoast SEO > Settings (site representation), or the existing JSON-LD source in the <head> of https://purplebasilmedspa.com/",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "BreadcrumbList schema",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for breadcrumb structured data that shows where a page sits in the site. This helps AI and search systems understand your site structure. No BreadcrumbList is present on this page. Without breadcrumb markup, search and AI systems get less structural context about your site. Adding it on the homepage also sets up the same pattern for service pages like microneedling and laser hair removal.",
+        "why_fix_it": "Without breadcrumb markup, search and AI systems get less structural context about your site. Adding it on the homepage also sets up the same pattern for service pages like microneedling and laser hair removal.",
+        "fix_url": "WordPress Admin > Yoast SEO > Settings > Advanced > Breadcrumbs, or the JSON-LD in the <head> of https://purplebasilmedspa.com/",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "BreadcrumbList schema",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for breadcrumb markup that shows where this page sits in the site (Home > Laser Hair Removal). AI and search engines use it to understand how your services are organized. No BreadcrumbList was found. Without breadcrumbs, the link between this page and your wider services is less clear to AI and search systems, and your result may display less clearly than competitors that have them.",
+        "why_fix_it": "Without breadcrumbs, the link between this page and your wider services is less clear to AI and search systems, and your result may display less clearly than competitors that have them.",
+        "fix_url": "WordPress Admin > header JSON-LD for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (<head>), or Yoast SEO breadcrumb settings",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "SpeakableSpecification schema",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether the page marks which passages are best suited to be read aloud by voice assistants and AI answer tools. The page has long-form text (about 448 words) but no speakable markup. Voice and AI answer tools favor pages that point to a clear summary passage. Without it, a competitor's intro may be chosen over your description of med spa services in Frisco.",
+        "why_fix_it": "Voice and AI answer tools favor pages that point to a clear summary passage. Without it, a competitor's intro may be chosen over your description of med spa services in Frisco.",
+        "fix_url": "The existing JSON-LD WebPage node in the <head> of https://purplebasilmedspa.com/ (theme or schema filter; WordPress Admin > Appearance > Theme File Editor, or a child theme)",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "SpeakableSpecification schema",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Ensures long-form content pages mark key sections as 'speakable' so voice assistants (Google Assistant, Alexa) know which portions to read aloud in voice search results, optimizing for smart speakers and mobile voice queries. Without Speakable markup, voice assistants will guess which content to read, often choosing irrelevant sections. Competitors with Speakable schema will dominate voice queries like 'What medspa packages are available in Frisco?' capturing the growing voice search audience.",
+        "why_fix_it": "Without Speakable markup, voice assistants will guess which content to read, often choosing irrelevant sections. Competitors with Speakable schema will dominate voice queries like 'What medspa packages are available in Frisco?' capturing the growing voice search audience.",
+        "fix_url": "WordPress Admin > Pages > Edit 'Treatment Packages' > Add Speakable schema via Yoast SEO schema blocks or custom code in Appearance > Theme Editor > header.php for https://purplebasilmedspa.com/packages/",
+        "page_url": "https://purplebasilmedspa.com/packages",
+        "page_label": "Treatment Packages",
+        "owner": "Engineering"
+      },
+      {
+        "title": "sameAs links to social profiles",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that your Organization markup lists official social and directory profiles (sameAs). AI systems use these links to confirm the business is a real, consistent entity across the web. No Organization markup exists, so there is no sameAs list. Footer links alone do not count. No Organization schema with sameAs was found. Add an Organization JSON-LD block that includes official social profile URLs.",
+        "why_fix_it": "No Organization schema with sameAs was found. Add an Organization JSON-LD block that includes official social profile URLs.",
+        "fix_url": "WordPress Admin > header JSON-LD for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (<head>); in Yoast SEO, social profile settings may feed this, menu names vary by version",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "Create /llms-full.txt — extended manifest",
+        "priority": "Low",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Whether a /llms-full.txt file exists at the domain root with extended, page-level descriptions. It gives AI systems richer context than the short index so they can represent your offerings accurately.",
+        "why_fix_it": "",
+        "fix_url": "Web server or CMS root directory. Serve the file at purplebasilmedspa.com/llms-full.txt (Web Dev to publish, SEO to draft page descriptions).",
+        "page_url": "",
+        "page_label": "",
+        "owner": "Engineering"
+      },
+      {
+        "title": "HTML sitemap page exists",
+        "priority": "Low",
+        "status": "WARN",
+        "workflow": "suggested",
+        "description": "Whether a browsable HTML sitemap page exists that links to the main sections of the site. It gives crawlers and visitors an additional, human-readable path to important pages.",
+        "why_fix_it": "",
+        "fix_url": "CMS page builder or site template. Create a page at /sitemap/ and link it from the site footer.",
+        "page_url": "",
+        "page_label": "",
+        "owner": "Engineering"
+      }
+    ],
+    "content_seo": [
+      {
+        "title": "Lead with direct answer in first paragraph (40–60 words, standalone)",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether the page opens with a short, self-contained paragraph (40-60 words) saying what the service is, who it is for and why it is different. AI answer engines often quote this block word for word, so it has to make sense on its own. No readable opening paragraph was found on this page. AI assistants have nothing to quote for facial laser hair removal, so competing med spas with clear summaries get cited instead.",
+        "why_fix_it": "No readable opening paragraph was found on this page. AI assistants have nothing to quote for facial laser hair removal, so competing med spas with clear summaries get cited instead.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) > Description field, or the category template's intro area. Menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      },
+      {
+        "title": "Comparison table vs alternatives",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for an HTML table comparing the brand with two or more alternatives on specific criteria. Tables are easy for AI to parse and cite in 'X vs Y' answers. No table exists. Prospects weighing a med spa against a dermatology office or at-home options get no structured comparison from you, so AI cites someone else.",
+        "why_fix_it": "No table exists. Prospects weighing a med spa against a dermatology office or at-home options get no structured comparison from you, so AI cites someone else.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > add a Table block (or Custom HTML block) below the services intro",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Concise paragraphs (max 3 sentences each)",
+        "priority": "High",
+        "status": "WARN",
+        "workflow": "suggested",
+        "description": "Checks that most paragraphs are three sentences or fewer. Short blocks are easier for AI to quote. The intro and hero are short, but about half the testimonials run four to five sentences. Fewer than 80% of paragraphs meet the limit, which makes quoting harder.",
+        "why_fix_it": "The intro and hero are short, but about half the testimonials run four to five sentences. Fewer than 80% of paragraphs meet the limit, which makes quoting harder.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > testimonials section",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "FAQ section with 5+ Q&As",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for a visible FAQ with at least five question-and-answer pairs, ideally mirrored in FAQPage structured data. FAQs give AI engines ready-made, quotable answers. The page has no FAQ at all, visible or in structured data. Buyers ask AI about pricing, downtime and suitability before booking, and without answers here you lose those moments to competitors.",
+        "why_fix_it": "The page has no FAQ at all, visible or in structured data. Buyers ask AI about pricing, downtime and suitability before booking, and without answers here you lose those moments to competitors.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ (visible FAQ); JSON-LD in the page <head> via a custom HTML block or header-script area. If you use Yoast SEO, this is usually under its schema settings — menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Headings match natural query phrasing",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether section headings read like questions buyers type or ask an assistant, such as 'What does microneedling cost?'. AI engines match headings to user questions when choosing what to quote. The visible headings are brand slogans ('Your Skin, Our Expertise – Tailored Treatments for Every Skin Type'). They do not match how Frisco clients search, so competitors with question-style headings are easier for AI to cite.",
+        "why_fix_it": "The visible headings are brand slogans ('Your Skin, Our Expertise – Tailored Treatments for Every Skin Type'). They do not match how Frisco clients search, so competitors with question-style headings are easier for AI to cite.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > change heading blocks to H2/H3 (block editor: select heading > Heading level)",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Meta description present and 140–160 chars",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that a meta description exists and is 140-160 characters. It summarises the page for search results and AI systems. No meta description was found. Search engines may pull random text, which lowers click-through and clarity versus competitors.",
+        "why_fix_it": "No meta description was found. Search engines may pull random text, which lowers click-through and clarity versus competitors.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) > Yoast SEO section > Meta description. Menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      },
+      {
+        "title": "Title tag optimized (<60 chars, keyword-first)",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that the title tag is under 60 characters and starts with the main keyword. It is a key signal for what the page is about. No title tag was detected. Without one, search engines and AI systems may generate a weak title or skip the page.",
+        "why_fix_it": "No title tag was detected. Without one, search engines and AI systems may generate a weak title or skip the page.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) > Yoast SEO section > SEO title. Menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      },
+      {
+        "title": "Last-updated date visible",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for a visible 'Last updated' date near the top of the page. AI engines use it as a freshness signal. No date is visible. Treatment menus and offers change, and AI may treat undated pages as stale compared with competitors that show a date.",
+        "why_fix_it": "No date is visible. Treatment menus and offers change, and AI may treat undated pages as stale compared with competitors that show a date.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > add a Custom HTML block under the hero section, or in the theme template for the homepage",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Numbered/bulleted lists for key features",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that key services or steps are marked up as real HTML lists (ul/ol), not just prose or visual cards. Lists let AI extract items cleanly. The services (Botox, fillers, laser hair removal, SkinPen®, peels, HydraFacial) appear only in running sentences. AI may miss or misquote your treatment menu, and competitors with clean lists are easier to cite.",
+        "why_fix_it": "The services (Botox, fillers, laser hair removal, SkinPen®, peels, HydraFacial) appear only in running sentences. AI may miss or misquote your treatment menu, and competitors with clean lists are easier to cite.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > add a List block under the intro",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Unique original content — no duplicate or templated pages",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that the page has substantive, original copy rather than boilerplate or repeated blocks. Unique content gives AI a reason to cite this page over others. No unique copy was detected. A bare archive page looks like a templated listing and gives AI nothing distinctive about your facial laser service.",
+        "why_fix_it": "No unique copy was detected. A bare archive page looks like a templated listing and gives AI nothing distinctive about your facial laser service.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) description.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      }
+    ],
+    "truncated_note": ""
+  },
+  "DETAILED_REPORT_HREF": "detailed-revenue-leak-audit.html"
+}
+    </script>
+    <script>
+      (function () {
+        var data = JSON.parse(document.getElementById("report-data").textContent);
+        var auditHref = data.DETAILED_REPORT_HREF || "detailed-revenue-leak-audit.html";
+
+        document.getElementById("back-to-audit").setAttribute("href", auditHref);
+        document.getElementById("footer-audit-link").setAttribute("href", auditHref);
+
+        var biz = data.BUSINESS_NAME || "Client";
+        document.getElementById("report-submeta").textContent =
+          (data.BUSINESS_URL || "") +
+          (data.AUDIT_AS_OF ? " · Data as of " + data.AUDIT_AS_OF : "") +
+          (data.GENERATED_AT_ISO ? " · Generated " + data.GENERATED_AT_ISO.slice(0, 10) : "");
+
+        function escapeHtml(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+        }
+
+        function priBadge(priority) {
+          var p = String(priority || "");
+          if (p === "Critical") return '<span class="badge badge--critical">Critical</span>';
+          if (p === "High") return '<span class="badge badge--high">High</span>';
+          return priority ? '<span class="badge badge--optional">' + escapeHtml(p) + "</span>" : "";
+        }
+
+        function statusBadge(status) {
+          var s = String(status || "");
+          if (s === "FAIL") return '<span class="badge badge--status-fail">FAIL</span>';
+          if (s === "WARN") return '<span class="badge badge--status-warn">WARN</span>';
+          return s ? '<span class="badge badge--optional">' + escapeHtml(s) + "</span>" : "";
+        }
+
+        function renderList(rows) {
+          if (!Array.isArray(rows) || !rows.length) {
+            return '<li class="citedby-action"><p class="citedby-action__desc">No pending items in this section for the latest capture.</p></li>';
+          }
+          return rows
+            .map(function (row) {
+              var meta = [];
+              if (row.page_label) meta.push(escapeHtml(row.page_label));
+              if (row.owner) meta.push("Owner: " + escapeHtml(row.owner));
+              if (row.workflow === "suggested") meta.push("Pending");
+              var urlLine = "";
+              if (row.page_url) {
+                urlLine =
+                  '<p class="citedby-action__url"><strong>Page:</strong> ' + escapeHtml(row.page_url) + "</p>";
+              }
+              if (row.fix_url) {
+                urlLine +=
+                  '<p class="citedby-action__url"><strong>Where to fix:</strong> ' + escapeHtml(row.fix_url) + "</p>";
+              }
+              return (
+                '<li class="citedby-action"><p class="citedby-action__title">' +
+                escapeHtml(row.title || "Action") +
+                '</p><div class="citedby-action__badges">' +
+                priBadge(row.priority) +
+                statusBadge(row.status) +
+                '</div><p class="citedby-action__desc">' +
+                escapeHtml(row.description || "") +
+                "</p>" +
+                (meta.length ? '<p class="citedby-action__url">' + meta.join(" · ") + "</p>" : "") +
+                urlLine +
+                "</li>"
+              );
+            })
+            .join("");
+        }
+
+        var page = data.CITEDBY_ACTIONS_PAGE || {};
+        var techRows = page.technical_entity_signals || [];
+        var contentRows = page.content_seo || [];
+
+        document.getElementById("citedby-actions-tech").innerHTML = renderList(techRows);
+        document.getElementById("citedby-actions-content").innerHTML = renderList(contentRows);
+
+        var crit = contentRows.filter(function (r) {
+          return r.priority === "Critical";
+        }).length;
+        var high = contentRows.filter(function (r) {
+          return r.priority === "High";
+        }).length;
+
+        document.getElementById("metric-strip").innerHTML =
+          '<div class="metric-pill"><span>Technical &amp; Entity:</span> ' +
+          techRows.length +
+          " pending</div>" +
+          '<div class="metric-pill"><span>Content &amp; SEO:</span> ' +
+          contentRows.length +
+          " (" +
+          crit +
+          " Critical · " +
+          high +
+          " High)</div>";
+
+        var capEl = document.getElementById("citedby-actions-capture");
+        if (page.capture_date) {
+          capEl.textContent = "Source capture: " + page.capture_date + " · get_technical_recommendations";
+        }
+
+        var truncEl = document.getElementById("citedby-actions-truncated");
+        truncEl.textContent = page.truncated_note ? String(page.truncated_note) : "";
+
+        var year = new Date().getFullYear();
+        document.getElementById("footer-copyright").textContent =
+          "\u00A9 " + year + " Limitless Enterprise OS LLC. All rights reserved.";
+        document.getElementById("footer-confidential").textContent =
+          "Confidential — prepared exclusively for " + biz + ". Do not distribute without permission.";
+        document.getElementById("footer-generated").textContent =
+          "Recommended actions from Detailed Revenue Leak Audit · ThriveStack Citedby technical recommendations.";
+      })();
+    </script>
+  </body>
+</html>

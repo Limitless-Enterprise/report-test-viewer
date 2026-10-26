@@ -350,6 +350,19 @@
       .roadmap-item .ie-label {
         font-size: 11px; font-weight: 600; color: var(--ink-55); text-align: right; line-height: 1.35;
       }
+      .citedby-action-list { list-style: none; margin: 0; padding: 0; }
+      .citedby-action {
+        border-radius: 14px; border: 1px solid var(--line); background: var(--bg-tab);
+        padding: 14px 16px; margin-top: 10px;
+      }
+      .citedby-action__badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+      .citedby-action__title { font-weight: 700; font-size: 15px; margin: 0; line-height: 1.35; }
+      .citedby-action__desc { margin: 8px 0 0; font-size: 13px; color: var(--ink-66); line-height: 1.45; }
+      .citedby-action__url { margin: 8px 0 0; font-size: 12px; color: var(--ink-55); word-break: break-word; }
+      .badge--critical { background: rgba(254, 100, 56, 0.14); color: #c43d1a; }
+      .badge--high { background: rgba(255, 182, 47, 0.2); color: #9a6b00; }
+      .badge--status-fail { background: rgba(254, 100, 56, 0.1); color: #b83200; }
+      .badge--status-warn { background: rgba(255, 182, 47, 0.15); color: #9a6b00; }
       .overview-compare {
         display: grid; gap: 12px; margin-top: 12px;
       }
@@ -376,6 +389,23 @@
         transition: transform 0.15s ease, box-shadow 0.15s ease;
       }
       .debrief-cta:hover { filter: brightness(1.04); transform: translateY(-1px); }
+      .satellite-nav {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px;
+        padding: 14px 18px; border-radius: var(--radius-card); border: 1px solid var(--teal-border);
+        background: linear-gradient(135deg, var(--aubergine-soft), var(--teal-soft));
+      }
+      .satellite-nav[hidden] { display: none !important; }
+      .satellite-nav__text { margin: 0; font-size: 13px; color: var(--ink-72); flex: 1 1 12rem; }
+      .satellite-nav__cta {
+        display: inline-flex; align-items: center; border-radius: 999px; border: none;
+        background: linear-gradient(180deg, var(--accent-purple) 0%, #5538b8 100%);
+        color: #fff; font-family: inherit; font-size: 13px; font-weight: 600;
+        padding: 10px 18px; text-decoration: none; cursor: pointer;
+        box-shadow: 0 4px 14px rgba(107, 76, 230, 0.25);
+        transition: transform 0.15s ease;
+      }
+      .satellite-nav__cta:hover { filter: brightness(1.05); transform: translateY(-1px); }
+      .satellite-nav + .satellite-nav { margin-top: 12px; }
       .appendix-export {
         margin-top: 16px; padding: 14px 16px; border-radius: 14px; border: 1px dashed var(--line);
         background: var(--bg-tab); font-size: 13px; color: var(--ink-66);
@@ -530,6 +560,16 @@
           <div class="integration-bar" id="integration-bar-mini" aria-label="Connected data sources">
             <p class="integration-bar__label">Data sources in this report</p>
             <div class="integration-chips" id="integration-chips"></div>
+          </div>
+
+          <div class="satellite-nav" id="satellite-actions-nav" hidden>
+            <p class="satellite-nav__text" id="satellite-actions-summary"></p>
+            <a class="satellite-nav__cta" id="satellite-actions-link" href="citedby-recommended-actions.html">Open Recommended Actions</a>
+          </div>
+
+          <div class="satellite-nav" id="satellite-broken-nav" hidden>
+            <p class="satellite-nav__text" id="satellite-broken-summary"></p>
+            <a class="satellite-nav__cta" id="satellite-broken-link" href="broken-pages-action-list.html">Open 404 details</a>
           </div>
 
           <div class="tabs" data-tabs-root>
@@ -882,75 +922,54 @@
         <p id="footer-copyright" style="margin:0"></p>
         <p id="footer-confidential" style="margin:8px 0 0"></p>
         <p id="footer-generated" style="margin:4px 0 0"></p>
-        <p style="margin:8px 0 0"><a href="https://limitlessenterprise.ai/" rel="noopener noreferrer">limitlessenterprise.ai</a></p>
+        <p style="margin:8px 0 0">
+          <a id="footer-broken-link" href="broken-pages-action-list.html" hidden>Broken links</a>
+          <span id="footer-broken-sep" hidden> · </span>
+          <a id="footer-actions-link" href="citedby-recommended-actions.html" hidden>Recommended Actions (AI visibility)</a>
+          <span id="footer-actions-sep" hidden> · </span>
+          <a href="https://limitlessenterprise.ai/" rel="noopener noreferrer">limitlessenterprise.ai</a>
+        </p>
       </footer>
     </main>
 
     <script type="application/json" id="report-data">
 {
-  "REPORT_TITLE": "Detailed Revenue Leak Audit: Purple Basil Medspa",
   "BUSINESS_NAME": "Purple Basil Medspa",
   "BUSINESS_URL": "https://purplebasilmedspa.com/",
   "IS_LIVE": true,
-  "GENERATED_AT_ISO": "2026-09-18T09:55:00Z",
-  "EXECUTIVE_SUMMARY": "Vagaro booking links show up on 73 pages we scanned—good foundation. Google Analytics logged 397 visits from Google search in the last window (+104% vs 195 prior), but Search Console shows only 79 clicks on 10,554 impressions; most searches still include your name, while “med spa frisco” alone had 373 impressions and zero clicks. When people ask AI about treatments in Frisco, you appear in 6.34% of tracked answers (5 citations; VI Peel leads at 25%)—HydraFacial, injectables, and microneedling are at 0%. Thirteen broken URLs, 24 thin service pages, no /llms-full.txt file (the extended page list some AI tools read alongside /llms.txt), and zero recorded book or call actions in Google Analytics mean you cannot yet prove which fixes drive appointments. Dollar “revenue at risk” stays off the Overview until call logs connect; we will use missed-call actuals from your phone system, not planning numbers from the onboarding form.",
-  "OVERVIEW_VS_FREE": {
-    "free": [
-      "4 tabs: Overview, Visibility, Response, Gaps",
-      "Visibility and Response scores plus Coverage / Clarity / Credibility / Consistency from the site scan and onboarding form",
-      "Summary bullets without Search Console, website analytics, or AI visibility tables"
-    ],
-    "detailed": [
-      "13 tabs: Search Console, analytics, Maps grid, website health, AI visibility, competitors",
-      "Your actual Google clicks and landing pages (79 clicks, 397 organic sessions)",
-      "90-day roadmap with owners, hours, and clear done-when lines",
-      "Live analyst walkthrough (schedule below)"
-    ]
-  },
-  "OVERVIEW_OUTCOMES": [
-    "Stop trust leaks: fix 13 broken pages, point your Google listing website field at https://purplebasilmedspa.com/, and add /llms-full.txt so AI tools can read a full list of your site pages.",
-    "Win searches without your name: “med spa frisco” (373 impressions, 0 clicks) and “microneedling frisco” (400 impressions, 0 clicks) need stronger Frisco landing pages and internal links.",
-    "Show up in AI answers: grow from 6.34% citation share with a VI Peel hub (/skin-concerns/vi-peel/), a HydraFacial vs peel page, and earned placements (North Biomedical, Perfect B, Mimi Silk).",
-    "Count bookings from Google traffic: tag book and call buttons in Google Analytics so those 397 organic sessions tie to real actions—right now the organic window shows 0 measurable events.",
-    "Finish the picture: call logs still pending (same audit, no extra purchase); mystery-shop call scoring is booked separately when you schedule it."
-  ],
-  "DEBRIEF_TITLE": "Included: 45–60 minute analyst walkthrough",
-  "DEBRIEF_BODY": "We walk through this report live: what to fix first, which Frisco searches deserve pages, Maps grid weak spots, and where AI answers skip you. Goal is a two-week action list. Bring your web person, front desk lead, or agency.",
-  "DEBRIEF_CTA_TEXT": "Schedule walkthrough with Limitless",
-  "DEBRIEF_CTA_HREF": "mailto:hello@limitlessenterprise.ai?subject=Purple%20Basil%20Detailed%20Audit%20Walkthrough",
-  "GAPS_COMPLETION_NOTE": "Your phone call history is not connected yet. Once it is, this same Detailed Revenue Leak Audit will show answer rate, missed calls, and after-hours share on the Calls tab—no extra report to buy. Mystery-shop call scoring is booked on its own when you schedule it; we leave those scores blank until real calls are recorded.",
-  "APPENDIX_EXPORT_PACK": "Export pack on request: per-page site scan spreadsheet, content and outbound-link checks, Search Console query export, AI citation URL list, site audit summary, and Maps grid coordinates. We can bundle Google Business Profile and Search Console screenshots for your records.",
-  "APPENDIX_SCORING_NOTE": "Headline scores use the Detailed audit rubric (full site scan, Google Business Profile, onboarding form answers, plus Google Search Console, Google Analytics, and AI citation when connected). Score trace file on request. The free snapshot uses a narrower rubric without those connections.",
-  "VISIBILITY_SCORE": "26",
+  "GENERATED_AT_ISO": "2026-10-26T15:35:32.098670Z",
+  "VISIBILITY_SCORE": "35",
   "RESPONSE_SCORE": "52",
   "REVENUE_AT_RISK_MONTHLY": "2,520",
-  "REVENUE_SOURCE": "intake_estimate",
-  "REVENUE_SHOW_ON_OVERVIEW": false,
-  "SCORE_OVERALL": "39",
-  "SCORE_OVERALL_BAND": "Significant opportunity",
+  "SCORE_OVERALL": "44",
+  "SCORE_OVERALL_BAND": "Moderate opportunity",
   "VISIBILITY_BAND": "Significant opportunity",
   "RESPONSE_BAND": "Moderate opportunity",
-  "FOUR_BAR_COVERAGE": "48",
-  "FOUR_BAR_CLARITY": "39",
-  "FOUR_BAR_CREDIBILITY": "63",
-  "FOUR_BAR_CONSISTENCY": "42",
-  "HERO_FIX_TITLE": "Fix 13 broken pages and point your Google listing at the HTTPS version of purplebasilmedspa.com",
-  "HERO_FIX_WHY": "The site audit flags 13 error pages and the site scan finds broken paths. Search Console already shows hundreds of impressions on competitive Frisco terms with almost no clicks. Clean up errors and make sure your Google listing name, address, phone, and website match what is on purplebasilmedspa.com before you pour budget into ads or new pages.",
+  "FOUR_BAR_COVERAGE": "51",
+  "FOUR_BAR_CLARITY": "45",
+  "FOUR_BAR_CREDIBILITY": "59",
+  "FOUR_BAR_CONSISTENCY": "50",
+  "SCORING_TIER": "paid_detailed",
+  "FREE_TIER_SCORES_SUPERSEDED": {
+    "VISIBILITY_SCORE": "53",
+    "RESPONSE_SCORE": "60",
+    "SCORE_OVERALL": "56"
+  },
   "INTEGRATIONS": {
     "intake": {
       "connected": true,
-      "label": "Onboarding form",
-      "description": "Revenue inputs, booking and after-hours flags, service area."
+      "label": "Client intake",
+      "description": "Revenue inputs, booking & after-hours flags, service area."
     },
     "librecrawl": {
       "connected": true,
       "label": "Website technical scan",
-      "description": "Full-site scan for broken links, thin pages, and on-page search issues."
+      "description": "Full-site crawl, broken links, thin content, and on-page SEO checks."
     },
     "openseo": {
       "connected": true,
       "label": "Search & local visibility",
-      "description": "Keyword rankings, Maps grid, Google listing, backlinks, and site audit signals."
+      "description": "Keywords, SERP footprint, Maps grid, backlinks, GBP, and site audit signals."
     },
     "gsc": {
       "connected": true,
@@ -959,8 +978,8 @@
     },
     "ga4": {
       "connected": true,
-      "label": "Google Analytics",
-      "description": "Traffic, landing pages, book and form actions, audience."
+      "label": "Google Analytics 4",
+      "description": "Traffic, landing pages, key events, audience."
     },
     "call_tracking": {
       "connected": false,
@@ -975,52 +994,351 @@
   },
   "VISIBILITY_WHATS_WORKING": [
     "Homepage title and positioning are clear: “Medspa in Frisco, TX | Purple Basil Medspa & Wellness”.",
-    "Third-party footprint: ~302 estimated organic traffic and 281 ranked keywords (domain overview, 2026-09-17).",
-    "Branded search demand is real in Search Console—top queries are Purple Basil variants and people click when they see you."
+    "Google Business Profile (GBP): 4.90 stars from 193 reviews."
   ],
   "VISIBILITY_HOLDING_BACK": [
-    "13 pages on your site return broken-page errors—bad for trust and Google indexing.",
-    "24 service pages look too thin for people comparing treatments in Frisco.",
-    "Live Google results (2026-09-18): no purplebasilmedspa.com URL in the top 20 on six Frisco searches; instagram.com/purplebasilmedspa ranks 17 for “hydrafacial frisco” only (social profile, not your site).",
-    "Laser hair removal Maps grid: you show at only 3 of 25 points (avg rank 10.7 where found)—visibility drops beyond ~2 km.",
-    "Google listing website field still http://www.purplebasilmedspa.com/ (two hops to HTTPS)."
+    "3 broken URLs still have live internal links pointing at them (11 additional 404/410 URLs have no inbound links and are excluded).",
+    "24 HTML pages flagged as thin content for treatment-intent searches."
   ],
   "VISIBILITY_TOP_IMPROVEMENTS": [
-    "Set each Google listing so name, address, phone, and website match https://purplebasilmedspa.com/.",
-    "Fix broken internal links from the site audit before turning on paid traffic.",
-    "Build or strengthen Frisco service landing pages (including your second Google listing location)."
+    "Align GBP website and NAP with the HTTPS canonical domain on every location listing.",
+    "Fix 4xx/broken internal links surfaced in the site audit before running paid traffic.",
+    "Build or strengthen location/service landing pages for Frisco, Texas, Frisco, Texas (GBP listing 2)."
   ],
   "VISIBILITY_EVIDENCE": [
-    "Third-party estimate: ~302 organic visits/month and 281 keywords where you rank (domain overview, 2026-09-17).",
-    "Other sites linking to you: 162 backlinks from 68 domains; domain strength score 18 (2026-09-18).",
-    "AI brand lookup (2026-09-18): 23 total mentions, 5,065 AI search volume.",
-    "Google results check: 6 Frisco searches, top 20 each—no purplebasilmedspa.com URLs (batch dated 2026-09-18).",
-    "Site health audit: 674 issues summarized; 13 broken error pages.",
-    "Full site scan: 172 HTML pages scored; 368 URLs checked (2026-09-17 session)."
+    "Estimated organic traffic (third-party): 294; organic keywords tracked: 279.",
+    "SERP snapshot: \"laser hair removal frisco\" (20 results):.",
+    "OpenSEO site audit: Audit 4f58be95-897c-42d9-bece-29d1c1247b94 (https://purplebasilmedspa.com/): 680 issues (showing 200)..",
+    "LibreCrawl HTML pages analyzed: 180 (asset URLs excluded)."
   ],
   "RESPONSE_WHATS_WORKING": [
-    "Online scheduling (Vagaro) linked from 73 pages on your site.",
-    "Your onboarding form confirms online booking is offered—matches what the site scan found.",
-    "Dedicated contact page is reachable on the site."
+    "Online scheduling (vagaro) linked from 85 crawled pages.",
+    "Intake confirms online booking is offered — matches crawl booking links.",
+    "Dedicated contact page is reachable in the crawl."
   ],
   "RESPONSE_HOLDING_BACK": [
-    "After-hours call coverage not confirmed—evening and weekend leads may hit voicemail.",
-    "Google Analytics shows 0 book, call, or form actions in the organic window even though one event is defined in measurement health—you cannot see conversions from Google traffic yet."
+    "After-hours call coverage not confirmed — evening/weekend leads may hit voicemail."
   ],
   "RESPONSE_TOP_IMPROVEMENTS": [
-    "Pick one primary action (call or book) above the fold on mobile for top service pages.",
-    "Cover after-hours calls so intent is not lost to voicemail.",
-    "Tag book, call, and form actions in Google Analytics and confirm they appear in reports before scaling spend."
+    "Make one primary CTA (call or book) above the fold on mobile for top service pages.",
+    "Add after-hours answering or AI call coverage so intent is not lost off-hours.",
+    "State expected response time on contact and booking pages."
   ],
   "RESPONSE_EVIDENCE": [
-    "Click-to-call link on site: yes (site scan); Google listing phone not re-verified in the 2026-09-18 listing pull",
-    "Contact form or email link: yes",
-    "Vagaro booking links: on 73 pages",
-    "Live chat widget: not found",
-    "After-hours coverage (onboarding form): no",
-    "Online booking offered (onboarding form): yes",
-    "Book, call, or form actions in Google Analytics organic window (2026-08-20→2026-09-16): 0"
+    "Phone/tel: detected (GBP/crawl)",
+    "Form/mailto: detected",
+    "Booking signals: detected",
+    "Chat signals: not detected",
+    "After-hours (intake): no",
+    "Online booking (intake): yes",
+    "GA4 organic key events (306 sessions in window): 0 key events recorded — booking/call proof missing."
   ],
+  "CITEDBY_ACTIONS_PAGE": {
+    "capture_date": "2026-10-26",
+    "source_tool": "get_technical_recommendations",
+    "technical_entity_signals": [
+      {
+        "title": "FAQPage schema",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for FAQ structured data that marks up questions and answers so AI systems can lift them directly. The page has no FAQPage schema, and it also shows no visible FAQ questions. Customers ask AI tools questions like 'how long does microneedling take' or 'is laser hair removal painful.' Without marked-up answers on your homepage, competitors with FAQ content are more likely to be cited for those questions.",
+        "why_fix_it": "Customers ask AI tools questions like 'how long does microneedling take' or 'is laser hair removal painful.' Without marked-up answers on your homepage, competitors with FAQ content are more likely to be cited for those questions.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ (add the FAQ content block), then add the JSON-LD in the page <head> or an existing schema source",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "FAQPage schema",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Confirms that frequently asked questions are marked up in a machine-readable format so AI engines can extract and cite your Q&A pairs directly in conversational answers, increasing visibility in voice assistants and chatbots. Without FAQPage schema, AI engines cannot easily pull your treatment package questions into answers. Competitors with FAQ markup will dominate 'What are the best medspa packages in Frisco?' queries, capturing prospects researching treatment options.",
+        "why_fix_it": "Without FAQPage schema, AI engines cannot easily pull your treatment package questions into answers. Competitors with FAQ markup will dominate 'What are the best medspa packages in Frisco?' queries, capturing prospects researching treatment options.",
+        "fix_url": "WordPress Admin > Pages > Edit 'Treatment Packages' (https://purplebasilmedspa.com/packages/) > Add FAQ section with 5+ questions in page content, then add FAQPage JSON-LD in Yoast SEO schema blocks or theme header",
+        "page_url": "https://purplebasilmedspa.com/packages",
+        "page_label": "Treatment Packages",
+        "owner": "Engineering"
+      },
+      {
+        "title": "FAQPage schema",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for FAQPage structured data that marks up question-and-answer content so AI systems can lift answers directly. The page data showed no FAQPage markup, and no visible FAQ questions were detected. Customers ask AI tools questions like 'is laser hair removal on the face safe?' or 'how many sessions will I need?'. Pages with clearly marked answers are easier for AI to quote, and without them competitors with FAQ markup get those citations.",
+        "why_fix_it": "Customers ask AI tools questions like 'is laser hair removal on the face safe?' or 'how many sessions will I need?'. Pages with clearly marked answers are easier for AI to quote, and without them competitors with FAQ markup get those citations.",
+        "fix_url": "WordPress Admin > Appearance > Customize/Edit category description for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (add visible FAQ), plus JSON-LD in the page <head>",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "Organization schema (JSON-LD)",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether the page has structured data (JSON-LD) that tells machines who the business is: its name, website, logo and official profiles. AI answer engines use it to confirm which business is behind the content before they cite or recommend it. The page data showed no Organization markup and no structured data of any kind. Without a machine-readable identity, AI assistants have a harder time linking this laser hair removal page to your med spa. Competitors that declare their identity are easier to cite and recommend for local treatment searches.",
+        "why_fix_it": "Without a machine-readable identity, AI assistants have a harder time linking this laser hair removal page to your med spa. Competitors that declare their identity are easier to cite and recommend for local treatment searches.",
+        "fix_url": "WordPress Admin > Appearance > Theme File Editor > header.php, or a header-scripts setting, for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (<head> section)",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "Schema validates at validator.schema.org",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that every structured-data block is complete, with no missing properties that validators flag. Clean schema is more likely to be read and trusted by search engines and AI systems. The Organization block is missing its description. The other blocks (WebPage, WebSite, DaySpa, address, geo and opening hours) are complete. Incomplete schema can be ignored or only partly used. Fixing this one gap makes the whole set clean, so competitors with valid markup don't have an edge in rich results and AI summaries.",
+        "why_fix_it": "Incomplete schema can be ignored or only partly used. Fixing this one gap makes the whole set clean, so competitors with valid markup don't have an edge in rich results and AI summaries.",
+        "fix_url": "WordPress Admin > Yoast SEO > Settings (site representation), or the existing JSON-LD source in the <head> of https://purplebasilmedspa.com/",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "BreadcrumbList schema",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for breadcrumb structured data that shows where a page sits in the site. This helps AI and search systems understand your site structure. No BreadcrumbList is present on this page. Without breadcrumb markup, search and AI systems get less structural context about your site. Adding it on the homepage also sets up the same pattern for service pages like microneedling and laser hair removal.",
+        "why_fix_it": "Without breadcrumb markup, search and AI systems get less structural context about your site. Adding it on the homepage also sets up the same pattern for service pages like microneedling and laser hair removal.",
+        "fix_url": "WordPress Admin > Yoast SEO > Settings > Advanced > Breadcrumbs, or the JSON-LD in the <head> of https://purplebasilmedspa.com/",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "BreadcrumbList schema",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for breadcrumb markup that shows where this page sits in the site (Home > Laser Hair Removal). AI and search engines use it to understand how your services are organized. No BreadcrumbList was found. Without breadcrumbs, the link between this page and your wider services is less clear to AI and search systems, and your result may display less clearly than competitors that have them.",
+        "why_fix_it": "Without breadcrumbs, the link between this page and your wider services is less clear to AI and search systems, and your result may display less clearly than competitors that have them.",
+        "fix_url": "WordPress Admin > header JSON-LD for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (<head>), or Yoast SEO breadcrumb settings",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "SpeakableSpecification schema",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether the page marks which passages are best suited to be read aloud by voice assistants and AI answer tools. The page has long-form text (about 448 words) but no speakable markup. Voice and AI answer tools favor pages that point to a clear summary passage. Without it, a competitor's intro may be chosen over your description of med spa services in Frisco.",
+        "why_fix_it": "Voice and AI answer tools favor pages that point to a clear summary passage. Without it, a competitor's intro may be chosen over your description of med spa services in Frisco.",
+        "fix_url": "The existing JSON-LD WebPage node in the <head> of https://purplebasilmedspa.com/ (theme or schema filter; WordPress Admin > Appearance > Theme File Editor, or a child theme)",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Engineering"
+      },
+      {
+        "title": "SpeakableSpecification schema",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Ensures long-form content pages mark key sections as 'speakable' so voice assistants (Google Assistant, Alexa) know which portions to read aloud in voice search results, optimizing for smart speakers and mobile voice queries. Without Speakable markup, voice assistants will guess which content to read, often choosing irrelevant sections. Competitors with Speakable schema will dominate voice queries like 'What medspa packages are available in Frisco?' capturing the growing voice search audience.",
+        "why_fix_it": "Without Speakable markup, voice assistants will guess which content to read, often choosing irrelevant sections. Competitors with Speakable schema will dominate voice queries like 'What medspa packages are available in Frisco?' capturing the growing voice search audience.",
+        "fix_url": "WordPress Admin > Pages > Edit 'Treatment Packages' > Add Speakable schema via Yoast SEO schema blocks or custom code in Appearance > Theme Editor > header.php for https://purplebasilmedspa.com/packages/",
+        "page_url": "https://purplebasilmedspa.com/packages",
+        "page_label": "Treatment Packages",
+        "owner": "Engineering"
+      },
+      {
+        "title": "sameAs links to social profiles",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that your Organization markup lists official social and directory profiles (sameAs). AI systems use these links to confirm the business is a real, consistent entity across the web. No Organization markup exists, so there is no sameAs list. Footer links alone do not count. No Organization schema with sameAs was found. Add an Organization JSON-LD block that includes official social profile URLs.",
+        "why_fix_it": "No Organization schema with sameAs was found. Add an Organization JSON-LD block that includes official social profile URLs.",
+        "fix_url": "WordPress Admin > header JSON-LD for https://purplebasilmedspa.com/category/laser-hair-removal-face/ (<head>); in Yoast SEO, social profile settings may feed this, menu names vary by version",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Engineering"
+      },
+      {
+        "title": "Create /llms-full.txt — extended manifest",
+        "priority": "Low",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Whether a /llms-full.txt file exists at the domain root with extended, page-level descriptions. It gives AI systems richer context than the short index so they can represent your offerings accurately.",
+        "why_fix_it": "",
+        "fix_url": "Web server or CMS root directory. Serve the file at purplebasilmedspa.com/llms-full.txt (Web Dev to publish, SEO to draft page descriptions).",
+        "page_url": "",
+        "page_label": "",
+        "owner": "Engineering"
+      },
+      {
+        "title": "HTML sitemap page exists",
+        "priority": "Low",
+        "status": "WARN",
+        "workflow": "suggested",
+        "description": "Whether a browsable HTML sitemap page exists that links to the main sections of the site. It gives crawlers and visitors an additional, human-readable path to important pages.",
+        "why_fix_it": "",
+        "fix_url": "CMS page builder or site template. Create a page at /sitemap/ and link it from the site footer.",
+        "page_url": "",
+        "page_label": "",
+        "owner": "Engineering"
+      }
+    ],
+    "content_seo": [
+      {
+        "title": "Lead with direct answer in first paragraph (40–60 words, standalone)",
+        "priority": "Critical",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether the page opens with a short, self-contained paragraph (40-60 words) saying what the service is, who it is for and why it is different. AI answer engines often quote this block word for word, so it has to make sense on its own. No readable opening paragraph was found on this page. AI assistants have nothing to quote for facial laser hair removal, so competing med spas with clear summaries get cited instead.",
+        "why_fix_it": "No readable opening paragraph was found on this page. AI assistants have nothing to quote for facial laser hair removal, so competing med spas with clear summaries get cited instead.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) > Description field, or the category template's intro area. Menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      },
+      {
+        "title": "Comparison table vs alternatives",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for an HTML table comparing the brand with two or more alternatives on specific criteria. Tables are easy for AI to parse and cite in 'X vs Y' answers. No table exists. Prospects weighing a med spa against a dermatology office or at-home options get no structured comparison from you, so AI cites someone else.",
+        "why_fix_it": "No table exists. Prospects weighing a med spa against a dermatology office or at-home options get no structured comparison from you, so AI cites someone else.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > add a Table block (or Custom HTML block) below the services intro",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Concise paragraphs (max 3 sentences each)",
+        "priority": "High",
+        "status": "WARN",
+        "workflow": "suggested",
+        "description": "Checks that most paragraphs are three sentences or fewer. Short blocks are easier for AI to quote. The intro and hero are short, but about half the testimonials run four to five sentences. Fewer than 80% of paragraphs meet the limit, which makes quoting harder.",
+        "why_fix_it": "The intro and hero are short, but about half the testimonials run four to five sentences. Fewer than 80% of paragraphs meet the limit, which makes quoting harder.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > testimonials section",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "FAQ section with 5+ Q&As",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for a visible FAQ with at least five question-and-answer pairs, ideally mirrored in FAQPage structured data. FAQs give AI engines ready-made, quotable answers. The page has no FAQ at all, visible or in structured data. Buyers ask AI about pricing, downtime and suitability before booking, and without answers here you lose those moments to competitors.",
+        "why_fix_it": "The page has no FAQ at all, visible or in structured data. Buyers ask AI about pricing, downtime and suitability before booking, and without answers here you lose those moments to competitors.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ (visible FAQ); JSON-LD in the page <head> via a custom HTML block or header-script area. If you use Yoast SEO, this is usually under its schema settings — menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Headings match natural query phrasing",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks whether section headings read like questions buyers type or ask an assistant, such as 'What does microneedling cost?'. AI engines match headings to user questions when choosing what to quote. The visible headings are brand slogans ('Your Skin, Our Expertise – Tailored Treatments for Every Skin Type'). They do not match how Frisco clients search, so competitors with question-style headings are easier for AI to cite.",
+        "why_fix_it": "The visible headings are brand slogans ('Your Skin, Our Expertise – Tailored Treatments for Every Skin Type'). They do not match how Frisco clients search, so competitors with question-style headings are easier for AI to cite.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > change heading blocks to H2/H3 (block editor: select heading > Heading level)",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Meta description present and 140–160 chars",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that a meta description exists and is 140-160 characters. It summarises the page for search results and AI systems. No meta description was found. Search engines may pull random text, which lowers click-through and clarity versus competitors.",
+        "why_fix_it": "No meta description was found. Search engines may pull random text, which lowers click-through and clarity versus competitors.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) > Yoast SEO section > Meta description. Menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      },
+      {
+        "title": "Title tag optimized (<60 chars, keyword-first)",
+        "priority": "High",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that the title tag is under 60 characters and starts with the main keyword. It is a key signal for what the page is about. No title tag was detected. Without one, search engines and AI systems may generate a weak title or skip the page.",
+        "why_fix_it": "No title tag was detected. Without one, search engines and AI systems may generate a weak title or skip the page.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) > Yoast SEO section > SEO title. Menu names vary by version.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      },
+      {
+        "title": "Last-updated date visible",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks for a visible 'Last updated' date near the top of the page. AI engines use it as a freshness signal. No date is visible. Treatment menus and offers change, and AI may treat undated pages as stale compared with competitors that show a date.",
+        "why_fix_it": "No date is visible. Treatment menus and offers change, and AI may treat undated pages as stale compared with competitors that show a date.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > add a Custom HTML block under the hero section, or in the theme template for the homepage",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Numbered/bulleted lists for key features",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that key services or steps are marked up as real HTML lists (ul/ol), not just prose or visual cards. Lists let AI extract items cleanly. The services (Botox, fillers, laser hair removal, SkinPen®, peels, HydraFacial) appear only in running sentences. AI may miss or misquote your treatment menu, and competitors with clean lists are easier to cite.",
+        "why_fix_it": "The services (Botox, fillers, laser hair removal, SkinPen®, peels, HydraFacial) appear only in running sentences. AI may miss or misquote your treatment menu, and competitors with clean lists are easier to cite.",
+        "fix_url": "WordPress Admin > Pages > edit https://purplebasilmedspa.com/ > add a List block under the intro",
+        "page_url": "https://purplebasilmedspa.com/",
+        "page_label": "Homepage",
+        "owner": "Content"
+      },
+      {
+        "title": "Unique original content — no duplicate or templated pages",
+        "priority": "Medium",
+        "status": "FAIL",
+        "workflow": "suggested",
+        "description": "Checks that the page has substantive, original copy rather than boilerplate or repeated blocks. Unique content gives AI a reason to cite this page over others. No unique copy was detected. A bare archive page looks like a templated listing and gives AI nothing distinctive about your facial laser service.",
+        "why_fix_it": "No unique copy was detected. A bare archive page looks like a templated listing and gives AI nothing distinctive about your facial laser service.",
+        "fix_url": "WordPress Admin > Posts > Categories > edit the Laser Hair Removal category (https://purplebasilmedspa.com/category/laser-hair-removal-face/) description.",
+        "page_url": "https://purplebasilmedspa.com/category/laser-hair-removal-face",
+        "page_label": "Laser Hair Removal",
+        "owner": "Content"
+      }
+    ],
+    "truncated_note": ""
+  },
+  "REPORT_TITLE": "Detailed Revenue Leak Audit: Purple Basil Medspa",
+  "EXECUTIVE_SUMMARY": "Vagaro booking links show up on 73 pages we scanned—good foundation. Google Analytics logged 397 visits from Google search in the last window (+104% vs 195 prior), but Search Console shows only 79 clicks on 10,554 impressions; most searches still include your name, while “med spa frisco” alone had 373 impressions and zero clicks. When people ask AI about treatments in Frisco, you appear in 6.34% of tracked answers (5 citations; VI Peel leads at 25%)—HydraFacial, injectables, and microneedling are at 0%. Three broken URLs still have live internal links (missing team photo, Black Friday → deals hub, and a malformed link on the wrinkle-relaxers page); eleven other 404 package URLs have no inbound links and are not treated as open report issues. Twenty-four thin service pages, no /llms-full.txt file (the extended page list some AI tools read alongside /llms.txt), and zero recorded book or call actions in Google Analytics mean you cannot yet prove which fixes drive appointments. Dollar “revenue at risk” stays off the Overview until call logs connect; we will use missed-call actuals from your phone system, not planning numbers from the onboarding form.",
+  "OVERVIEW_VS_FREE": {
+    "free": [
+      "4 tabs: Overview, Visibility, Response, Gaps",
+      "Visibility and Response scores plus Coverage / Clarity / Credibility / Consistency from the site scan and onboarding form",
+      "Summary bullets without Search Console, website analytics, or AI visibility tables"
+    ],
+    "detailed": [
+      "13 tabs: Search Console, analytics, Maps grid, website health, AI visibility, competitors",
+      "Your actual Google clicks and landing pages (79 clicks, 397 organic sessions)",
+      "90-day roadmap with owners, hours, and clear done-when lines",
+      "Live analyst walkthrough (schedule below)"
+    ]
+  },
+  "OVERVIEW_OUTCOMES": [
+    "Stop trust leaks: fix 3 actionable broken URLs (still linked from live pages), point your Google listing website field at https://purplebasilmedspa.com/, and add /llms-full.txt so AI tools can read a full list of your site pages.",
+    "Win searches without your name: “med spa frisco” (373 impressions, 0 clicks) and “microneedling frisco” (400 impressions, 0 clicks) need stronger Frisco landing pages and internal links.",
+    "Show up in AI answers: grow from 6.34% citation share with a VI Peel hub (/skin-concerns/vi-peel/), a HydraFacial vs peel page, and earned placements (North Biomedical, Perfect B, Mimi Silk).",
+    "Count bookings from Google traffic: tag book and call buttons in Google Analytics so those 397 organic sessions tie to real actions—right now the organic window shows 0 measurable events.",
+    "Finish the picture: call logs still pending (same audit, no extra purchase); mystery-shop call scoring is booked separately when you schedule it."
+  ],
+  "DEBRIEF_TITLE": "Included: 45–60 minute analyst walkthrough",
+  "DEBRIEF_BODY": "We walk through this report live: what to fix first, which Frisco searches deserve pages, Maps grid weak spots, and where AI answers skip you. Goal is a two-week action list. Bring your web person, front desk lead, or agency.",
+  "DEBRIEF_CTA_TEXT": "Schedule walkthrough with Limitless",
+  "DEBRIEF_CTA_HREF": "mailto:hello@limitlessenterprise.ai?subject=Purple%20Basil%20Detailed%20Audit%20Walkthrough",
+  "GAPS_COMPLETION_NOTE": "Your phone call history is not connected yet. Once it is, this same Detailed Revenue Leak Audit will show answer rate, missed calls, and after-hours share on the Calls tab—no extra report to buy. Mystery-shop call scoring is booked on its own when you schedule it; we leave those scores blank until real calls are recorded.",
+  "APPENDIX_EXPORT_PACK": "Export pack on request: per-page site scan spreadsheet, content and outbound-link checks, Search Console query export, AI citation URL list, site audit summary, and Maps grid coordinates. We can bundle Google Business Profile and Search Console screenshots for your records.",
+  "APPENDIX_SCORING_NOTE": "Headline scores use the Detailed audit rubric (full site scan, Google Business Profile, onboarding form answers, plus Google Search Console, Google Analytics, and AI citation when connected). Score trace file on request. The free snapshot uses a narrower rubric without those connections.",
+  "REVENUE_SOURCE": "intake_estimate",
+  "REVENUE_SHOW_ON_OVERVIEW": false,
+  "HERO_FIX_TITLE": "Fix 3 linked broken URLs and point your Google listing at the HTTPS version of purplebasilmedspa.com",
+  "HERO_FIX_WHY": "The Oct 26 site scan found 12 URLs returning 404, but only 3 still have internal links pointing at them—a missing team photo on 14+ blog posts, /med-spa-deals/ from the Black Friday page, and a protocol-less link on the wrinkle-relaxers page. Eleven orphan package 404s have no live inbound links. Search Console already shows hundreds of impressions on competitive Frisco terms with almost no clicks. Clean up the linked errors and make sure your Google listing name, address, phone, and website match what is on purplebasilmedspa.com before you pour budget into ads or new pages.",
   "LOCAL_INSIGHTS": [
     "Google listing (2026-09-18): Medical spa, claimed, 4.90★ from 184 reviews, 55 photos; website field still http://www.purplebasilmedspa.com/.",
     "Newest 30 reviews: 17 of 30 have no owner reply in this pull (habit lapsed on recent reviews).",
@@ -1054,9 +1372,9 @@
   ],
   "TECHNICAL_METRICS": [
     {
-      "label": "Broken pages",
-      "value": "13",
-      "hint": "Search audit + site scan"
+      "label": "Broken pages (actionable)",
+      "value": "3",
+      "hint": "404/410 with ≥1 internal link · Oct 26 scan"
     },
     {
       "label": "Thin content (HTML)",
@@ -1070,54 +1388,56 @@
     }
   ],
   "TECHNICAL_PRIORITIES": [
-    "Clear 13 broken URLs from the search visibility audit before paid campaigns.",
+    "Fix 3 actionable broken URLs before paid campaigns (team photo asset, /med-spa-deals/, wrinkle-relaxers malformed href).",
     "Expand or merge 24 thin HTML pages—especially service and package paths tied to Vagaro.",
-    "Fix 2 broken internal links and 2 redirect chains from the audit summary.",
-    "Check Vagaro booking links and fix the broken WebMD outbound (server error in site scan exports)."
+    "Fix 2 broken internal links and 2 redirect chains from the OpenSEO audit (targets overlap the actionable list above).",
+    "Optional hygiene: 11 orphan /packages/* 404s have zero internal links—301 to /packages/ or leave out of sitemap; not counted as open leaks."
   ],
   "TECHNICAL_EVIDENCE": [
-    "Site scan 2026-09-17: 368 URLs checked; 13 broken pages flagged in the audit summary.",
-    "Search visibility audit 4ed66c4f: 257 pages reviewed; 674 total issues.",
-    "172 HTML pages used for free-report scoring; 73 pages with booking links."
+    "LibreCrawl 2026-10-26: 390 URLs fetched; 12 HTTP 404s in crawl exports; 11 orphans (no Linked From); 1 asset 404 linked from 14+ pages.",
+    "OpenSEO audit 4f58be95: 13× broken-page warnings (raw 404 count) and 2 critical broken-internal-link rows—merged into 3 actionable targets for scoring.",
+    "Method: a 404 counts as a report issue only when ≥1 crawled internal page still links to it; orphan 404s are documented but excluded from broken-page metrics.",
+    "180 HTML pages analyzed (assets excluded); 73 pages with Vagaro booking links."
   ],
+  "APPENDIX_BROKEN_LINKS_NOTE": "Broken-link methodology (2026-10-26): LibreCrawl per-page + Critical table inbound counts, cross-checked with OpenSEO broken-internal-link rows and live HTML spot checks. See BROKEN-LINKS-AUDIT-20261026.md in the client folder.",
   "CITEDBY_METRICS": [
     {
       "label": "Overall AI visibility",
-      "value": "6.34%",
-      "hint": "Probe 2026-09-15"
+      "value": "5.3%",
+      "hint": "Probe 2026-10-20"
     },
     {
       "label": "Citations of your brand",
-      "value": "5",
-      "hint": "78 probe questions"
+      "value": "4",
+      "hint": "75 probe questions"
     },
     {
-      "label": "Topic leader: VI Peel",
-      "value": "25%",
-      "hint": "4 cites on topic"
+      "label": "Topic leader: Laser Hair Removal",
+      "value": "13.3%",
+      "hint": "2 cites on topic"
     },
     {
       "label": "Owned content recs",
-      "value": "17",
-      "hint": "9 HIGH / 8 MED · capture 2026-09-17"
+      "value": "25",
+      "hint": "18 HIGH / 7 MED · capture 2026-10-26"
     },
     {
       "label": "Earned content recs",
-      "value": "16",
-      "hint": "All HIGH · capture 2026-09-17"
+      "value": "45",
+      "hint": "35 HIGH / 10 MED · API total 70"
     }
   ],
   "CITEDBY_GAPS": [
-    "HydraFacial, injectables, and microneedling: 0% of probed AI answers cite you despite live service pages.",
-    "AI engines pulled 489 URLs in the probe; only 5 were pages you own—most mentions go to other sites.",
-    "Missing /llms-full.txt (the extended page list some AI tools read) and a warning on your HTML sitemap page make it harder for AI answers to pull accurate facts from your site.",
-    "Laser hair removal: 6.7% visibility, 1 citation—competitors own the “worth it vs waxing” questions."
+    "Hydrafacial and medical-grade injectables: 0% of probed AI answers cite you despite live service pages.",
+    "AI engines pulled 680 URLs in the probe; only 3 were pages you own—most mentions go to other sites.",
+    "Missing /llms-full.txt (extended AI manifest) remains a crawl-readiness FAIL; /llms.txt and robots.txt for AI crawlers are PASS.",
+    "Laser hair removal leads topics at 13.3% visibility—Vi Peel and microneedling sit at 6.7% each in this probe."
   ],
   "CITEDBY_RECOMMENDATIONS": [
-    "Publish owned hub: “How Does a VI Peel Actually Work on the Skin?” (high-priority recommendation).",
-    "Publish owned comparison: “Hydrafacial vs. Chemical Peels for Acne-Prone Skin”.",
-    "Publish owned local guide: “Microneedling Downtime in Frisco: What to Expect Before Your Next Event”.",
-    "Earned outreach targets include North Biomedical (VI Peel), Perfect B (HydraFacial vs peel), and Mimi Silk (home IPL vs professional laser)—drafts in client content deliverable folder."
+    "Publish owned: “Are Injectables in Frisco Done by Doctors or Trained Staff?” (HIGH priority).",
+    "Publish owned: “Is Laser Hair Removal in Frisco Worth It Compared to Waxing Every Few Weeks?” (HIGH priority).",
+    "Publish owned: “How Medical-Grade Injectables Work to Reduce Wrinkles” (HIGH priority).",
+    "Earned outreach: prioritize HIGH editorial/social targets from the 2026-10-26 earned rec batch (45 returned, 70 total in API)."
   ],
   "CITEDBY_TOPIC_ROWS": [
     {
@@ -1128,8 +1448,8 @@
     },
     {
       "topic": "Laser Hair Removal",
-      "visibility": "6.7%",
-      "citations": "1",
+      "visibility": "13.3%",
+      "citations": "2",
       "prompts": "5"
     },
     {
@@ -1140,100 +1460,100 @@
     },
     {
       "topic": "Microneedling Treatments",
-      "visibility": "0%",
-      "citations": "0",
+      "visibility": "6.7%",
+      "citations": "1",
       "prompts": "5"
     },
     {
       "topic": "Vi Peel Treatments",
-      "visibility": "25%",
-      "citations": "4",
+      "visibility": "6.7%",
+      "citations": "1",
       "prompts": "5"
     }
   ],
   "CITEDBY_PROMPT_ROWS": [
     {
       "topic": "Laser Hair Removal",
-      "prompt": "Is laser hair removal in Frisco worth it compared to just waxing every few weeks?",
+      "prompt": "How much does a full Brazilian laser hair removal cost in Frisco?",
       "our_cites": "1",
-      "total_cites": "8"
+      "total_cites": "26"
+    },
+    {
+      "topic": "Laser Hair Removal",
+      "prompt": "What does a package deal for full-leg laser hair removal usually run in Frisco?",
+      "our_cites": "1",
+      "total_cites": "17"
+    },
+    {
+      "topic": "Microneedling Treatments",
+      "prompt": "How much does a microneedling session typically cost in Frisco?",
+      "our_cites": "1",
+      "total_cites": "29"
     },
     {
       "topic": "Vi Peel Treatments",
       "prompt": "Can I book a VI peel consultation in Frisco this week?",
-      "our_cites": "2",
-      "total_cites": "12"
-    },
-    {
-      "topic": "Vi Peel Treatments",
-      "prompt": "What should I expect to pay for a full VI peel series in Frisco?",
       "our_cites": "1",
-      "total_cites": "8"
-    },
-    {
-      "topic": "Vi Peel Treatments",
-      "prompt": "How much does a VI peel cost in Frisco?",
-      "our_cites": "1",
-      "total_cites": "22"
+      "total_cites": "11"
     }
   ],
   "CITEDBY_CITED_SOURCES": [
     {
+      "domain": "aad.org",
+      "retrievals": "38",
+      "notes": "680 URLs in probe merge"
+    },
+    {
       "domain": "google.com",
-      "retrievals": "39",
-      "notes": "489 URLs in probe merge"
+      "retrievals": "31",
+      "notes": "680 URLs in probe merge"
     },
     {
       "domain": "youtube.com",
+      "retrievals": "17",
+      "notes": "680 URLs in probe merge"
+    },
+    {
+      "domain": "dashboard.boulevard.io",
+      "retrievals": "14",
+      "notes": "680 URLs in probe merge"
+    },
+    {
+      "domain": "pubmed.ncbi.nlm.nih.gov",
+      "retrievals": "14",
+      "notes": "680 URLs in probe merge"
+    },
+    {
+      "domain": "expressmedspas.com",
       "retrievals": "12",
-      "notes": "489 URLs in probe merge"
+      "notes": "680 URLs in probe merge"
     },
     {
       "domain": "pmc.ncbi.nlm.nih.gov",
       "retrievals": "11",
-      "notes": "489 URLs in probe merge"
+      "notes": "680 URLs in probe merge"
     },
     {
-      "domain": "instagram.com",
+      "domain": "vagaro.com",
       "retrievals": "10",
-      "notes": "489 URLs in probe merge"
+      "notes": "680 URLs in probe merge"
     },
     {
-      "domain": "frznaesthetics.com",
-      "retrievals": "9",
-      "notes": "489 URLs in probe merge"
+      "domain": "hydrafacial.com",
+      "retrievals": "10",
+      "notes": "680 URLs in probe merge"
     },
     {
-      "domain": "novuskin.com",
-      "retrievals": "9",
-      "notes": "489 URLs in probe merge"
-    },
-    {
-      "domain": "txfaces.com",
-      "retrievals": "9",
-      "notes": "489 URLs in probe merge"
-    },
-    {
-      "domain": "facebeautyscience.com",
+      "domain": "thecliniccompass.com",
       "retrievals": "8",
-      "notes": "489 URLs in probe merge"
-    },
-    {
-      "domain": "vipeel.com",
-      "retrievals": "8",
-      "notes": "489 URLs in probe merge"
-    },
-    {
-      "domain": "reddit.com",
-      "retrievals": "8",
-      "notes": "489 URLs in probe merge"
+      "notes": "680 URLs in probe merge"
     }
   ],
   "CITEDBY_AI_COMPETITORS": [
     {
       "domain": "purplebasilmedspa.com",
-      "visibility": "6.4%",
-      "notes": "Your brand · probe 2026-09-15"
+      "visibility": "5.3%",
+      "notes": "Your brand · probe 2026-10-20"
     },
     {
       "domain": "skintightnaturals.com",
@@ -1262,10 +1582,10 @@
     }
   ],
   "CITEDBY_TECH_HIGHLIGHTS": [
-    "Crawl readiness (2026-09-15): 14 PASS, 1 FAIL (/llms-full.txt extended page list for AI tools), 1 WARN (HTML sitemap page).",
-    "/llms.txt: PASS; robots.txt allows major AI crawlers.",
-    "On-page AI-readiness checks: 96 items (56 FAIL, 24 critical) on homepage, packages, and laser service URLs.",
-    "489 URLs retrieved in the citation probe—5 classified as owned on purplebasilmedspa.com."
+    "Crawl readiness (2026-10-20): 14 PASS, 1 FAIL, 1 WARN on AI crawler checks.",
+    "/llms.txt: PASS; /llms-full.txt: FAIL; robots.txt allows major AI crawlers.",
+    "On-page AI-readiness checks: 96 items (13 FAIL in returned sample; API total 96).",
+    "680 URLs retrieved in the citation probe—3 classified as owned on purplebasilmedspa.com."
   ],
   "GSC_METRICS": [
     {
@@ -1427,68 +1747,6 @@
     "Overview revenue-at-risk will use actual missed-call data after connection (onboarding-form planning math is not shown in the client UI until then).",
     "Connecting your phone system or call-tracking account is part of delivering this audit—no additional report purchase required."
   ],
-  "COMPETITOR_ROWS": [
-    {
-      "domain": "starwoodmedspa.com",
-      "overlap": "10.45 · 7 shared searches",
-      "keywords": 7,
-      "notes": "median pos 1; est traffic 528"
-    },
-    {
-      "domain": "yelp.com",
-      "overlap": "5.30 · 7 shared searches",
-      "keywords": 7,
-      "notes": "median pos 4; est traffic 35"
-    },
-    {
-      "domain": "lebeauvisagemedicalspa.com",
-      "overlap": "4.35 · 6 shared searches",
-      "keywords": 6,
-      "notes": "median pos 6; est traffic 106"
-    },
-    {
-      "domain": "legacydermatology.com",
-      "overlap": "3.35 · 6 shared searches",
-      "keywords": 6,
-      "notes": "median pos 3; est traffic 20"
-    },
-    {
-      "domain": "finelineaestheticstx.com",
-      "overlap": "2.65 · 6 shared searches",
-      "keywords": 6,
-      "notes": "median pos 5; est traffic 20"
-    },
-    {
-      "domain": "themodernskin.com",
-      "overlap": "2.25 · 3 shared searches",
-      "keywords": 3,
-      "notes": "median pos 3; est traffic 14"
-    },
-    {
-      "domain": "hushmedspa.com",
-      "overlap": "2.00 · 5 shared searches",
-      "keywords": 5,
-      "notes": "median pos 12; est traffic 62"
-    },
-    {
-      "domain": "txfaces.com",
-      "overlap": "1.95 · 6 shared searches",
-      "keywords": 6,
-      "notes": "median pos 10; est traffic 11"
-    },
-    {
-      "domain": "atomicbeauty.com",
-      "overlap": "1.90 · 5 shared searches",
-      "keywords": 5,
-      "notes": "median pos 6; est traffic 7"
-    },
-    {
-      "domain": "finetunemedspa.com",
-      "overlap": "1.85 · 7 shared searches",
-      "keywords": 7,
-      "notes": "median pos 11; est traffic 30"
-    }
-  ],
   "COMPETITIVE_INSIGHTS": [
     "Eight Frisco searches (2026-09-18): starwoodmedspa.com tops the shared-search score at 10.45 on 7 of those keywords—your clearest organic benchmark in this pull.",
     "Other med spas in the batch: Le Beau Visage (4.35), Fine Line (2.65), Hush (2.0), FINETUNE (1.85), The Modern Skin (2.25). Re-check after P0 fixes to see if the scores shift.",
@@ -1500,22 +1758,22 @@
     {
       "phase": "Days 1–14",
       "priority": "P0",
-      "title": "Fix 13 broken pages, 2 broken internal links, and Google listing website → HTTPS",
+      "title": "Fix 3 actionable broken URLs, 2 broken internal links, and Google listing website → HTTPS",
       "impact": "High",
       "effort": "Medium",
       "owner": "Dev / web",
-      "hours": "8–16h",
-      "success_metric": "Broken pages from the site audit drop to 0; Google listing website shows https://purplebasilmedspa.com/; “med spa frisco” keeps impressions with rising clicks in Search Console"
+      "hours": "4–8h",
+      "success_metric": "Actionable broken URLs (linked 404s) drop to 0; Google listing website shows https://purplebasilmedspa.com/; “med spa frisco” keeps impressions with rising clicks in Search Console"
     },
     {
       "phase": "Days 1–14",
-      "priority": "P0",
-      "title": "Add /llms-full.txt, redirect the “friso” typo URL, and repair broken HydraFacial page links",
-      "impact": "High",
+      "priority": "P1",
+      "title": "Add /llms-full.txt, redirect the “friso” typo URL, and optionally 301 orphan package 404s",
+      "impact": "Medium",
       "effort": "Low",
       "owner": "Dev",
       "hours": "2–4h",
-      "success_metric": "/llms-full.txt is live and readable by AI tools; HydraFacial and other priority service URLs open without “page not found” errors"
+      "success_metric": "/llms-full.txt is live and readable by AI tools; orphan /packages/* 404s redirected or removed from sitemap if you want a clean crawl export"
     },
     {
       "phase": "Days 15–30",
@@ -1619,7 +1877,8 @@
       "captured": "—",
       "status": "Not connected"
     }
-  ]
+  ],
+  "BROKEN_PAGES_HREF": "broken-pages-action-list.html"
 }
     </script>
 
@@ -1689,6 +1948,102 @@
           if (!table || !Array.isArray(rows)) return;
           var tbody = table.querySelector("tbody");
           tbody.innerHTML = rows.map(fn).join("");
+        }
+
+        function syncFooterSatelliteSeparators() {
+          var broken = document.getElementById("footer-broken-link");
+          var actions = document.getElementById("footer-actions-link");
+          var brokenSep = document.getElementById("footer-broken-sep");
+          var actionsSep = document.getElementById("footer-actions-sep");
+          var brokenOn = broken && !broken.hidden;
+          var actionsOn = actions && !actions.hidden;
+          if (brokenSep) brokenSep.hidden = !(brokenOn && actionsOn);
+          if (actionsSep) actionsSep.hidden = !actionsOn;
+        }
+
+        function parseActionableBrokenCount(data) {
+          if (data.ACTIONABLE_BROKEN_PAGE_COUNT != null && data.ACTIONABLE_BROKEN_PAGE_COUNT !== "") {
+            var direct = Number(data.ACTIONABLE_BROKEN_PAGE_COUNT);
+            if (isFinite(direct) && direct >= 0) return direct;
+          }
+          var metrics = data.TECHNICAL_METRICS;
+          if (!Array.isArray(metrics)) return 0;
+          for (var i = 0; i < metrics.length; i++) {
+            var m = metrics[i];
+            if (!m || String(m.label || "").toLowerCase().indexOf("broken pages") === -1) continue;
+            var parsed = parseInt(String(m.value || "0").replace(/[^\d]/g, ""), 10);
+            return isFinite(parsed) ? parsed : 0;
+          }
+          return 0;
+        }
+
+        function renderSatelliteBrokenNav(data) {
+          var nav = document.getElementById("satellite-broken-nav");
+          var summary = document.getElementById("satellite-broken-summary");
+          var link = document.getElementById("satellite-broken-link");
+          var footerLink = document.getElementById("footer-broken-link");
+          if (!nav || !summary) return;
+
+          var count = parseActionableBrokenCount(data);
+          var href = data.BROKEN_PAGES_HREF || "broken-pages-action-list.html";
+          var footerLabel =
+            count === 1 ? "Broken links (1 actionable)" : "Broken links (" + count + " actionable)";
+
+          if (!count) {
+            nav.hidden = true;
+            if (footerLink) footerLink.hidden = true;
+            syncFooterSatelliteSeparators();
+            return;
+          }
+
+          nav.hidden = false;
+          summary.textContent =
+            "Broken links: " +
+            count +
+            " actionable URL" +
+            (count === 1 ? "" : "s") +
+            " (live internal links still point at them). Full fix list on a separate page.";
+          if (link) link.setAttribute("href", href);
+          if (footerLink) {
+            footerLink.hidden = false;
+            footerLink.setAttribute("href", href);
+            footerLink.textContent = footerLabel;
+          }
+          syncFooterSatelliteSeparators();
+        }
+
+        function renderSatelliteActionsNav(data) {
+          var nav = document.getElementById("satellite-actions-nav");
+          var summary = document.getElementById("satellite-actions-summary");
+          var link = document.getElementById("satellite-actions-link");
+          var footerLink = document.getElementById("footer-actions-link");
+          if (!nav || !summary) return;
+
+          var page = data.CITEDBY_ACTIONS_PAGE;
+          var tech = page && Array.isArray(page.technical_entity_signals) ? page.technical_entity_signals.length : 0;
+          var content = page && Array.isArray(page.content_seo) ? page.content_seo.length : 0;
+          var href = data.CITEDBY_ACTIONS_HREF || "citedby-recommended-actions.html";
+
+          if (!tech && !content) {
+            nav.hidden = true;
+            if (footerLink) footerLink.hidden = true;
+            syncFooterSatelliteSeparators();
+            return;
+          }
+
+          nav.hidden = false;
+          summary.textContent =
+            "ThriveStack recommended actions: Technical & Entity Signals (" +
+            tech +
+            " pending) · Content & SEO (" +
+            content +
+            " critical/high). Full checklist on a separate page.";
+          if (link) link.setAttribute("href", href);
+          if (footerLink) {
+            footerLink.hidden = false;
+            footerLink.setAttribute("href", href);
+          }
+          syncFooterSatelliteSeparators();
         }
 
         function parseRevenueAmount(str) {
@@ -2276,6 +2631,8 @@
             return "<tr><td>" + escapeHtml(r.domain) + '</td><td class="num">' + escapeHtml(r.visibility) +
               "</td><td>" + escapeHtml(r.notes) + "</td></tr>";
           });
+          renderSatelliteBrokenNav(data);
+          renderSatelliteActionsNav(data);
           renderTableBody("appendix-sources", data.APPENDIX_SOURCES, function (r) {
             return "<tr><td>" + escapeHtml(r.source) + "</td><td>" + escapeHtml(r.scope || r.tool || "") +
               "</td><td>" + escapeHtml(r.captured) + "</td><td>" + escapeHtml(r.status) + "</td></tr>";

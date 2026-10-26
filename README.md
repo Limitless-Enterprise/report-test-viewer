@@ -5,7 +5,8 @@ Static publish folder for the client report. Deploy on **Vercel** as a static si
 | File | URL path |
 |------|----------|
 | `index.html` | `/` — full Detailed Revenue Leak Audit |
-| `broken-pages.html` | `/broken-pages.html` — 13 broken URLs action list |
+| `broken-pages.html` | `/broken-pages.html` — 3 actionable broken URLs (11 orphan 404s documented separately) |
+| `citedby-recommended-actions.html` | `/citedby-recommended-actions.html` — ThriveStack AI visibility recommended actions |
 
 ## Vercel (Git)
 
