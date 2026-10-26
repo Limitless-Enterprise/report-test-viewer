@@ -8,29 +8,61 @@ Static publish folder for the client report. Deploy on **Vercel** as a static si
 | `broken-pages.html` | `/broken-pages.html` — 3 actionable broken URLs (11 orphan 404s documented separately) |
 | `citedby-recommended-actions.html` | `/citedby-recommended-actions.html` — ThriveStack AI visibility recommended actions |
 
-## Canonical production URL
+## Canonical publish (read this first)
 
-**https://report-test-viewer.vercel.app/** — Vercel project `report-test-viewer`, team **test11-6763**, GitHub repo **Limitless-Enterprise/report-test-viewer**.
+**Production URL:** **https://report-test-viewer.vercel.app/**
 
-## Update the live site (preferred)
+| | |
+|---|---|
+| **GitHub repo** | [Limitless-Enterprise/report-test-viewer](https://github.com/Limitless-Enterprise/report-test-viewer) (this directory when checked out as that repo) |
+| **Monorepo path** | `clients/purple-basil-medspa/publish/` in `revenue-leak-audit` |
+| **Vercel** | Team **test11-6763**, project **report-test-viewer** |
+| **GitHub environment** | **Production – report-test-viewer** only (stale generic **Production** was removed; do not recreate it) |
 
-Use **Git push only**. Vercel’s Git integration redeploys production on every push to `main`. Do not run `vercel --prod` for normal publishes (it creates an extra Vercel deployment and can register a second GitHub deployment for the same commit).
+### DO
+
+1. **Sync HTML from the monorepo client folder** into this publish directory before commit:
+   - `index.html` — regenerate with `embed_detailed_html.py` (see below); do **not** raw-copy `detailed-revenue-leak-audit.html`
+   - `broken-pages.html`
+   - `citedby-recommended-actions.html`
+2. **Commit and push to `main` only** in `report-test-viewer`. Vercel’s Git integration deploys production automatically.
+3. **Push with GitHub account `dave4272-lle`** (`gh auth switch` if needed). `Dave4272-Office` gets **403** on this repo.
+4. Confirm one deployment in [Vercel → report-test-viewer → Deployments](https://vercel.com/test11-6763/report-test-viewer) or GitHub **Deployments** (environment **Production – report-test-viewer**).
+
+### DON'T
+
+- **Do not run `vercel --prod`** (or `npx vercel --prod --scope test11-6763`) for routine releases. Git push + CLI prod both firing caused **double deploys** and duplicate GitHub deployment records for the same commit.
+- **Do not** `cp ../detailed-revenue-leak-audit.html index.html` — that copies client-only `broken-pages-action-list.html` links and breaks the live 404 details page.
+- **Do not** treat **https://publish-inky-iota.vercel.app/** as production — that URL is not on team **test11-6763** (stray CLI preview project).
+- **Do not** add a second Vercel Git import for the same repo (duplicate deploy hooks).
+
+### Release commands (monorepo → publish repo)
+
+From **revenue-leak-audit** root, regenerate `index.html`, copy sibling pages, then push **this repo** (`report-test-viewer`):
 
 ```bash
-# Regenerate publish/index.html (uses broken-pages.html, not the client action-list path):
-python3 ../../../scripts/generate-report/embed_detailed_html.py \
-  --root ../../../ --client purple-basil-medspa
-git add -A && git commit -m "Update report" && git push origin main
+# 1) Regenerate publish/index.html (uses broken-pages.html, not the client action-list path):
+python3 scripts/generate-report/embed_detailed_html.py \
+  --root . --client purple-basil-medspa
+
+# 2) Copy other live pages into publish/ (paths relative to monorepo):
+cp clients/purple-basil-medspa/broken-pages-action-list.html \
+   clients/purple-basil-medspa/publish/broken-pages.html
+cp clients/purple-basil-medspa/citedby-recommended-actions.html \
+   clients/purple-basil-medspa/publish/
+
+# 3) Commit in the publish git repo only:
+cd clients/purple-basil-medspa/publish
+git add index.html broken-pages.html citedby-recommended-actions.html README.md
+git commit -m "Update live report pages"
+git push origin main
 ```
 
-Do **not** `cp ../detailed-revenue-leak-audit.html index.html` — that copies client-only
-`broken-pages-action-list.html` links and breaks the live 404 details page.
-
-Watch the deploy in [Vercel → report-test-viewer → Deployments](https://vercel.com/test11-6763/report-test-viewer) or GitHub **Actions / Deployments** (environment **Production – report-test-viewer**).
+Use `broken-pages.html` naming in publish; the monorepo source file may still be named `broken-pages-action-list.html`.
 
 ## First-time setup (Vercel + Git)
 
-1. Push this directory as its own Git repository (`git remote` points at `Limitless-Enterprise/report-test-viewer`).
+1. Push this directory as its own Git repository (`git remote` → `Limitless-Enterprise/report-test-viewer`).
 2. [Vercel](https://vercel.com/new) → **Import** that repository under team **test11-6763**.
 3. Leave defaults: **Framework Preset** = Other (or auto-detected static). **Build Command** and **Install Command** empty. **Output Directory** = `.` (repository root).
 4. Connect **Production Branch** = `main`. After that, only pushes are needed.
@@ -39,25 +71,19 @@ If the repo root is the monorepo instead of this folder, set **Root Directory** 
 
 ## Vercel CLI (emergency only)
 
-Local linking uses `.vercel/` (gitignored). The linked project should be **report-test-viewer** on **test11-6763** — not ad-hoc preview projects on other teams (e.g. stray `publish-*.vercel.app` URLs from `vercel` without `--scope`).
+Local linking uses `.vercel/` (gitignored). The linked project must be **report-test-viewer** on **test11-6763**.
 
 ```bash
 cd clients/purple-basil-medspa/publish
 npx vercel --scope test11-6763          # preview URL only — OK for smoke tests
-# Avoid for routine releases:
+# NOT for routine releases:
 # npx vercel --prod --scope test11-6763
 ```
 
-Use CLI prod deploy only if Git integration is broken and you need an immediate fix; then restore Git-only workflow.
+Use CLI prod deploy **only** if Git integration is broken and you need an immediate fix; then restore Git-only workflow.
 
-## GitHub “two Production environments” (historical)
+## GitHub environments (reference)
 
-Vercel used to report deployments to a GitHub environment named **Production**. Newer integrations use **Production – `{project-name}`** (here: **Production – report-test-viewer**). Both names referred to the **same** Vercel project; the sidebar showed two environments because the old one was never removed.
+Vercel now reports deployments to **Production – `{project-name}`** → **Production – report-test-viewer**. That is the only environment operators should see for production.
 
-**Canonical GitHub environment:** **Production – report-test-viewer** (matches current Vercel GitHub App behavior).
-
-**Stale environment:** **Production** (last activity ~Sept 2025). Safe to delete — it does not host a separate site; it was only a GitHub deployment label.
-
-To remove manually: repo **Settings → Environments → Production → Delete environment** (requires admin). Deleting it does not change https://report-test-viewer.vercel.app/.
-
-Do **not** add a second Vercel Git connection for the same repo (duplicate imports create duplicate deploy hooks).
+The old GitHub environment named **Production** (legacy Vercel label, last activity ~Sept 2025) was removed via API—it did not host a separate site. Do not recreate it.
